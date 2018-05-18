@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 public class LevelsActivity extends AppCompatActivity {
     Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Music.levelMusic();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
 

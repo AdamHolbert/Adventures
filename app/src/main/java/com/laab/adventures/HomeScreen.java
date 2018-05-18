@@ -36,6 +36,8 @@ public class HomeScreen extends AppCompatActivity {
                 openInstructions();
             }
         });
+
+        Music.menuMusic();
     }
 
     public void openLevels() {
