@@ -11,7 +11,6 @@ public class LevelsActivity extends AppCompatActivity {
     Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Music.levelMusic();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
 
@@ -23,6 +22,8 @@ public class LevelsActivity extends AppCompatActivity {
                 goBack();
             }
         });
+
+//        Music.levelMusic(this);
     }
 
     public void goBack() {
