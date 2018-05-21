@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Adventures</string>
+    <string name="devteam"><u><strong>\nDev Team</strong></u></string>
+    <string name="musicassets"><u><strong>Music</strong></u></string>
+    <string name="otherassets"><u><strong>Others</strong></u></string>
 </resources>
