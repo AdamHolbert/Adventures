@@ -1,15 +1,17 @@
 package com.laab.adventures;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 
 public class Music {
 
     private static final int levelMusic = R.raw.level;
     private static final int menuMusic = R.raw.background;
-    private static int currentMusic;
-    private static MediaPlayer music;
-    static boolean muted;
+    private static int currentMusic = 0;
+    private static MediaPlayer music = new MediaPlayer();
+    private static boolean muted = false;
+    private static Context lastContext = null;
 
     static void startMusic(){
         if(!muted){
@@ -18,12 +20,18 @@ public class Music {
         }
     }
 
-    static void stopMusic(){
-        music.stop();
+    static void pauseMusic(){
+        music.pause();
     }
 
     static void toggleMute(){
         muted = !muted;
+        if(muted){
+            pauseMusic();
+        }
+        else{
+            changeMusic(lastContext, currentMusic);
+        }
     }
 
     static void levelMusic(Context context) {
@@ -39,9 +47,13 @@ public class Music {
     }
 
     private static void changeMusic(Context context, int newMusic){
-        stopMusic();
+        lastContext = context;
+        if(music.isPlaying()) {
+            pauseMusic();
+        }
         currentMusic = newMusic;
         music = MediaPlayer.create(context, currentMusic);
         startMusic();
     }
+
 }

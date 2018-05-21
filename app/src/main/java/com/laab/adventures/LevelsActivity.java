@@ -23,7 +23,7 @@ public class LevelsActivity extends AppCompatActivity {
             }
         });
 
-//        Music.levelMusic(this);
+        Music.levelMusic(this);
     }
 
     public void goBack() {

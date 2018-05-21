@@ -21,7 +21,7 @@ public class InstructionsActivity extends AppCompatActivity {
                 goBack();
             }
         });
-//        Music.menuMusic(this);
+        Music.menuMusic(this);
     }
 
     public void goBack() {

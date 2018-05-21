@@ -20,6 +20,7 @@ public class CreditsActivity extends AppCompatActivity {
                 goBack();
             }
         });
+        Music.menuMusic(this);
     }
 
     public void goBack() {
