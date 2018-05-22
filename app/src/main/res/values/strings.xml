@@ -3,4 +3,6 @@
     <string name="devteam"><u><strong>\nDev Team</strong></u></string>
     <string name="musicassets"><u><strong>Music</strong></u></string>
     <string name="otherassets"><u><strong>Others</strong></u></string>
+    <string name="instructions"><u><strong>\nGame Instructions</strong></u></string>
+    <string name="instructionstext">This will be the instructions</string>
 </resources>
