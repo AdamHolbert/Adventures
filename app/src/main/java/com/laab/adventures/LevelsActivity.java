@@ -30,4 +30,9 @@ public class LevelsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeScreen.class);
         startActivity(intent);
     }
+
+    public void moveToLevel(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
 }
