@@ -15,13 +15,16 @@ public class Music {
 
     static void startMusic(){
         if(!muted){
-            music.setLooping(true);
-            music.start();
+            if(!music.isPlaying()) {
+                music.start();
+            }
         }
     }
 
     static void pauseMusic(){
-        music.pause();
+        if(music.isPlaying()) {
+            music.pause();
+        }
     }
 
     static void toggleMute(){
@@ -53,6 +56,7 @@ public class Music {
         }
         currentMusic = newMusic;
         music = MediaPlayer.create(context, currentMusic);
+        music.setLooping(true);
         startMusic();
     }
 
