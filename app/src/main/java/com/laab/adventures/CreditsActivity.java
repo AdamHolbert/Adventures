@@ -27,4 +27,16 @@ public class CreditsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Music.startMusic();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Music.pauseMusic();
+    }
 }

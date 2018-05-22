@@ -54,4 +54,16 @@ public class HomeScreen extends AppCompatActivity {
         Intent intent = new Intent(this, InstructionsActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Music.startMusic();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        Music.pauseMusic();
+    }
 }
