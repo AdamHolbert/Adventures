@@ -22,8 +22,6 @@ public class LevelsActivity extends AppCompatActivity {
                 goBack();
             }
         });
-
-        Music.levelMusic(this);
     }
 
     public void goBack() {
@@ -36,6 +34,10 @@ public class LevelsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void moveToPhysics(View view) {
+        Intent intent = new Intent(this, PhysicsTest.class);
+        startActivity(intent);
+    }
     @Override
     public void onResume(){
         super.onResume();
