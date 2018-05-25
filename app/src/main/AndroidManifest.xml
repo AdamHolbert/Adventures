@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeScreen">
+        <activity android:name=".MainSplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,8 @@
         <activity android:name=".InstructionsActivity" />
         <activity android:name=".LevelsActivity" />
         <activity android:name=".CreditsActivity" />
-        <activity android:name=".GameActivity"></activity>
+        <activity android:name=".GameActivity" />
+        <activity android:name=".HomeScreen"></activity>
     </application>
 
 </manifest>
