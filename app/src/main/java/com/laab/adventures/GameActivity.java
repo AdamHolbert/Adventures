@@ -7,26 +7,27 @@ import com.jawnnypoo.physicslayout.PhysicsLinearLayout;
 
 public class GameActivity extends AppCompatActivity {
 
+    GameActivity_Layout gameActivity_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
-        PhysicsLinearLayout physicsLinearLayout = (PhysicsLinearLayout) findViewById(R.id.physics_layout);
-        physicsLinearLayout.getPhysics().enableFling();
-
+        gameActivity_layout = new GameActivity_Layout(this);
+        setContentView(gameActivity_layout);
         Music.levelMusic(this);
     }
 
     @Override
-    public void onResume(){
+    protected void onResume() {
         super.onResume();
+        gameActivity_layout.resume();
         Music.startMusic();
     }
 
     @Override
-    public void onPause(){
+    protected void onPause() {
         super.onPause();
+        gameActivity_layout.pause();
         Music.pauseMusic();
-
     }
 }
