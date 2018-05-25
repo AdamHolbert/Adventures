@@ -21,11 +21,8 @@
         <activity android:name=".LevelsActivity" />
         <activity android:name=".CreditsActivity" />
         <activity android:name=".GameActivity" />
-<<<<<<< HEAD
         <activity android:name=".HomeScreen"></activity>
-=======
         <activity android:name=".PhysicsTest"></activity>
->>>>>>> master
     </application>
 
 </manifest>
