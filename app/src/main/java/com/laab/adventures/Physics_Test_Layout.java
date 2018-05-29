@@ -16,12 +16,13 @@ public class Physics_Test_Layout extends SurfaceView implements Runnable{
     Paint red_fill;
 
     int rect_x = 0, rect_y = 0;
-    int squareSize = 20;
+    int squareSize = 40;
 
     Object object;
 
     Canvas canvas;
     SurfaceHolder surfaceholder;
+
 
     public Physics_Test_Layout(Context context){
         super(context);

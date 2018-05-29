@@ -7,11 +7,6 @@
 
     <Canvas>
 
-        <ImageView
-            android:id="@+id/image1"
-            android:src="@mipmap/ic_launcher_round"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
     </Canvas>
 

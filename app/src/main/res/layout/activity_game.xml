@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <com.jawnnypoo.physicslayout.PhysicsLinearLayout
-        android:id="@+id/physics_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:physics="true"
-        app:gravityX="0.0"
-        app:gravityY="9.8"
-        app:bounds="true"
-        app:boundsSize="50dp">
 
         <ImageView
 
@@ -39,5 +29,4 @@
             android:layout_height="wrap_content" />
 
 
-    </com.jawnnypoo.physicslayout.PhysicsLinearLayout>
 </RelativeLayout>
