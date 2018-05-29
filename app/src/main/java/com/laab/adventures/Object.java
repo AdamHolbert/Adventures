@@ -1,6 +1,7 @@
 package com.laab.adventures;
 
-public class Object {
+
+public class Object implements Drawable{
 
     private int x1, y1, x2, y2;
     private int size;
@@ -37,6 +38,27 @@ public class Object {
 
     public int[] GetPoints(){
         return new int[]{x1,y1,x2,y2};
+    }
+
+
+    public int GetXMin() {
+        return x1;
+    }
+
+    public int GetYMin() {
+        return y1;
+    }
+
+    public int GetXMax() {
+        return x2;
+    }
+
+    public int GetYMax() {
+        return y2;
+    }
+
+    public boolean CollidedWith(Drawable object) {
+        return false;
     }
 
     public int[] MoveTo(int x, int y){
