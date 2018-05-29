@@ -1,5 +1,7 @@
 package com.laab.adventures;
 
+import android.graphics.Canvas;
+
 public class Wall extends Drawable {
 
 
@@ -11,4 +13,13 @@ public class Wall extends Drawable {
     }
 
 
+    @Override
+    void draw(Canvas canvas) {
+
+    }
+
+    @Override
+    public void move(int i) {
+
+    }
 }

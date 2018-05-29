@@ -1,11 +1,13 @@
 package com.laab.adventures;
 
+import android.graphics.Canvas;
+
 public abstract class Drawable {
 
 
     int x1, y1, x2, y2;
 
-    boolean CollidedWith(Drawable obj){
+    boolean collidedWith(Drawable obj){
         boolean collision = false;
         if(this.GetXMax() >= obj.GetXMin()){ //right
             if(this.GetYMax() >= obj.GetYMin()){ //bottom
@@ -58,5 +60,7 @@ public abstract class Drawable {
     int GetXMax(){return x2;}
     int GetYMax(){return y2;}
 
+    abstract void draw(Canvas canvas);
 
+    public abstract void move(int i);
 }

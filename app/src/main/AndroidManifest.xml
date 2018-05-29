@@ -8,21 +8,30 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainSplashActivity">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
+        <activity android:name=".MainSplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".InstructionsActivity" />
-        <activity android:name=".LevelsActivity" />
-        <activity android:name=".CreditsActivity" />
-        <activity android:name=".GameActivity" />
-        <activity android:name=".HomeScreen"></activity>
-        <activity android:name=".PhysicsTest"></activity>
+        <activity android:name=".SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".InstructionsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LevelsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CreditsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".GameActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HomeScreen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PhysicsTest"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

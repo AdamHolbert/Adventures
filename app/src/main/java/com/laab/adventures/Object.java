@@ -1,6 +1,8 @@
 package com.laab.adventures;
 
 
+import android.graphics.Canvas;
+
 public class Object extends Drawable{
 
     private int size;
@@ -46,5 +48,15 @@ public class Object extends Drawable{
         y2 = y + (size/2);
 
         return GetPoints();
+    }
+
+    @Override
+    void draw(Canvas canvas) {
+
+    }
+
+    @Override
+    public void move(int i) {
+
     }
 }
