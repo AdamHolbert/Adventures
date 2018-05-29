@@ -3,7 +3,6 @@ package com.laab.adventures;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.jawnnypoo.physicslayout.PhysicsLinearLayout;
 
 public class GameActivity extends AppCompatActivity {
 
