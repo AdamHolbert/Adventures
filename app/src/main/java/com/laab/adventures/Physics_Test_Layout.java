@@ -16,7 +16,7 @@ public class Physics_Test_Layout extends SurfaceView implements Runnable{
     Paint red_fill;
 
     int rect_x = 0, rect_y = 0;
-    int squareSize = 40;
+    int squareSize = 50;
 
     Object object;
 

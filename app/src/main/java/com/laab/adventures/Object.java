@@ -1,9 +1,8 @@
 package com.laab.adventures;
 
 
-public class Object implements Drawable{
+public class Object extends Drawable{
 
-    private int x1, y1, x2, y2;
     private int size;
     private boolean isAlive;
     private boolean topCollision, bottomCollision, leftCollision, rightCollision;
@@ -38,41 +37,6 @@ public class Object implements Drawable{
 
     public int[] GetPoints(){
         return new int[]{x1,y1,x2,y2};
-    }
-
-    @Override
-    public int GetXMin() {
-        return x1;
-    }
-    @Override
-    public int GetYMin() {
-        return y1;
-    }
-    @Override
-    public int GetXMax() {
-        return x2;
-    }
-    @Override
-    public int GetYMax() {
-        return y2;
-    }
-    @Override
-    public boolean CollidedWith(Drawable object) {
-        if(this.GetXMin() >= object.GetXMax()){
-            return true;
-        }
-        else if(this.GetXMax() >= object.GetXMin()){
-            return true;
-        }
-        else if(this.GetYMin() >= object.GetYMax()){
-            return true;
-        }
-        else if(this.GetYMax() >= object.GetYMin()){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
     public int[] MoveTo(int x, int y){
