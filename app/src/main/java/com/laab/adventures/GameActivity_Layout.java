@@ -2,6 +2,7 @@ package com.laab.adventures;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,10 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> walls;
     List<Player> players;
     List<Drawable> spikes;
+
+    Player draggingPlayer = null;
+    boolean dragging = false;
+    float xDrag, yDrag = 0;
 
     public GameActivity_Layout(Context context) {
         super(context);
@@ -67,8 +72,45 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Drawable player : players){
             player.draw(canvas);
         }
-//        canvas.drawCircle(x , y, toPxs(3), red_paintbrush_fill);
 
         surfaceHolder.unlockCanvasAndPost(canvas);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                dragStart(x, y);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                dragMove(x, y);
+                break;
+            case MotionEvent.ACTION_UP:
+                dragEnd();
+                break;
+            default:
+        }
+        return false;
+    }
+
+    private void dragMove(float x, float y) {
+        dragging = true;
+        xDrag = x;
+        yDrag = y;
+    }
+
+    private void dragEnd() {
+        dragging = false;
+        draggingPlayer = null;
+        xDrag = 0;
+        yDrag = 0;
+    }
+
+    private void dragStart(float x, float y) {
+        xDrag = x;
+        yDrag = y;
     }
 }
