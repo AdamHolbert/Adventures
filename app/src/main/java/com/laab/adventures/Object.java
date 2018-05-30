@@ -55,8 +55,4 @@ public class Object extends Drawable{
 
     }
 
-    @Override
-    public void move(int i) {
-
-    }
 }

@@ -23,7 +23,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
 
-        players.add(new Player(0, 0, 5, 5));
+        players.add(new Player(0, 0, 50, 50));
+        walls.add(new Wall(500,0,510, 1000));
     }
 
     @Override
@@ -47,8 +48,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     break;
                 }
             }
-            if(collided){
-                player.move(1);
+            if(!collided){
+                player.move(5, 5);
             }
         }
         for(Player p : playersToBeDeleted){
