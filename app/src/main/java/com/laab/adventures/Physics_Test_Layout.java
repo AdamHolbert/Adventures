@@ -28,7 +28,7 @@ public class Physics_Test_Layout extends SurfaceView implements Runnable{
         super(context);
         surfaceholder = getHolder();
         prepBrushes();
-        object = new Object(rect_x,rect_y,squareSize);
+//        object = new Object(rect_x,rect_y,squareSize);
     }
 
     @Override

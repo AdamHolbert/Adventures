@@ -11,7 +11,8 @@ public class Wall extends Drawable {
     Rect rectangle;
     Paint display;
 
-    public Wall(int x1, int y1, int x2, int y2){
+    public Wall(int x1, int y1, int x2, int y2, GameActivity_Layout layout){
+        super(layout);
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
