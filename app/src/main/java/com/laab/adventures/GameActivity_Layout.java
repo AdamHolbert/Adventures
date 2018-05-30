@@ -2,6 +2,7 @@ package com.laab.adventures;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +13,25 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Player> players;
     List<Drawable> spikes;
 
+    Player draggingPlayer = null;
+    boolean dragging = false;
+    float xDrag, yDrag = 0;
+
     public GameActivity_Layout(Context context) {
         super(context);
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
 
-        players.add(new Player(100, 100, 150, 150, this));
+
+        players.add(new Player(0, 0, 50, 50, this));
         walls.add(new Wall(500,0,510, 1000, this));
-        walls.add(new Wall(0,0,10, 1000, this));
-        walls.add(new Wall(0,1000,510, 1010, this));
-        walls.add(new Wall(0,0,510, 10, this));
+        walls.add(new Wall(350,2000,360,1250, this));
+        walls.add(new Wall(650,2000,660,1500, this));
+        walls.add(new Wall(1500,650 ,1700 ,660, this));
+
+        spikes.add(new Spike(300, this));
+
     }
 
     @Override
@@ -33,7 +42,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             Sides collision = Sides.None;
             int moveX = 1, moveY = 1;
             for(Drawable spike : spikes){
-                if(player.collidedWith(spike)){
+                if(player.collidedWith(spike)) {
                     spikeCollision = true;
                     break;
                 }
@@ -66,9 +75,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
     @Override
     void draw() {
         canvas = surfaceHolder.lockCanvas();
-        canvas.drawRect(0, 0, cwidth, cheight, green_paintbrush_fill);
         canvas.drawCircle(cwidth, cheight, toPxs(10), red_paintbrush_fill);
-
+        canvas.drawRect(0,0,cwidth,cheight,green_paintbrush_fill);
         //cannon ball
         for(Drawable wall : walls){
             wall.draw(canvas);
@@ -79,8 +87,45 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Drawable player : players){
             player.draw(canvas);
         }
-//        canvas.drawCircle(x , y, toPxs(3), red_paintbrush_fill);
 
         surfaceHolder.unlockCanvasAndPost(canvas);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                dragStart(x, y);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                dragMove(x, y);
+                break;
+            case MotionEvent.ACTION_UP:
+                dragEnd();
+                break;
+            default:
+        }
+        return false;
+    }
+
+    private void dragMove(float x, float y) {
+        dragging = true;
+        xDrag = x;
+        yDrag = y;
+    }
+
+    private void dragEnd() {
+        dragging = false;
+        draggingPlayer = null;
+        xDrag = 0;
+        yDrag = 0;
+    }
+
+    private void dragStart(float x, float y) {
+        xDrag = x;
+        yDrag = y;
     }
 }
