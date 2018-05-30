@@ -25,6 +25,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
         players.add(new Player(0, 0, 50, 50));
         walls.add(new Wall(500,0,510, 1000));
+        walls.add(new Wall(350,2000,360,1250));
+        walls.add(new Wall(650,2000,660,1500));
+        walls.add(new Wall(1500,650 ,1700 ,660));
+
+        spikes.add(new Spike(300));
+
     }
 
     @Override
@@ -32,10 +38,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
         List<Player> playersToBeDeleted = new ArrayList<Player>();
         for(Player player : players){
             boolean collided = false;
+
+
             for(Drawable spike : spikes){
                 if(player.collidedWith(spike)){
-                    collided = true;
-                    break;
+                   collided = true;
+                  break;
                 }
             }
             if(collided){
@@ -60,9 +68,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
     @Override
     void draw() {
         canvas = surfaceHolder.lockCanvas();
-        canvas.drawRect(0, 0, cwidth, cheight, green_paintbrush_fill);
         canvas.drawCircle(cwidth, cheight, toPxs(10), red_paintbrush_fill);
-
+        canvas.drawRect(0,0,cwidth,cheight,green_paintbrush_fill);
         //cannon ball
         for(Drawable wall : walls){
             wall.draw(canvas);
