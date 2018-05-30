@@ -62,5 +62,10 @@ public abstract class Drawable {
 
     abstract void draw(Canvas canvas);
 
-    public abstract void move(int i);
+    public void move(int x, int y) {
+        x1 += x;
+        x2 += x;
+        y1 += y;
+        y2 += y;
+    }
 }
