@@ -23,16 +23,14 @@ public class GameActivity_Layout extends GameLoop_Layout {
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
 
-        players.add(new Player(0, 0, 50, 50));
 
-        // Adding Walls
-        walls.add(new Wall(500,0,510, 1000));
-        walls.add(new Wall(350,2000,360,1250));
-        walls.add(new Wall(650,2000,660,1500));
-        walls.add(new Wall(1500,650 ,1700 ,660));
+        players.add(new Player(0, 0, 50, 50, this));
+        walls.add(new Wall(500,0,510, 1000, this));
+        walls.add(new Wall(350,2000,360,1250, this));
+        walls.add(new Wall(650,2000,660,1500, this));
+        walls.add(new Wall(1500,650 ,1700 ,660, this));
 
-        // Adding Spikes
-        spikes.add(new Spike(300));
+        spikes.add(new Spike(300, this));
 
     }
 
@@ -40,28 +38,34 @@ public class GameActivity_Layout extends GameLoop_Layout {
     void update(double delta_t) {
         List<Player> playersToBeDeleted = new ArrayList<Player>();
         for(Player player : players){
-            boolean collided = false;
-
-
+            boolean spikeCollision = false;
+            Sides collision = Sides.None;
+            int moveX = 1, moveY = 1;
             for(Drawable spike : spikes){
                 if(player.collidedWith(spike)){
-                   collided = true;
+                    spikeCollision = true;
                   break;
                 }
             }
-            if(collided){
+            if(spikeCollision){
                 playersToBeDeleted.add(player);
                 break;
             }
             for(Drawable wall : walls){
-                if(player.collidedWith(wall)){
-                    collided = true;
+                collision = player.AdvancedCollision(wall);
+                if(collision != Sides.None){
                     break;
                 }
             }
-            if(!collided){
-                player.move(5, 5);
+            if(collision == Sides.Top || collision ==  Sides.Bottom){
+                moveY *= -1;
+                Log.i("Y Movement", "Switched");
             }
+            else if(collision == Sides.Left || collision ==  Sides.Right){
+                moveX *= -1;
+                Log.i("X Movement", "Switched");
+        }
+            player.move(moveX, moveY);
         }
         for(Player p : playersToBeDeleted){
             players.remove(p);

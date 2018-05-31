@@ -15,7 +15,8 @@ public class Spike extends Drawable {
     BitmapFactory img;
     GameActivity_Layout layout;
 
-    public Spike(int coordinate){
+    public Spike(int coordinate, GameActivity_Layout layout){
+        super(layout);
         this.x1 = coordinate - 15;
         this.y1 = coordinate + 15;
         this.x2 = coordinate + 15;
