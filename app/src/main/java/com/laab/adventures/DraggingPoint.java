@@ -42,8 +42,8 @@ public class DraggingPoint extends Drawable {
 //        canvas.drawRect(layout.toPxs(getX()), layout.toPxs(getY()),
 //                layout.toPxs(getX() + 10), layout.toPxs(getY()+10), paint);
 
-        canvas.drawRect(layout.toPxs(GetXMin()), layout.toPxs(GetYMin()),
-                layout.toPxs(GetXMax()), layout.toPxs(GetYMax()), paint);
+//        canvas.drawRect(layout.toPxs(GetXMin()), layout.toPxs(GetYMin()),
+//                layout.toPxs(GetXMax()), layout.toPxs(GetYMax()), paint);
     }
 
     public void setEvent(MotionEvent event) {

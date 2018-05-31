@@ -120,6 +120,8 @@ public abstract class Drawable {
     abstract void draw(Canvas canvas);
 
     public void move(int x, int y){
+        x = x > 0 ? 1 : x < 0 ? -1 : 0;
+        y = y > 0 ? 1 : y < 0 ? -1 : 0;
         x1 += x;
         x2 += x;
         y1 += y;

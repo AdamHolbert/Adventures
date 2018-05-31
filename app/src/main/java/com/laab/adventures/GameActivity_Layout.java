@@ -73,11 +73,11 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     }
                 }
             }
-            if(collision == Sides.Top || collision ==  Sides.Bottom){
+            if((collision == Sides.Top && moveY > 0) || (collision ==  Sides.Bottom && moveY < 0)){
                 moveY = 0;
                 Log.i("Y Movement", "Switched");
             }
-            else if(collision == Sides.Left || collision ==  Sides.Right){
+            else if((collision == Sides.Left && moveX < 0) || (collision ==  Sides.Right && moveX > 0)){
                 moveX = 0;
                 Log.i("X Movement", "Switched");
         }
