@@ -99,7 +99,6 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
     private void update_BIG_DELTA(double delta_t){
         if (delta_t <0){
             delta_t = frame_time_ns - delta_t;
-            Log.d("NEGATIVE","NEGATIVE");
         }
 
         delta_t=delta_t+dt_pool;
@@ -180,32 +179,24 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
 
     public void pause(){
         CanDraw=false;
-        Log.d("Thread", "Pausing thread..." + Thread.currentThread().getId());
 
         while(true){
             try {
-                Log.d("Thread", "Joining" );
                 thread.join();
                 break;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        Log.d("Thread", "THREAD IS PAUSED " + Thread.currentThread().getId() );
         thread=null;
-        Log.d("Thread", "NULLED ******");
     }
 
     public void resume(){
         CanDraw = true;
-        Log.d("CanDraw", "true");
 
         if(thread==null){
-            Log.d("Thread", "MAKING NEW");
             thread = new Thread(this);
-            Log.d("Thread", "STARTING NEW");
             thread.start();
-            Log.d("Thread", "STARTED");
         };
     }
 

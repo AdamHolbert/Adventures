@@ -14,10 +14,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> spikes;
     List<Drawable>plates;
 
-    Player draggingPlayer = null;
-    boolean dragging = false;
-    float xDrag, yDrag = 0;
-
     public GameActivity_Layout(Context context) {
         super(context);
         walls = new ArrayList<Drawable>();
@@ -27,11 +23,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
 
         players.add(new Player(0, 0, 50, 50, this));
-        walls.add(new Wall(500,0,510, 1000, this));
-        walls.add(new Wall(350,2000,360,1250, this));
-        walls.add(new Wall(650,2000,660,1500, this));
-        walls.add(new Wall(1500,650 ,1700 ,660, this));
-
+        walls.add(new Wall(0, 0, 1250, 200, this));
+        walls.add(new Wall(0, 1250, 1250, 1750, this));
         spikes.add(new Spike(300, 300, 310,310,this));
 
     }
@@ -51,12 +44,24 @@ public class GameActivity_Layout extends GameLoop_Layout {
             }
             if(spikeCollision){
                 playersToBeDeleted.add(player);
-                break;
+                continue;
             }
             for(Drawable wall : walls){
                 collision = player.AdvancedCollision(wall);
                 if(collision != Sides.None){
                     break;
+                }
+            }
+            if(draggingPoint != null &&  draggingPoint.hasEvent()){
+                if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
+                    draggingPoint.setCapturedPlayer(player);
+                    int xMove = ((player.x2-player.x1) + player.x1);
+                    int yMove = ((player.y2-player.y1) + player.y1);
+                    player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
+                } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
+                    int xMove = ((player.x2-player.x1) + player.x1);
+                    int yMove = ((player.y2-player.y1) + player.y1);
+                    player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
                 }
             }
             if(collision == Sides.Top || collision ==  Sides.Bottom){
@@ -90,8 +95,14 @@ public class GameActivity_Layout extends GameLoop_Layout {
             player.draw(canvas);
         }
 
+        if(draggingPoint != null && draggingPoint.hasEvent()){
+            draggingPoint.draw(canvas);
+        }
         surfaceHolder.unlockCanvasAndPost(canvas);
     }
+
+
+    DraggingPoint draggingPoint;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -100,34 +111,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                dragStart(x, y);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                dragMove(x, y);
-                break;
-            case MotionEvent.ACTION_UP:
-                dragEnd();
+                draggingPoint = new DraggingPoint(event, this);
+                draggingPoint.setEvent(event);
+                draggingPoint.setCapturedPlayer(null);
                 break;
             default:
         }
         return false;
     }
-
-    private void dragMove(float x, float y) {
-        dragging = true;
-        xDrag = x;
-        yDrag = y;
     }
-
-    private void dragEnd() {
-        dragging = false;
-        draggingPlayer = null;
-        xDrag = 0;
-        yDrag = 0;
-    }
-
-    private void dragStart(float x, float y) {
-        xDrag = x;
-        yDrag = y;
-    }
-}
