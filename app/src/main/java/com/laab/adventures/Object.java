@@ -9,7 +9,8 @@ public class Object extends Drawable{
     private boolean isAlive;
     private boolean topCollision, bottomCollision, leftCollision, rightCollision;
 
-    public Object(){
+    public Object(GameActivity_Layout layout){
+        super(layout);
         x1 = 0;
         y1 = 0;
         x2 = 20;
@@ -23,7 +24,8 @@ public class Object extends Drawable{
         rightCollision = false;
     }
 
-    public Object(int x, int y, int size){
+    public Object(int x, int y, int size,GameActivity_Layout layout){
+        super(layout);
         x1 = x;
         y1 = y;
         x2 = x + size;

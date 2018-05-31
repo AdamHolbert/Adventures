@@ -8,13 +8,14 @@ import android.widget.Button;
 
 
 public class LevelsActivity extends AppCompatActivity {
-    Button back;
+    Button back, file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
 
         back = (Button) findViewById(R.id.backbutton);
+        file = (Button) findViewById(R.id.filebutton);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,10 +23,22 @@ public class LevelsActivity extends AppCompatActivity {
                 goBack();
             }
         });
+
+        file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goFile();
+            }
+        });
     }
 
     public void goBack() {
         Intent intent = new Intent(this, HomeScreen.class);
+        startActivity(intent);
+    }
+
+    public void goFile() {
+        Intent intent = new Intent(this, FileActivity.class);
         startActivity(intent);
     }
 
