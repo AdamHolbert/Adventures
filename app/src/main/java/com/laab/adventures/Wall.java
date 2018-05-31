@@ -28,7 +28,8 @@ public class Wall extends Drawable {
 
     @Override
     void draw(Canvas canvas) {
-        canvas.drawRect(x1, y1, x2, y2, display);
+        Log.i("Wall", "Drawing!");
+        canvas.drawRect(layout.toPxs(x1), layout.toPxs(y1), layout.toPxs(x2), layout.toPxs(y2), display);
     }
 
     @Override

@@ -19,11 +19,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
         players.add(new Player(0, 0, 50, 50, this));
-        walls.add(new Wall(500,0,510, 1000, this));
-        walls.add(new Wall(350,2000,360,1250, this));
-        walls.add(new Wall(650,2000,660,1500, this));
-        walls.add(new Wall(1500,650 ,1700 ,660, this));
-
+        walls.add(new Wall(0, 0, 1250, 200, this));
+        walls.add(new Wall(0, 1250, 1250, 1750, this));
         spikes.add(new Spike(300, this));
 
     }

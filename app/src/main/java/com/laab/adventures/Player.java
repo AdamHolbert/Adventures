@@ -23,8 +23,6 @@ class Player extends Drawable {
         rectangle.set(x1, y1, x2, y2);
 
         image = BitmapFactory.decodeResource(layout.getResources(), R.drawable.objectboi);
-//        image.setWidth(x2-x1);
-//        image.setHeight(y2-y1);
 
         display = new Paint();
         display.setColor(Color.BLACK);

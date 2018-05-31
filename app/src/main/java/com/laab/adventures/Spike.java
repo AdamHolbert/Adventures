@@ -12,8 +12,7 @@ public class Spike extends Drawable {
 
     private Rect rectangle;
     private Paint display;
-    BitmapFactory img;
-    GameActivity_Layout layout;
+    Bitmap img;
 
     public Spike(int coordinate, GameActivity_Layout layout){
         super(layout);
@@ -25,7 +24,7 @@ public class Spike extends Drawable {
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
-        // img = BitmapFactory.decodeResource(layout.getResources(), R.drawable.spikes);
+        img = BitmapFactory.decodeResource(layout.getResources(), R.drawable.spikes);
 
         display = new Paint();
         display.setColor(Color.RED);
@@ -35,6 +34,6 @@ public class Spike extends Drawable {
     }
     @Override
     void draw(Canvas canvas) {
-        canvas.drawRect(x1, y1, x2, y2, display);
+        canvas.drawBitmap(img, layout.toPxs(x1), layout.toPxs(y1), display);
     }
 }
