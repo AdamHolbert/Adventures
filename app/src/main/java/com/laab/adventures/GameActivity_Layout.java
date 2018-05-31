@@ -28,6 +28,9 @@ public class GameActivity_Layout extends GameLoop_Layout {
         walls.add(new Wall(50, 300, 420, 450, this));
         walls.add(new Wall(0, 500, 420, 700, this));
         spikes.add(new Spike(300, this));
+        plates = new ArrayList<Drawable>();
+        doors = new ArrayList<Drawable>();
+
 
     }
 
