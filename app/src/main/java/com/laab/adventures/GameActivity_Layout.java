@@ -23,7 +23,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
         plates = new ArrayList<Drawable>();
         doors = new ArrayList<Drawable>();
 
-        players.add(new Player(0, 0, 50, 50, this));
 
         players.add(new Player(250, 250, this));
         walls.add(new Wall(0, 0, 1250, 200, this));
