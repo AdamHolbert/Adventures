@@ -12,16 +12,20 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> walls;
     List<Player> players;
     List<Drawable> spikes;
+    List<Drawable>plates;
 
     public GameActivity_Layout(Context context) {
         super(context);
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
-        players.add(new Player(0, 0, 50, 50, this));
+        plates = new ArrayList<Drawable>();
+
+
+        players.add(new Player(250, 250, this));
         walls.add(new Wall(0, 0, 1250, 200, this));
         walls.add(new Wall(0, 1250, 1250, 1750, this));
-        spikes.add(new Spike(300, this));
+        spikes.add(new Spike(300, 300, this));
 
     }
 
@@ -88,7 +92,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     void draw() {
         canvas = surfaceHolder.lockCanvas();
         canvas.drawCircle(cwidth, cheight, toPxs(10), red_paintbrush_fill);
-        canvas.drawRect(0,0,cwidth,cheight,green_paintbrush_fill);
+        canvas.drawRect(0,0,cwidth,cheight, gray_panitbrush_fill);
         //cannon ball
         for(Drawable wall : walls){
             wall.draw(canvas);
@@ -124,4 +128,4 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         return false;
     }
-}
+    }
