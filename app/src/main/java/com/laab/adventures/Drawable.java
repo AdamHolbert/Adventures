@@ -15,21 +15,46 @@ public abstract class Drawable {
 
     boolean collidedWith(Drawable obj){
         boolean collision = false;
-        if(this.GetXMax() >= obj.GetXMin()){ //right
-            if(this.GetYMax() >= obj.GetYMin()){ //bottom
-                collision = true;
-            }
-            else if(this.GetYMin() >= obj.GetYMax()){ //top
-                collision = true;
-            }
+//        if(this.GetXMax() >= obj.GetXMin()){ //right
+//            if(this.GetYMax() >= obj.GetYMin()){ //bottom
+//                collision = true;
+//            }
+//            else if(this.GetYMin() >= obj.GetYMax()){ //top
+//                collision = true;
+//            }
+//        }
+//        else if(this.GetXMin() >= obj.GetXMax()){ //left
+//            if(this.GetYMax() >= obj.GetYMin()){ //bottom
+//                collision = true;
+//            }
+//            else if(this.GetYMin() >= obj.GetYMax()){ //top
+//                collision = true;
+//            }
+//        }
+        Rect thisObj = new Rect();
+        thisObj.set(x1, y1, x2, y2);
+
+        Rect thatObj = new Rect();
+        thatObj.set(obj.GetXMin(), obj.GetYMin(), obj.GetXMax(), obj.GetYMax());
+
+        //is the ______ corner of obj inside of this
+        boolean topLeft = isInside(thisObj, obj.GetXMin(), obj.GetYMin());
+        boolean topRight = isInside(thisObj, obj.GetXMax(), obj.GetYMin());
+        boolean bottomLeft = isInside(thisObj, obj.GetXMin(), obj.GetYMax());
+        boolean bottomRight = isInside(thisObj, obj.GetXMax(), obj.GetYMax());
+
+
+        //is the ______ corner of this inside of obj
+        boolean topLeftO = isInside(thatObj, x1, y1);
+        boolean topRightO = isInside(thatObj, x2, y1);
+        boolean bottomLeftO = isInside(thatObj, x1, y2);
+        boolean bottomRightO = isInside(thatObj, x2, y2);
+
+        if(topLeft || topRight || bottomLeft || bottomRight || topLeftO || topRightO || bottomLeftO || bottomRightO){
+            collision = true;
         }
-        else if(this.GetXMin() >= obj.GetXMax()){ //left
-            if(this.GetYMax() >= obj.GetYMin()){ //bottom
-                collision = true;
-            }
-            else if(this.GetYMin() >= obj.GetYMax()){ //top
-                collision = true;
-            }
+        else{
+            collision = false;
         }
         return collision;
     }

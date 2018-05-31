@@ -22,10 +22,10 @@ public class GameActivity_Layout extends GameLoop_Layout {
         plates = new ArrayList<Drawable>();
 
 
-        players.add(new Player(0, 0, 50, 50, this));
+        players.add(new Player(250, 250, this));
         walls.add(new Wall(0, 0, 1250, 200, this));
         walls.add(new Wall(0, 1250, 1250, 1750, this));
-        spikes.add(new Spike(300, 300, 310,310,this));
+        spikes.add(new Spike(300, 300, this));
 
     }
 
