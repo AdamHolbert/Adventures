@@ -14,7 +14,8 @@ public class DraggingPoint extends Drawable {
     private Paint paint;
     private Player capturedPlayer;
 
-    DraggingPoint(MotionEvent event){
+    DraggingPoint(MotionEvent event, GameActivity_Layout layout){
+        super(layout);
         this.event = event;
         paint = new Paint();
         paint.setColor(Color.RED);
@@ -22,8 +23,8 @@ public class DraggingPoint extends Drawable {
     }
 
 
-    int getX(){return (int) event.getX();}
-    int getY(){return (int) event.getY();}
+    int getX(){return (int) (layout.toPxs(1) * event.getX());}
+    int getY(){return (int) (layout.toPxs(1) * event.getY());}
 
     @Override
     int GetXMin(){return getX();}
@@ -36,7 +37,8 @@ public class DraggingPoint extends Drawable {
 
     @Override
     void draw(Canvas canvas) {
-        canvas.drawRect(getX(), getY(), getX() + 20, getY()+20, paint);
+        canvas.drawRect(layout.toPxs(getX()), layout.toPxs(getY()),
+                layout.toPxs(getX() + 20), layout.toPxs(getY()+20), paint);
     }
 
     public void setEvent(MotionEvent event) {

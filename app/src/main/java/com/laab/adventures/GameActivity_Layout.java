@@ -110,7 +110,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                draggingPoint = new DraggingPoint(event);
+                draggingPoint = new DraggingPoint(event, this);
                 draggingPoint.setEvent(event);
                 draggingPoint.setCapturedPlayer(null);
                 break;
