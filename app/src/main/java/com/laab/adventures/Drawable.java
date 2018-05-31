@@ -6,6 +6,11 @@ public abstract class Drawable {
 
 
     int x1, y1, x2, y2;
+    GameActivity_Layout layout;
+
+    public Drawable(GameActivity_Layout layout){
+        this.layout = layout;
+    }
 
     boolean collidedWith(Drawable obj){
         boolean collision = false;
@@ -29,29 +34,10 @@ public abstract class Drawable {
     }
 
     Sides AdvancedCollision(Drawable obj){
-        Sides side = Sides.None;
-        if(this.GetXMax() >= obj.GetXMin()){ //right
-            if(this.GetYMax() > obj.GetYMin()){ //bottom
-                side = Sides.Bottom;
-            }
-            else if(this.GetYMin() > obj.GetYMax()){ //top
-                side = Sides.Top;
-            }
-            else if(this.GetYMax() == obj.GetYMin() || this.GetYMin() == obj.GetYMax()){ //only right
-                side = Sides.Right;
-            }
-        }
-        else if(this.GetXMin() >= obj.GetXMax()){ //left
-            if(this.GetYMax() > obj.GetYMin()){ //bottom
-                side = Sides.Bottom;
-            }
-            else if(this.GetYMin() > obj.GetYMax()){ //top
-                side = Sides.Top;
-            }
-            else if(this.GetYMax() == obj.GetYMin() || this.GetYMin() == obj.GetYMax()){ //only left
-                side = Sides.Left;
-            }
-        }
+        Sides side = null;
+
+        side = Sides.None;
+
         return side;
     }
 
@@ -62,5 +48,10 @@ public abstract class Drawable {
 
     abstract void draw(Canvas canvas);
 
-    public abstract void move(int i);
+    public void move(int x, int y){
+        x1 += x;
+        x2 += x;
+        y1 += y;
+        y2 += y;
+    }
 }
