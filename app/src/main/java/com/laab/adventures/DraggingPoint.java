@@ -23,22 +23,27 @@ public class DraggingPoint extends Drawable {
     }
 
 
-    int getX(){return (int) (layout.toPxs(1) * event.getX());}
-    int getY(){return (int) (layout.toPxs(1) * event.getY());}
+    int getX(){
+        return (int) (event.getX()/layout.toPxs(1));
+    }
+    int getY(){return (int) (event.getY()/layout.toPxs(1));}
 
     @Override
-    int GetXMin(){return getX();}
+    int GetXMin(){return getX() - 10;}
     @Override
-    int GetYMin(){return getY();}
+    int GetYMin(){return getY() - 10;}
     @Override
-    int GetXMax(){return getX();}
+    int GetXMax(){return getX() + 10;}
     @Override
-    int GetYMax(){return getY();}
+    int GetYMax(){return getY() + 10;}
 
     @Override
     void draw(Canvas canvas) {
-        canvas.drawRect(layout.toPxs(getX()), layout.toPxs(getY()),
-                layout.toPxs(getX() + 20), layout.toPxs(getY()+20), paint);
+//        canvas.drawRect(layout.toPxs(getX()), layout.toPxs(getY()),
+//                layout.toPxs(getX() + 10), layout.toPxs(getY()+10), paint);
+
+        canvas.drawRect(layout.toPxs(GetXMin()), layout.toPxs(GetYMin()),
+                layout.toPxs(GetXMax()), layout.toPxs(GetYMax()), paint);
     }
 
     public void setEvent(MotionEvent event) {

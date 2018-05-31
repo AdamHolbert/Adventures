@@ -31,7 +31,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Player player : players){
             boolean spikeCollision = false;
             Sides collision = Sides.None;
-            int moveX = 1, moveY = 1;
+            int moveX = 0, moveY = 1;
             for(Drawable spike : spikes){
                 if(player.collidedWith(spike)){
                     spikeCollision = true;
@@ -55,17 +55,26 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     int yMove = ((player.y2-player.y1) + player.y1);
                     player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
                 } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
-                    int xMove = ((player.x2-player.x1) + player.x1);
-                    int yMove = ((player.y2-player.y1) + player.y1);
-                    player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
+                    Log.w("Player", Integer.toString(player.GetXMin()) + "," + Integer.toString(player.GetYMin()) + "   size:" + Integer.toString(player.x2 - player.x1));
+                    Log.w("Drager", Integer.toString(draggingPoint.getX()) + "," + Integer.toString(draggingPoint.getY()));
+                    int xMove = draggingPoint.getX() - ((player.x2-player.x1)/2 + player.x1);
+                    int yMove = draggingPoint.getY() - ((player.y2-player.y1)/2 + player.y1);
+                    moveX = xMove;
+                    if(moveX == 0 && xMove != 0){
+                        moveX = xMove > 0 ? 10 : -10;
+                    }
+                    moveY = yMove;
+                    if(moveY == 0 && yMove != 0){
+                        moveY = yMove > 0 ? 10 : -10;;
+                    }
                 }
             }
             if(collision == Sides.Top || collision ==  Sides.Bottom){
-                moveY *= -1;
+                moveY = 0;
                 Log.i("Y Movement", "Switched");
             }
             else if(collision == Sides.Left || collision ==  Sides.Right){
-                moveX *= -1;
+                moveX = 0;
                 Log.i("X Movement", "Switched");
         }
             player.move(moveX, moveY);
