@@ -13,6 +13,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Player> players;
     List<Drawable> spikes;
     List<Drawable>plates;
+    List<Drawable> doors;
 
     public GameActivity_Layout(Context context) {
         super(context);
@@ -20,12 +21,19 @@ public class GameActivity_Layout extends GameLoop_Layout {
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
         plates = new ArrayList<Drawable>();
-
+        doors = new ArrayList<Drawable>();
 
         players.add(new Player(0, 0, 50, 50, this));
+
+
         walls.add(new Wall(0, 0, 1250, 200, this));
         walls.add(new Wall(0, 1250, 1250, 1750, this));
+
+
         spikes.add(new Spike(300, 300, 310,310,this));
+
+        plates.add(new Plate(350, 350, 360, 360, this));
+
 
     }
 
@@ -94,7 +102,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Drawable player : players){
             player.draw(canvas);
         }
-
+        for (Drawable plate : plates){
+            plate.draw(canvas);
+        }
+        for(Drawable door : doors){
+            door.draw(canvas);
+        }
         if(draggingPoint != null && draggingPoint.hasEvent()){
             draggingPoint.draw(canvas);
         }
@@ -119,4 +132,4 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         return false;
     }
-    }
+}
