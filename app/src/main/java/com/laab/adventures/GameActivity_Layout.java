@@ -13,16 +13,11 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Player> players;
     List<Drawable> spikes;
 
-    Player draggingPlayer = null;
-    boolean dragging = false;
-    float xDrag, yDrag = 0;
-
     public GameActivity_Layout(Context context) {
         super(context);
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
-
         players.add(new Player(0, 0, 50, 50));
         walls.add(new Wall(500,0,510, 1000));
     }
@@ -40,7 +35,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             }
             if(collided){
                 playersToBeDeleted.add(player);
-                break;
+                continue;
             }
             for(Drawable wall : walls){
                 if(player.collidedWith(wall)){
@@ -48,8 +43,20 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     break;
                 }
             }
+            if(draggingPoint != null &&  draggingPoint.hasEvent()){
+                if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
+                    draggingPoint.setCapturedPlayer(player);
+                    int xMove = ((player.x2-player.x1) + player.x1);
+                    int yMove = ((player.y2-player.y1) + player.y1);
+                    player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
+                } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
+                    int xMove = ((player.x2-player.x1) + player.x1);
+                    int yMove = ((player.y2-player.y1) + player.y1);
+                    player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
+                }
+            }
             if(!collided){
-                player.move(5, 5);
+                player.move(0, 5);
             }
         }
         for(Player p : playersToBeDeleted){
@@ -74,8 +81,14 @@ public class GameActivity_Layout extends GameLoop_Layout {
             player.draw(canvas);
         }
 
+        if(draggingPoint != null && draggingPoint.hasEvent()){
+            draggingPoint.draw(canvas);
+        }
         surfaceHolder.unlockCanvasAndPost(canvas);
     }
+
+
+    DraggingPoint draggingPoint;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -84,34 +97,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                dragStart(x, y);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                dragMove(x, y);
-                break;
-            case MotionEvent.ACTION_UP:
-                dragEnd();
+                draggingPoint = new DraggingPoint(event);
+                draggingPoint.setEvent(event);
+                draggingPoint.setCapturedPlayer(null);
                 break;
             default:
         }
         return false;
-    }
-
-    private void dragMove(float x, float y) {
-        dragging = true;
-        xDrag = x;
-        yDrag = y;
-    }
-
-    private void dragEnd() {
-        dragging = false;
-        draggingPlayer = null;
-        xDrag = 0;
-        yDrag = 0;
-    }
-
-    private void dragStart(float x, float y) {
-        xDrag = x;
-        yDrag = y;
     }
 }
