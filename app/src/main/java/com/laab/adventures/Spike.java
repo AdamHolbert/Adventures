@@ -14,12 +14,12 @@ public class Spike extends Drawable {
     private Paint display;
     Bitmap img;
 
-    public Spike(int coordinate, GameActivity_Layout layout){
+    public Spike(int x1, int y1, GameActivity_Layout layout){
         super(layout);
-        this.x1 = coordinate - 15;
-        this.y1 = coordinate + 15;
-        this.x2 = coordinate + 15;
-        this.y2 = coordinate - 15;
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x1 +32;
+        this.y2 = y1 +32;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
@@ -34,6 +34,8 @@ public class Spike extends Drawable {
     }
     @Override
     void draw(Canvas canvas) {
+//        canvas.drawRect( layout.toPxs(x1), layout.toPxs(y1), layout.toPxs(x2), layout.toPxs(y2),display);
         canvas.drawBitmap(img, layout.toPxs(x1), layout.toPxs(y1), display);
     }
 }
+

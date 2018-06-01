@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.laab.adventures.LevelBuilder;
 
 public class GameActivity_Layout extends GameLoop_Layout {
 
@@ -19,20 +18,21 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
     public GameActivity_Layout(Context context) {
         super(context);
-//          setLevel(1);
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
-        players.add(new Player(0, 0, 50, 50, this));
-        walls.add(new Wall(0, 0, 420, 100, this));
-        walls.add(new Wall(0, 0, 10, 700, this));
-        walls.add(new Wall(0, 200, 350, 250, this));
-        walls.add(new Wall(400, 0, 420, 700, this));
-        walls.add(new Wall(50, 300, 420, 450, this));
-        walls.add(new Wall(0, 500, 420, 700, this));
-        spikes.add(new Spike(300, this));
         plates = new ArrayList<Drawable>();
         doors = new ArrayList<Drawable>();
+
+
+        players.add(new Player(250, 250, this));
+        walls.add(new Wall(0, 0, 1250, 200, this));
+        walls.add(new Wall(0, 1250, 1250, 1750, this));
+        spikes.add(new Spike(300, 300, this));
+
+        plates.add(new Plate(350, 350, 360, 360, this));
+
+
     }
 
     @Override
@@ -90,21 +90,29 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     int yMove = ((player.y2-player.y1) + player.y1);
                     player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
                 } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
+                    Log.w("Player", Integer.toString(player.GetXMin()) + "," + Integer.toString(player.GetYMin()) + "   size:" + Integer.toString(player.x2 - player.x1));
+                    Log.w("Drager", Integer.toString(draggingPoint.getX()) + "," + Integer.toString(draggingPoint.getY()));
                     int xMove = draggingPoint.getX() - ((player.x2-player.x1)/2 + player.x1);
                     int yMove = draggingPoint.getY() - ((player.y2-player.y1)/2 + player.y1);
                     moveX = xMove;
+                    if(moveX == 0 && xMove != 0){
+                        moveX = xMove > 0 ? 10 : -10;
+                }
                     moveY = yMove;
+                    if(moveY == 0 && yMove != 0){
+                        moveY = yMove > 0 ? 10 : -10;;
+            }
                 }
             }
-            if(collision == Sides.Top || collision ==  Sides.Bottom){
-                moveY *= -1;
+            if((collision == Sides.Top && moveY > 0) || (collision ==  Sides.Bottom && moveY < 0)){
+                moveY = 0;
                 Log.i("Y Movement", "Switched");
             }
-            else if(collision == Sides.Left || collision ==  Sides.Right){
-                moveX *= -1;
+            else if((collision == Sides.Left && moveX < 0) || (collision ==  Sides.Right && moveX > 0)){
+                moveX = 0;
                 Log.i("X Movement", "Switched");
         }
-//            player.move(moveX, moveY);
+            player.move(moveX, moveY);
         }
         for(Player p : playersToBeDeleted){
             players.remove(p);
@@ -115,7 +123,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     void draw() {
         canvas = surfaceHolder.lockCanvas();
         canvas.drawCircle(cwidth, cheight, toPxs(10), red_paintbrush_fill);
-        canvas.drawRect(0,0,cwidth,cheight,green_paintbrush_fill);
+        canvas.drawRect(0,0,cwidth,cheight, gray_panitbrush_fill);
         //cannon ball
         for(Drawable wall : walls){
             wall.draw(canvas);
@@ -126,7 +134,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Drawable player : players){
             player.draw(canvas);
         }
-
+        for (Drawable plate : plates){
+            plate.draw(canvas);
+        }
+        for(Drawable door : doors){
+            door.draw(canvas);
+        }
         if(draggingPoint != null && draggingPoint.hasEvent()){
             draggingPoint.draw(canvas);
         }
@@ -151,9 +164,5 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         return false;
     }
-
-/*    public void setLevel(int level) {
-       // walls = LevelBuilder.getWalls(level, this);
-        players = LevelBuilder.getPlayers(level, this);
     }*/
 }

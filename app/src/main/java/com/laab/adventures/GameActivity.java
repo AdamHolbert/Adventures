@@ -12,7 +12,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gameActivity_layout = new GameActivity_Layout(this);
-//        gameActivity_layout.setLevel(1);
         setContentView(gameActivity_layout);
         Music.levelMusic(this);
     }
