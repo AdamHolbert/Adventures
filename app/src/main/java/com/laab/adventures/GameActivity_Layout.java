@@ -152,8 +152,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
         return false;
     }
 
-    public void setLevel(int level) {
-        walls = LevelBuilder.getWalls(level, this);
+/*    public void setLevel(int level) {
+       // walls = LevelBuilder.getWalls(level, this);
         players = LevelBuilder.getPlayers(level, this);
-    }
+    }*/
 }
