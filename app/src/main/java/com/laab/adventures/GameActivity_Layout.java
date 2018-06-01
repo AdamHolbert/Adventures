@@ -164,5 +164,4 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         return false;
     }
-    }*/
 }
