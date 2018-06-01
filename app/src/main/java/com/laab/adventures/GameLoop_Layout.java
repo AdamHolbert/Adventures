@@ -15,7 +15,7 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
     double frames_per_second, frame_time_seconds, frame_time_ms, frame_time_ns;
     double tLF, tEOR, delta_t,physics_rate,dt,dt_pool;
 
-    Paint red_paintbrush_fill, blue_paintbrush_fill, green_paintbrush_fill;
+    Paint red_paintbrush_fill, blue_paintbrush_fill, green_paintbrush_fill, gray_panitbrush_fill;
     Paint red_paintbrush_stroke,blue_paintbrush_stroke,green_paintbrush_stroke;
 
     Boolean CanDraw;
@@ -43,7 +43,7 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
 
         // 50 physics updates per second, = 1/50 sec = (1/50)*1,000,000,000 nanosecs
         // 1 physics update every 20,000,000 nanoseconds
-        physics_rate=50;
+        physics_rate=100;
         dt=(1/physics_rate)*1000000000;
         dt_pool=0;
     }
@@ -167,7 +167,11 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
         green_paintbrush_stroke.setColor(Color.GREEN);
         green_paintbrush_stroke.setStyle(Paint.Style.STROKE);
         green_paintbrush_stroke.setStrokeWidth(10);
-    }
+
+        gray_panitbrush_fill = new Paint();
+        gray_panitbrush_fill.setColor(Color.DKGRAY);
+        gray_panitbrush_fill.setStyle(Paint.Style.FILL);
+}
 
     protected int toPxs(float dps){
         return (int) (dps * getResources().getDisplayMetrics().density + 0.5f);
