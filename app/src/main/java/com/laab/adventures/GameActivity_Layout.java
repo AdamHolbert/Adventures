@@ -13,10 +13,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> walls;
     List<Player> players;
     List<Drawable> spikes;
-
+    List<Drawable> plates;
+    List<Drawable> doors;
 
     public GameActivity_Layout(Context context) {
         super(context);
+//          setLevel(1);
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
@@ -30,8 +32,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
         spikes.add(new Spike(300, this));
         plates = new ArrayList<Drawable>();
         doors = new ArrayList<Drawable>();
-
-
     }
 
     @Override
