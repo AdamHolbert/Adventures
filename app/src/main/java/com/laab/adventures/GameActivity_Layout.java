@@ -22,14 +22,14 @@ public class GameActivity_Layout extends GameLoop_Layout {
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
-        players.add(new Player(0, 0, 50, 50, this));
+        players.add(new Player(50, 100, this));
         walls.add(new Wall(0, 0, 420, 100, this));
         walls.add(new Wall(0, 0, 10, 700, this));
         walls.add(new Wall(0, 200, 350, 250, this));
         walls.add(new Wall(400, 0, 420, 700, this));
         walls.add(new Wall(50, 300, 420, 450, this));
         walls.add(new Wall(0, 500, 420, 700, this));
-        spikes.add(new Spike(300, this));
+        spikes.add(new Spike(170,170, this));
         plates = new ArrayList<Drawable>();
         doors = new ArrayList<Drawable>();
     }

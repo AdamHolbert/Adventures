@@ -24,7 +24,7 @@ public class LevelBuilder {
     public static List<Player>getPlayers(int level, GameActivity_Layout game) {
         List<Player> players = null;
         if(level == 1) {
-            players.add(new Player(0, 0, 50, 50, game));
+            players.add(new Player(0, 0, game));
         }
         return players;
     }

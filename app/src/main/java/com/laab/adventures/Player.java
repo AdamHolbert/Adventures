@@ -13,12 +13,12 @@ class Player extends Drawable {
     private Bitmap image;
     private Paint display;
 
-    public Player(int x1, int y1, int x2, int y2, GameActivity_Layout layout) {
+    public Player(int x1, int y1, GameActivity_Layout layout) {
         super(layout);
         this.x1 = x1;
-        this.x2 = x2;
+        this.x2 = x1 +16;
         this.y1 = y1;
-        this.y2 = y2;
+        this.y2 = y1 +16;
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
