@@ -10,7 +10,7 @@ public class LevelBuilder {
     Paint paint;
     public static List<Drawable> getWalls(int level, GameActivity_Layout game) {
         List<Drawable> walls = null;
-        if(level == 0) {
+        if(level == 1) {
             walls.add(new Wall(0, 0, 420, 100,game));
             walls.add(new Wall(0, 0, 10, 700, game));
             walls.add(new Wall(0, 200, 350, 250, game));
@@ -23,7 +23,7 @@ public class LevelBuilder {
 
     public static List<Player>getPlayers(int level, GameActivity_Layout game) {
         List<Player> players = null;
-        if(level == 0) {
+        if(level == 1) {
             players.add(new Player(0, 0, 50, 50, game));
         }
         return players;
