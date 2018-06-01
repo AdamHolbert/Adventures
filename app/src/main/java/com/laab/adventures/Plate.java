@@ -20,8 +20,8 @@ public class Plate extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 + 16;
-        this.y2 = y1 + 16;
+        this.x2 = x1 + 32;
+        this.y2 = y1 + 32;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
