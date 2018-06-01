@@ -30,7 +30,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         walls.add(new Wall(0, 1250, 1250, 1750, this));
         spikes.add(new Spike(300, 300, this));
 
-        plates.add(new Plate(350, 350, 360, 360, this));
+        plates.add(new Plate(350, 350, this, new Door(200,200,this)));
 
 
     }
@@ -164,4 +164,5 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         return false;
     }
+
 }
