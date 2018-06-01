@@ -1,5 +1,6 @@
 package com.laab.adventures;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -25,11 +26,16 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
 
         players.add(new Player(250, 250, this));
+
         walls.add(new Wall(0, 0, 1250, 200, this));
         walls.add(new Wall(0, 1250, 1250, 1750, this));
+
         spikes.add(new Spike(300, 300, this));
 
-        plates.add(new Plate(350, 350, 360, 360, this));
+        Door door = new Door(100,300,this);
+        doors.add(door);
+
+        plates.add(new Plate(250, 450,this, door));
 
 
     }
@@ -41,6 +47,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
             boolean spikeCollision = false;
             Sides collision = Sides.None;
             int moveX = 0, moveY = 1;
+            boolean collidedWithDoor = false;
+            boolean collidedWithPlate = false;
             for(Drawable spike : spikes){
                 if(player.collidedWith(spike)){
                     spikeCollision = true;
@@ -57,6 +65,29 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     break;
                 }
             }
+            for(Drawable plate : plates){
+                collision = player.AdvancedCollision(plate);
+                if(collision != Sides.None) {
+                    if(!((Plate)plate).getDoor().getIsOpen())
+                        ((Plate)plate).getDoor().open();
+                }else{
+                    ((Plate)plate).getDoor().close();
+                }
+            }
+            for(Drawable door : doors){
+
+                if(!((Door) door).getIsOpen())
+                    System.out.println("******* Door Is Not Open ********");
+                if(((Door) door).getIsOpen())
+                    System.out.println("******* Door Is Open ********");
+
+               if (!((Door) door).getIsOpen()) {
+                    collision = player.AdvancedCollision(door);
+                    if(collision != Sides.None) {
+                        break;
+                    }
+                }
+            }
             if(draggingPoint != null &&  draggingPoint.hasEvent()){
                 if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
                     draggingPoint.setCapturedPlayer(player);
@@ -71,11 +102,11 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     moveX = xMove;
                     if(moveX == 0 && xMove != 0){
                         moveX = xMove > 0 ? 10 : -10;
-                }
+                        }
                     moveY = yMove;
                     if(moveY == 0 && yMove != 0){
                         moveY = yMove > 0 ? 10 : -10;;
-            }
+                    }
                 }
             }
             if((collision == Sides.Top && moveY > 0) || (collision ==  Sides.Bottom && moveY < 0)){

@@ -13,16 +13,19 @@ public class Plate extends Drawable {
     private Rect rectangle;
     private Paint display;
     Bitmap img;
+    private Door door;
 
-    public Plate (int x1, int y1, int x2, int y2, GameActivity_Layout layout){
+
+    public Plate (int x1, int y1, GameActivity_Layout layout, Door door){
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
+        this.x2 = x1 + 16;
+        this.y2 = y1 + 16;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
+
 
         img = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate);
 
@@ -30,11 +33,15 @@ public class Plate extends Drawable {
         display.setColor(Color.RED);
         display.setStyle(Paint.Style.FILL);
 
-
+        this.door = door;
     }
     @Override
-    void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
         canvas.drawBitmap(img, layout.toPxs(x1), layout.toPxs(y1), display);
+    }
+
+    public Door getDoor(){
+        return door;
     }
 }
 
