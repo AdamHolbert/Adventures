@@ -68,10 +68,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 }
             }
             for(Drawable door : doors){
-
                 if(((Door) door).getIsOpen())
                     System.out.println("******* Door Is Open ********");
-
                 if (!((Door) door).getIsOpen()) {
                     collision = player.AdvancedCollision(door);
                     if(collision != Sides.None) {
