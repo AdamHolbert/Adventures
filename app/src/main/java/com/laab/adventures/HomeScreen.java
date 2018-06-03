@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 
 public class HomeScreen extends AppCompatActivity {
-    Button levels;
-    Button instructions;
-    Button settings;
+    private Button levels;
+    private Button instructions;
+    private Button settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
