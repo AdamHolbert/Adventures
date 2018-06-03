@@ -1,5 +1,6 @@
 package com.laab.adventures;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -12,7 +13,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> walls;
     List<Player> players;
     List<Drawable> spikes;
-    List<Drawable>plates;
+    List<Drawable> plates;
     List<Drawable> doors;
 
     public GameActivity_Layout(Context context) {
@@ -36,12 +37,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
             walls.addAll(builder.getWalls(3, this));
             players.addAll(builder.getPlayers(3, this));
         }
-//        players.add(new Player(250, 250, this));
-//        walls.add(new Wall(0, 0, 1250, 200, this));
-//        walls.add(new Wall(0, 1250, 1250, 1750, this));
-//        spikes.add(new Spike(300, 300, this));
-//
-//        plates.add(new Plate(350, 350, 360, 360, this));
     }
 
     @Override
@@ -51,6 +46,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
             boolean spikeCollision = false;
             Sides collision = Sides.None;
             int moveX = 0, moveY = 1;
+            boolean collidedWithDoor = false;
+            boolean collidedWithPlate = false;
             for(Drawable spike : spikes){
                 if(player.collidedWith(spike)){
                     spikeCollision = true;
@@ -67,25 +64,37 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     break;
                 }
             }
+            for(Drawable plate : plates){
+                collision = player.AdvancedCollision(plate);
+                if(player.collidedWith(plate)) {
+                    if(!((Plate)plate).getDoor().getIsOpen())
+                        ((Plate)plate).getDoor().open();
+                }
+            }
+            for(Drawable door : doors){
+
+                if(((Door) door).getIsOpen())
+                    System.out.println("******* Door Is Open ********");
+
+                if (!((Door) door).getIsOpen()) {
+                    collision = player.AdvancedCollision(door);
+                    if(collision != Sides.None) {
+                        break;
+                    }
+                }
+            }
             if(draggingPoint != null &&  draggingPoint.hasEvent()){
                 if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
                     draggingPoint.setCapturedPlayer(player);
-                    int xMove = ((player.x2-player.x1) + player.x1);
-                    int yMove = ((player.y2-player.y1) + player.y1);
-                    player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
-                } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
-                    Log.w("Player", Integer.toString(player.GetXMin()) + "," + Integer.toString(player.GetYMin()) + "   size:" + Integer.toString(player.x2 - player.x1));
-                    Log.w("Drager", Integer.toString(draggingPoint.getX()) + "," + Integer.toString(draggingPoint.getY()));
                     int xMove = draggingPoint.getX() - ((player.x2-player.x1)/2 + player.x1);
                     int yMove = draggingPoint.getY() - ((player.y2-player.y1)/2 + player.y1);
                     moveX = xMove;
-                    if(moveX == 0 && xMove != 0){
-                        moveX = xMove > 0 ? 10 : -10;
-                }
                     moveY = yMove;
-                    if(moveY == 0 && yMove != 0){
-                        moveY = yMove > 0 ? 10 : -10;;
-            }
+                } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
+                    int xMove = draggingPoint.getX() - ((player.x2-player.x1)/2 + player.x1);
+                    int yMove = draggingPoint.getY() - ((player.y2-player.y1)/2 + player.y1);
+                    moveX = xMove;
+                    moveY = yMove;
                 }
             }
             if((collision == Sides.Top && moveY > 0) || (collision ==  Sides.Bottom && moveY < 0)){
@@ -95,7 +104,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             else if((collision == Sides.Left && moveX < 0) || (collision ==  Sides.Right && moveX > 0)){
                 moveX = 0;
                 Log.i("X Movement", "Switched");
-        }
+            }
             player.move(moveX, moveY);
         }
         for(Player p : playersToBeDeleted){
@@ -148,4 +157,5 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         return false;
     }
+
 }
