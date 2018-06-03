@@ -9,8 +9,8 @@ import android.widget.Button;
 
 public class LevelsActivity extends AppCompatActivity {
     Button back, file, level1, level2, level3;
-    public static String level = "";
-    public static boolean level2Locked, level3Locked;
+    private static String level = "";
+    private static boolean level2Locked, level3Locked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,4 +108,7 @@ public class LevelsActivity extends AppCompatActivity {
 
     }
 
+    public String getLevel(){
+        return level;
+    }
 }

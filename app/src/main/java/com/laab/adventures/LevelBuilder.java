@@ -7,6 +7,7 @@ public class LevelBuilder {
 
     public static ArrayList<Drawable> getWalls(int level, GameActivity_Layout game) {
         ArrayList<Drawable> walls = new ArrayList<Drawable>();
+
         if(level == 1) {
             walls.add(new Wall(0, 0, 890, 100,game));
             walls.add(new Wall(0, 0, 10, 700, game));
@@ -47,5 +48,41 @@ public class LevelBuilder {
             players.add(new Player(370, 500, game));
         }
         return players;
+    }
+
+    public static ArrayList<Drawable>getSpikes(int level, GameActivity_Layout game) {
+        ArrayList<Drawable> spikes = new ArrayList<Drawable>();
+        if(level == 2) {
+            spikes.add(new Spike(20, 617, game));
+            spikes.add(new Spike(60, 617, game));
+        }
+        return spikes;
+    }
+
+    public static ArrayList<Drawable>getFlags(int level, GameActivity_Layout game) {
+        ArrayList<Drawable> flags = new ArrayList<Drawable>();
+        if(level == 1) {
+            flags.add(new Flag(30,165, game));
+        }
+        if(level == 2) {
+            flags.add(new Flag(20,118, game));
+        }
+        return flags;
+    }
+
+    public static ArrayList<Drawable>getPlates(int level, GameActivity_Layout game, Door door) {
+        ArrayList<Drawable> plates = new ArrayList<Drawable>();
+        if(level == 2) {
+            plates.add(new Plate(10, 200, game, door));
+        }
+        return plates;
+    }
+
+    public static ArrayList<Drawable>getDoors(int level, GameActivity_Layout game) {
+        ArrayList<Drawable> doors = new ArrayList<Drawable>();
+        if(level == 2) {
+            doors.add(new Door(200, 100, game));
+        }
+        return doors;
     }
 }

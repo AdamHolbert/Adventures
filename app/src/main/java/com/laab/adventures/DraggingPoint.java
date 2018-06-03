@@ -42,7 +42,7 @@ public class DraggingPoint extends Drawable {
     int GetYMax(){return getY() + 10;}
 
     @Override
-    void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
         Log.w("dragging point", Integer.toString(GetXMin()));
         canvas.drawRect(event.getX(), event.getY(),
                 event.getX() + 50, event.getY()+50, red);

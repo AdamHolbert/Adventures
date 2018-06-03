@@ -6,7 +6,7 @@ import android.graphics.Rect;
 public abstract class Drawable {
 
 
-    int x1, y1, x2, y2;
+    protected int x1, y1, x2, y2;
     GameActivity_Layout layout;
 
     public Drawable(GameActivity_Layout layout){
@@ -117,7 +117,7 @@ public abstract class Drawable {
     int GetXMax(){return x2;}
     int GetYMax(){return y2;}
 
-    abstract void draw(Canvas canvas);
+    protected abstract void draw(Canvas canvas);
 
     public void move(int x, int y){
         x = x > 0 ? 1 : x < 0 ? -1 : 0;

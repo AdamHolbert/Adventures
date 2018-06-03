@@ -12,9 +12,9 @@ import android.view.SurfaceView;
 
 public abstract class GameLoop_Layout extends SurfaceView implements Runnable, SurfaceHolder.Callback {
 
-    Thread thread = null;
-    double frames_per_second, frame_time_seconds, frame_time_ms, frame_time_ns;
-    double tLF, tEOR, delta_t,physics_rate,dt,dt_pool;
+    private Thread thread = null;
+    private double frames_per_second, frame_time_seconds, frame_time_ms, frame_time_ns;
+    private double tLF, tEOR, delta_t,physics_rate,dt,dt_pool;
 
     Paint red_paintbrush_fill, blue_paintbrush_fill, green_paintbrush_fill, gray_panitbrush_fill;
     Paint red_paintbrush_stroke,blue_paintbrush_stroke,green_paintbrush_stroke;
