@@ -17,21 +17,31 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
     public GameActivity_Layout(Context context) {
         super(context);
+        LevelBuilder builder = new LevelBuilder();
+        LevelsActivity levels = new LevelsActivity();
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
         plates = new ArrayList<Drawable>();
         doors = new ArrayList<Drawable>();
-
-
-        players.add(new Player(250, 250, this));
-        walls.add(new Wall(0, 0, 1250, 200, this));
-        walls.add(new Wall(0, 1250, 1250, 1750, this));
-        spikes.add(new Spike(300, 300, this));
-
-        plates.add(new Plate(350, 350, 360, 360, this));
-
-
+        if(levels.level == "Level 1") {
+            walls.addAll(builder.getWalls(1, this));
+            players.addAll(builder.getPlayers(1, this));
+        }
+        else if(levels.level == "Level 2") {
+            walls.addAll(builder.getWalls(2, this));
+            players.addAll(builder.getPlayers(2, this));
+        }
+        else if(levels.level == "Level 2") {
+            walls.addAll(builder.getWalls(3, this));
+            players.addAll(builder.getPlayers(3, this));
+        }
+//        players.add(new Player(250, 250, this));
+//        walls.add(new Wall(0, 0, 1250, 200, this));
+//        walls.add(new Wall(0, 1250, 1250, 1750, this));
+//        spikes.add(new Spike(300, 300, this));
+//
+//        plates.add(new Plate(350, 350, 360, 360, this));
     }
 
     @Override

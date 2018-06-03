@@ -8,14 +8,22 @@ import android.widget.Button;
 
 
 public class LevelsActivity extends AppCompatActivity {
-    Button back, file;
+    Button back, file, level1, level2, level3;
+    public static String level = "";
+    public static boolean level2Locked, level3Locked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
 
+        level2Locked = false;
+        level3Locked = true;
+
         back = (Button) findViewById(R.id.backbutton);
         file = (Button) findViewById(R.id.filebutton);
+        level1 = (Button) findViewById(R.id.level1);
+        level2 = (Button) findViewById(R.id.level2);
+        level3 = (Button) findViewById(R.id.level3);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +38,36 @@ public class LevelsActivity extends AppCompatActivity {
                 goFile();
             }
         });
+
+        level1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goLevel1(v);
+                level = "Level 1";
+            }
+        });
+        level2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goLevel2(v);
+                level = "Level 2";
+            }
+        });
+        level3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goLevel3(v);
+                level = "Level 3";
+            }
+        });
+
+        if(level2Locked == true) {
+            level2.setEnabled(false);
+        }
+
+        if(level3Locked == true) {
+            level3.setEnabled(false);
+        }
     }
 
     public void goBack() {
@@ -42,7 +80,17 @@ public class LevelsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void moveToLevel(View view) {
+    public void goLevel1(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    public void goLevel2(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
+
+    public void goLevel3(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
@@ -59,4 +107,5 @@ public class LevelsActivity extends AppCompatActivity {
         Music.pauseMusic();
 
     }
+
 }
