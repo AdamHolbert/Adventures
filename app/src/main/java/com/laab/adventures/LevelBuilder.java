@@ -59,13 +59,30 @@ public class LevelBuilder {
         return spikes;
     }
 
-    public static ArrayList<Drawable>getPlates(int level, GameActivity_Layout game) {
+    public static ArrayList<Drawable>getFlags(int level, GameActivity_Layout game) {
+        ArrayList<Drawable> flags = new ArrayList<Drawable>();
+        if(level == 1) {
+            flags.add(new Flag(30,165, game));
+        }
+        if(level == 2) {
+            flags.add(new Flag(20,118, game));
+        }
+        return flags;
+    }
+
+    public static ArrayList<Drawable>getPlates(int level, GameActivity_Layout game, Door door) {
         ArrayList<Drawable> plates = new ArrayList<Drawable>();
+        if(level == 2) {
+            plates.add(new Plate(10, 200, game, door));
+        }
         return plates;
     }
 
     public static ArrayList<Drawable>getDoors(int level, GameActivity_Layout game) {
         ArrayList<Drawable> doors = new ArrayList<Drawable>();
+        if(level == 2) {
+            doors.add(new Door(200, 100, game));
+        }
         return doors;
     }
 }
