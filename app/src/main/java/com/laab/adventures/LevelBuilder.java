@@ -7,6 +7,7 @@ public class LevelBuilder {
 
     public static ArrayList<Drawable> getWalls(int level, GameActivity_Layout game) {
         ArrayList<Drawable> walls = new ArrayList<Drawable>();
+
         if(level == 1) {
             walls.add(new Wall(0, 0, 420, 100,game));
             walls.add(new Wall(0, 0, 10, 700, game));
@@ -56,14 +57,6 @@ public class LevelBuilder {
             spikes.add(new Spike(60, 617, game));
         }
         return spikes;
-    }
-
-    public static ArrayList<Drawable>getFlags(int level, GameActivity_Layout game) {
-        ArrayList<Drawable> flags = new ArrayList<Drawable>();
-        if(level == 1) {
-
-        }
-        return flags;
     }
 
     public static ArrayList<Drawable>getPlates(int level, GameActivity_Layout game) {

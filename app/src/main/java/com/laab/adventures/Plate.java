@@ -12,7 +12,7 @@ public class Plate extends Drawable {
 
     private Rect rectangle;
     private Paint display;
-    Bitmap img;
+    private Bitmap img;
     private Door door;
 
 

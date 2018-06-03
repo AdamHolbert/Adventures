@@ -20,9 +20,9 @@ import java.io.InputStreamReader;
 
 public class FileActivity extends AppCompatActivity {
 
-    public EditText editText;
-    public TextView textView;
-    public Button save, load;
+    private EditText editText;
+    private TextView textView;
+    private Button save, load;
 
     public String path = Environment.getExternalStorageDirectory().getAbsolutePath();
 

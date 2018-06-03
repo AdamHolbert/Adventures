@@ -31,7 +31,7 @@ class Player extends Drawable {
     }
 
     @Override
-    void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
         if(image != null) {
             canvas.drawBitmap(image, layout.toPxs(x1), layout.toPxs(y1), null);
         }

@@ -12,7 +12,7 @@ public class Spike extends Drawable {
 
     private Rect rectangle;
     private Paint display;
-    Bitmap img;
+    private Bitmap img;
 
     public Spike(int x1, int y1, GameActivity_Layout layout){
         super(layout);
@@ -33,7 +33,7 @@ public class Spike extends Drawable {
 
     }
     @Override
-    void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
 //        canvas.drawRect( layout.toPxs(x1), layout.toPxs(y1), layout.toPxs(x2), layout.toPxs(y2),display);
         canvas.drawBitmap(img, layout.toPxs(x1), layout.toPxs(y1), display);
     }
