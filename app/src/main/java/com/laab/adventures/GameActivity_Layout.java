@@ -29,8 +29,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
         walls.add(new Wall(0, 0, 1250, 200, this));
         walls.add(new Wall(0, 1250, 1250, 1750, this));
         spikes.add(new Spike(300, 300, this));
-
-        plates.add(new Plate(350, 350, this, new Door(200,200,this)));
+        doors.add(new Door(200,200,this));
+        plates.add(new Plate(350, 350, this, (Door) doors.get(0)));
 
 
     }
@@ -62,21 +62,17 @@ public class GameActivity_Layout extends GameLoop_Layout {
             }
             for(Drawable plate : plates){
                 collision = player.AdvancedCollision(plate);
-                if(collision != Sides.None) {
+                if(player.collidedWith(plate)) {
                     if(!((Plate)plate).getDoor().getIsOpen())
                         ((Plate)plate).getDoor().open();
-                }else{
-                    ((Plate)plate).getDoor().close();
                 }
             }
             for(Drawable door : doors){
 
-                if(!((Door) door).getIsOpen())
-                    System.out.println("******* Door Is Not Open ********");
                 if(((Door) door).getIsOpen())
                     System.out.println("******* Door Is Open ********");
 
-               if (!((Door) door).getIsOpen()) {
+                if (!((Door) door).getIsOpen()) {
                     collision = player.AdvancedCollision(door);
                     if(collision != Sides.None) {
                         break;
@@ -86,22 +82,15 @@ public class GameActivity_Layout extends GameLoop_Layout {
             if(draggingPoint != null &&  draggingPoint.hasEvent()){
                 if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
                     draggingPoint.setCapturedPlayer(player);
-                    int xMove = ((player.x2-player.x1) + player.x1);
-                    int yMove = ((player.y2-player.y1) + player.y1);
-                    player.move(draggingPoint.getX()-xMove, draggingPoint.getY()-yMove);
-                } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
-                    Log.w("Player", Integer.toString(player.GetXMin()) + "," + Integer.toString(player.GetYMin()) + "   size:" + Integer.toString(player.x2 - player.x1));
-                    Log.w("Drager", Integer.toString(draggingPoint.getX()) + "," + Integer.toString(draggingPoint.getY()));
                     int xMove = draggingPoint.getX() - ((player.x2-player.x1)/2 + player.x1);
                     int yMove = draggingPoint.getY() - ((player.y2-player.y1)/2 + player.y1);
                     moveX = xMove;
-                    if(moveX == 0 && xMove != 0){
-                        moveX = xMove > 0 ? 10 : -10;
-                }
                     moveY = yMove;
-                    if(moveY == 0 && yMove != 0){
-                        moveY = yMove > 0 ? 10 : -10;;
-            }
+                } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
+                    int xMove = draggingPoint.getX() - ((player.x2-player.x1)/2 + player.x1);
+                    int yMove = draggingPoint.getY() - ((player.y2-player.y1)/2 + player.y1);
+                    moveX = xMove;
+                    moveY = yMove;
                 }
             }
             if((collision == Sides.Top && moveY > 0) || (collision ==  Sides.Bottom && moveY < 0)){
@@ -111,7 +100,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             else if((collision == Sides.Left && moveX < 0) || (collision ==  Sides.Right && moveX > 0)){
                 moveX = 0;
                 Log.i("X Movement", "Switched");
-        }
+            }
             player.move(moveX, moveY);
         }
         for(Player p : playersToBeDeleted){
