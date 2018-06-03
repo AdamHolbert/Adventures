@@ -36,9 +36,9 @@ public class Door extends Drawable {
     @Override
     void draw(Canvas canvas) {
         if(isOpen){
-            canvas.drawBitmap(open, layout.toPxs(x1), layout.toPxs(y1), display);
+            canvas.drawBitmap(open, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
         } else {
-            canvas.drawBitmap(closed, layout.toPxs(x1), layout.toPxs(y1), display);
+            canvas.drawBitmap(closed, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
         }
     }
 

@@ -115,7 +115,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
     @Override
     void draw() {
         canvas = surfaceHolder.lockCanvas();
-        canvas.drawCircle(cwidth, cheight, toPxs(10), red_paintbrush_fill);
         canvas.drawRect(0,0,cwidth,cheight, gray_panitbrush_fill);
         //cannon ball
         for(Drawable wall : walls){

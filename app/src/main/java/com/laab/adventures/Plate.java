@@ -29,6 +29,7 @@ public class Plate extends Drawable {
 
         img = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate);
 
+
         display = new Paint();
         display.setColor(Color.RED);
         display.setStyle(Paint.Style.FILL);
@@ -37,7 +38,7 @@ public class Plate extends Drawable {
     }
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(img, layout.toPxs(x1), layout.toPxs(y1), display);
+        canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 
     public Door getDoor(){

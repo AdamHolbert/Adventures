@@ -35,7 +35,7 @@ public class Spike extends Drawable {
     @Override
     void draw(Canvas canvas) {
 //        canvas.drawRect( layout.toPxs(x1), layout.toPxs(y1), layout.toPxs(x2), layout.toPxs(y2),display);
-        canvas.drawBitmap(img, layout.toPxs(x1), layout.toPxs(y1), display);
+        canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 }
 

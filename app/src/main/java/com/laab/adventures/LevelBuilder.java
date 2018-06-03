@@ -8,7 +8,7 @@ public class LevelBuilder {
     public static ArrayList<Drawable> getWalls(int level, GameActivity_Layout game) {
         ArrayList<Drawable> walls = new ArrayList<Drawable>();
         if(level == 1) {
-            walls.add(new Wall(0, 0, 420, 100,game));
+            walls.add(new Wall(0, 0, 890, 100,game));
             walls.add(new Wall(0, 0, 10, 700, game));
             walls.add(new Wall(0, 200, 350, 250, game));
             walls.add(new Wall(400, 0, 420, 700, game));

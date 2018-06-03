@@ -10,7 +10,7 @@ import android.util.Log;
 
 class Player extends Drawable {
     private Rect rectangle;
-    private Bitmap image;
+    private Bitmap img;
     private Paint display;
 
     public Player(int x1, int y1, GameActivity_Layout layout) {
@@ -22,7 +22,8 @@ class Player extends Drawable {
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
-        image = BitmapFactory.decodeResource(layout.getResources(), R.drawable.objectboi);
+        img = BitmapFactory.decodeResource(layout.getResources(), R.drawable.objectboi);
+
 
         display = new Paint();
         display.setColor(Color.BLACK);
@@ -32,8 +33,8 @@ class Player extends Drawable {
 
     @Override
     void draw(Canvas canvas) {
-        if(image != null) {
-            canvas.drawBitmap(image, layout.toPxs(x1), layout.toPxs(y1), null);
+        if(img != null) {
+            canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
         }
     }
 
