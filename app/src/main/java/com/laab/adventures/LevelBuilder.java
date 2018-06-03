@@ -48,4 +48,31 @@ public class LevelBuilder {
         }
         return players;
     }
+
+    public static ArrayList<Drawable>getSpikes(int level, GameActivity_Layout game) {
+        ArrayList<Drawable> spikes = new ArrayList<Drawable>();
+        if(level == 2) {
+            spikes.add(new Spike(20, 617, game));
+            spikes.add(new Spike(60, 617, game));
+        }
+        return spikes;
+    }
+
+    public static ArrayList<Drawable>getFlags(int level, GameActivity_Layout game) {
+        ArrayList<Drawable> flags = new ArrayList<Drawable>();
+        if(level == 1) {
+
+        }
+        return flags;
+    }
+
+    public static ArrayList<Drawable>getPlates(int level, GameActivity_Layout game) {
+        ArrayList<Drawable> plates = new ArrayList<Drawable>();
+        return plates;
+    }
+
+    public static ArrayList<Drawable>getDoors(int level, GameActivity_Layout game) {
+        ArrayList<Drawable> doors = new ArrayList<Drawable>();
+        return doors;
+    }
 }

@@ -32,6 +32,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         else if(levels.level == "Level 2") {
             walls.addAll(builder.getWalls(2, this));
             players.addAll(builder.getPlayers(2, this));
+            spikes.addAll(builder.getSpikes(2, this));
         }
         else if(levels.level == "Level 2") {
             walls.addAll(builder.getWalls(3, this));
