@@ -30,23 +30,23 @@ public class DraggingPoint extends Drawable {
         Log.w("dragging point", Float.toString(event.getX()/layout.toPxsWidth(1)));
         return (int) (event.getX()/layout.toPxsWidth(1));
     }
-    int getY(){return (int) (event.getY()/layout.toPxsHeight(1));}
+    int getY(){return (int) (event.getY()/layout.toPxsHeight(1)) - 15;}
 
     @Override
-    int GetXMin(){return getX() - 10;}
+    int GetXMin(){return getX() - 15;}
     @Override
-    int GetYMin(){return getY() - 10;}
+    int GetYMin(){return getY() - 15;}
     @Override
-    int GetXMax(){return getX() + 10;}
+    int GetXMax(){return getX() + 15;}
     @Override
-    int GetYMax(){return getY() + 10;}
+    int GetYMax(){return getY() + 15;}
 
     @Override
     public void draw(Canvas canvas) {
-        Log.w("dragging point", Integer.toString(GetXMin()));
-        canvas.drawRect(event.getX(), event.getY(),
-                event.getX() + 50, event.getY()+50, red);
-
+//        Log.w("dragging point", Integer.toString(GetXMin()));
+//        canvas.drawRect(event.getX(), event.getY(),
+//                event.getX() + 50, event.getY()+50, red);
+//
         canvas.drawRect(layout.toPxsWidth(GetXMin()), layout.toPxsHeight(GetYMin()),
                 layout.toPxsWidth(GetXMax()), layout.toPxsHeight(GetYMax()), green);
     }

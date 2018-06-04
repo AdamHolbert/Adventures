@@ -10,9 +10,11 @@ import android.graphics.Rect;
 
 public class Plate extends Drawable {
 
+    private boolean pressed;
     private Rect rectangle;
     private Paint display;
-    private Bitmap img;
+    private Bitmap plateUp;
+    private Bitmap plateDown;
     private Door door;
 
 
@@ -20,14 +22,15 @@ public class Plate extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 + 40;
-        this.y2 = y1 + 32;
+        this.x2 = x1 + 70;
+        this.y2 = y1 + 20;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
 
-        img = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate);
+        plateUp = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate);
+        plateDown = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_down);
 
 
         display = new Paint();
@@ -38,8 +41,18 @@ public class Plate extends Drawable {
     }
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
-        canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
+//        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
+
+        if(!pressed){
+            canvas.drawBitmap(plateUp, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
+        }
+        else {
+            canvas.drawBitmap(plateDown, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
+        }
+    }
+
+    public void press(){
+        pressed = true;
     }
 
     public Door getDoor(){

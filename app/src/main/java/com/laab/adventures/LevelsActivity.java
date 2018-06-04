@@ -61,9 +61,18 @@ public class LevelsActivity extends AppCompatActivity {
 
         if (level2Locked) {
             level2.setEnabled(false);
+            level2.setText("Locked");
         }
+        else{
+            level2.setText("Level 2");
+        }
+
         if (level3Locked) {
             level3.setEnabled(false);
+            level3.setText("Locked");
+        }
+        else{
+            level3.setText("Level 3");
         }
     }
 

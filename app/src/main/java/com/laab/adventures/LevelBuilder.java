@@ -1,5 +1,7 @@
 package com.laab.adventures;
 
+import android.graphics.BitmapFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,10 +126,10 @@ public class LevelBuilder {
     public static ArrayList<Drawable>getFlags(int level, GameActivity_Layout game) {
         ArrayList<Drawable> flags = new ArrayList<Drawable>();
         if(level == 1) {
-            flags.add(new Flag(30,220, game));
+            flags.add(new Flag(30,225, game));
         }
         if(level == 2) {
-            flags.add(new Flag(20,220, game));
+            flags.add(new Flag(20,225, game));
         }
         if(level == 3) {
             flags.add(new Flag(800,220, game));
@@ -138,7 +140,7 @@ public class LevelBuilder {
     public static ArrayList<Drawable>getPlates(int level, GameActivity_Layout game, List<Drawable> doors) {
         ArrayList<Drawable> plates = new ArrayList<Drawable>();
         if(level == 2) {
-            plates.add(new Plate(10, 570, game, (Door)doors.get(0)));
+            plates.add(new Plate(10, 575, game, (Door)doors.get(0)));
         }
         if(level == 3) {
             plates.add(new Plate(335, 1480, game, (Door)doors.get(0)));
@@ -159,5 +161,12 @@ public class LevelBuilder {
             doors.add(new Door(10, 380, game));
         }
         return doors;
+    }
+
+    public static ArrayList<Drawable> getButtons(GameActivity_Layout game){
+        ArrayList<Drawable> buttons = new ArrayList<Drawable>();
+        buttons.add(new Button(game,10, 10,  BitmapFactory.decodeResource(game.getResources(), R.drawable.flag)));
+        buttons.add(new Button(game, 790, 10,  BitmapFactory.decodeResource(game.getResources(), R.drawable.plate)));
+        return buttons;
     }
 }
