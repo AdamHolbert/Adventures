@@ -16,6 +16,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> plates;
     List<Drawable> doors;
     List<Drawable> flags;
+    LevelsActivity levels;
 
     public GameActivity_Layout(Context context) {
         super(context);
@@ -31,13 +32,13 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
     private void getAssets(){
         LevelBuilder builder = new LevelBuilder();
-        LevelsActivity levels = new LevelsActivity();
-        if(levels.getLevel() == "Level 1") {
+        levels = new LevelsActivity();
+        if(levels.getLevel() == 1) {
             walls = builder.getWalls(1, this);
             players = builder.getPlayers(1, this);
             flags = builder.getFlags(1,this);
         }
-        else if(levels.getLevel() == "Level 2") {
+        else if(levels.getLevel() == 2) {
             walls = builder.getWalls(2, this);
             players = builder.getPlayers(2, this);
             spikes = builder.getSpikes(2, this);
@@ -45,7 +46,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             doors = builder.getDoors(2,this);
             plates = builder.getPlates(2, this, doors);
         }
-        else if(levels.getLevel() == "Level 3") {
+        else if(levels.getLevel() == 3) {
             walls = builder.getWalls(3, this);
             players = builder.getPlayers(3, this);
         }
@@ -149,6 +150,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
             if (beatLevel) {
                 Log.i("Win", "YOU BEAT THE LEVEL");
+                levels.beatCurrentLevel();
             }
         }
         else{
