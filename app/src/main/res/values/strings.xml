@@ -2,7 +2,14 @@
     <string name="app_name">Adventures</string>
     <string name="devteam"><u><strong>\nDev Team</strong></u></string>
     <string name="musicassets"><u><strong>Music</strong></u></string>
-    <string name="otherassets"><u><strong>Others</strong></u></string>
+    <string name="otherassets"><u><strong>\nAssets</strong></u></string>
     <string name="instructions"><u><strong>\nGame Instructions</strong></u></string>
-    <string name="instructionstext">This will be the instructions</string>
+    <string name="instructionstext">
+        The goal of the game is to get Object Boi to the goal. The goal is indicated by
+        a green flag. Object Boi has the ability to clone himself so if he finds himself in a pinch,
+        he will utilize that power to its fullest extent. Some clones may be used to trigger pressure
+        plates which will open a the corresponding door when pressed. The object boi will need to
+        remain standing on the plate in order for the door to remain open. Oh and there are also spikes
+        that may get in your way so be careful.
+    </string>
 </resources>

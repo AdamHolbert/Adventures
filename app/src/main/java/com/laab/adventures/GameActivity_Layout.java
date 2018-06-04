@@ -40,7 +40,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             spikes.addAll(builder.getSpikes(2, this));
             flags.addAll(builder.getFlags(2,this));
             doors.addAll(builder.getDoors(2,this));
-//            plates.addAll(builder.getPlates(2, this, ))
+            plates.addAll(builder.getPlates(2, this, new Door(500, 1000, this)));
         }
         else if(levels.getLevel() == "Level 3") {
             walls.addAll(builder.getWalls(3, this));
