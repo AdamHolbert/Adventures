@@ -23,14 +23,15 @@ public class Plate extends Drawable {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x1 + 70;
-        this.y2 = y1 + 20;
+        this.y2 = y1 + 10;
+
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
 
         plateUp = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate);
-        plateDown = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_down);
+        plateDown = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_downxx);
 
 
         display = new Paint();
@@ -44,14 +45,17 @@ public class Plate extends Drawable {
 //        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
 
         if(!pressed){
-            canvas.drawBitmap(plateUp, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
+            canvas.drawBitmap(plateUp, layout.toPxsWidth(x1), layout.toPxsHeight(y1 -10), display);
         }
         else {
-            canvas.drawBitmap(plateDown, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
+            canvas.drawBitmap(plateDown, layout.toPxsWidth(x1), layout.toPxsHeight(y1 -10), display);
         }
     }
 
     public void press(){
+//        y1 += layout.toPxsHeight(1);
+//        y2 += layout.toPxsHeight(1);
+//        rectangle.set(x1, y1, x2, y2);
         pressed = true;
     }
 

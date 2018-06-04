@@ -48,6 +48,10 @@ public class GameActivity_Layout extends GameLoop_Layout {
             plates = LevelBuilder.getPlates(2, this, doors);
         }
         else if(levels.getLevel() == 3) {
+            flags = LevelBuilder.getFlags(3,this);
+            spikes = LevelBuilder.getSpikes(3, this);
+            doors = LevelBuilder.getDoors(3,this);
+            plates = LevelBuilder.getPlates(3, this, doors);
             walls = LevelBuilder.getWalls(3, this);
             players = LevelBuilder.getPlayers(3, this);
         }
