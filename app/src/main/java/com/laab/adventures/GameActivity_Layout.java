@@ -2,6 +2,7 @@ package com.laab.adventures;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Path;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -54,42 +55,9 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Player player : players){
             boolean spikeCollision = false;
             List<Sides> collisions = new ArrayList<Sides>();
+
+            // get player direction
             int moveX = 0, moveY = 1;
-            boolean collidedWithDoor = false;
-            boolean collidedWithPlate = false;
-            for(Drawable spike : spikes){
-                if(player.collidedWith(spike)){
-                    spikeCollision = true;
-                  break;
-                }
-            }
-            if(spikeCollision){
-                playersToBeDeleted.add(player);
-                continue;
-            }
-            for(Drawable wall : walls){
-                collisions.add(player.AdvancedCollision(wall));
-            }
-            for(Drawable plate : plates){
-                collisions.add(player.AdvancedCollision(plate));
-                if(player.collidedWith(plate)) {
-                    if(!((Plate)plate).getDoor().getIsOpen())
-                        ((Plate)plate).getDoor().open();
-                }
-            }
-            for(Drawable door : doors){
-                if(((Door) door).getIsOpen())
-                    System.out.println("******* Door Is Open ********");
-                if (!((Door) door).getIsOpen()) {
-                    collisions.add(player.AdvancedCollision(door));
-                }
-            }
-            for(Drawable flag : flags){
-                collisions.add(player.AdvancedCollision(flag));
-                if(player.collidedWith(flag)){
-                    player.atFlag();
-                }
-            }
             if(draggingPoint != null &&  draggingPoint.hasEvent()){
                 if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
                     draggingPoint.setCapturedPlayer(player);
@@ -104,30 +72,72 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     moveY = yMove;
                 }
             }
-            for(Sides collision : collisions) {
-                if(collision != Sides.None){
-                    if ((collision == Sides.Top && moveY > 0) || (collision == Sides.Bottom && moveY < 0)) {
-                        moveY = 0;
-                        Log.i("Y Movement", "Switched");
-                    } else if ((collision == Sides.Left && moveX < 0) || (collision == Sides.Right && moveX > 0)) {
-                        moveX = 0;
-                        Log.i("X Movement", "Switched");
-                    } else if (collision == Sides.TopLeft && (moveX < 0 || moveY < 0)) {
-                        moveX = 0;
-                        moveY = 0;
-                    } else if (collision == Sides.TopRight && (moveX > 0 || moveY < 0)) {
-                        moveX = 0;
-                        moveY = 0;
-                    } else if (collision == Sides.BottomLeft && (moveX < 0 || moveY > 0)) {
-                        moveX = 0;
-                        moveY = 0;
-                    } else if (collision == Sides.BottomRight && (moveX > 0 || moveY > 0)) {
-                        moveX = 0;
-                        moveY = 0;
+            // move that direction
+            player.move(moveX, moveY);
+
+            boolean collidedWithDoor = false;
+            boolean collidedWithPlate = false;
+            for(Drawable spike : spikes){
+                if(player.collidedWith(spike)){
+                    spikeCollision = true;
+                    break;
+                }
+            }
+            if(spikeCollision){
+                playersToBeDeleted.add(player);
+                continue;
+            }
+            for(Drawable wall : walls){
+                if(player.collidedWith(wall)){
+                    for(Sides side : player.AdvancedCollision(wall)){
+                        collisions.add(side);
                     }
                 }
             }
-            player.move(moveX, moveY);
+            for(Drawable plate : plates){
+                for(Sides side : player.AdvancedCollision(plate)){
+                    collisions.add(side);
+                }
+                if(player.collidedWith(plate)) {
+                    if(!((Plate)plate).getDoor().getIsOpen())
+                        ((Plate)plate).getDoor().open();
+                }
+            }
+            for(Drawable door : doors){
+                if(((Door) door).getIsOpen())
+                    System.out.println("******* Door Is Open ********");
+                if (!((Door) door).getIsOpen()) {
+                    if(player.collidedWith(door)){
+                        for(Sides side : player.AdvancedCollision(door)){
+                            collisions.add(side);
+                        }
+                    }
+                }
+            }
+            for(Drawable flag : flags){
+                if(player.collidedWith(flag)){
+                    for(Sides side : player.AdvancedCollision(flag)){
+                        collisions.add(side);
+                    }
+                    player.atFlag();
+                }
+            }
+
+            boolean revertY = false;
+            boolean revertX = false;
+            for(Sides collision : collisions) {
+                if ((collision == Sides.Top && moveY < 0) || (collision == Sides.Bottom && moveY > 0)) {
+                    revertY = true;
+                } else if ((collision == Sides.Left && moveX < 0) || (collision == Sides.Right && moveX > 0)) {
+                    revertX = true;
+                }
+            }
+            if(revertX){
+                player.move(moveX*-1, 0);
+            }
+            if(revertY){
+                player.move(0, moveY*-1);
+            }
         }
 
         for(Player p : playersToBeDeleted){
