@@ -37,7 +37,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
     private void getAssets(){
         LevelBuilder builder = new LevelBuilder();
-        LevelsActivity levels = new LevelsActivity();
+        levels = new LevelsActivity();
         if(levels.getLevel() == 1) {
             walls = builder.getWalls(1, this);
             players = builder.getPlayers(1, this);
