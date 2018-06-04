@@ -42,7 +42,7 @@ public class LevelBuilder {
     public static ArrayList<Player>getPlayers(int level, GameActivity_Layout game) {
         ArrayList<Player> players = new ArrayList<Player>();
         if(level == 1) {
-            players.add(new Player(800, 1200, game));
+            players.add(new Player(800, 1100, game));
         }
         if(level == 2) {
             players.add(new Player(800, 1100, game));
@@ -75,6 +75,8 @@ public class LevelBuilder {
         ArrayList<Drawable> plates = new ArrayList<Drawable>();
         if(level == 2) {
             plates.add(new Plate(10, 570, game, door));
+            plates.add(new Plate(400, 275, game, door));
+
         }
         return plates;
     }
@@ -82,7 +84,7 @@ public class LevelBuilder {
     public static ArrayList<Drawable>getDoors(int level, GameActivity_Layout game) {
         ArrayList<Drawable> doors = new ArrayList<Drawable>();
         if(level == 2) {
-            doors.add(new Door(500, 1000, game));
+            doors.add(new Door(825, 500, game));
         }
         return doors;
     }
