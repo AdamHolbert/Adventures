@@ -1,60 +1,62 @@
 package com.laab.adventures;
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.graphics.Path;
 import android.util.Log;
 import android.view.MotionEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity_Layout extends GameLoop_Layout {
 
+    public static boolean beatLevel;
+    GameActivity game;
     List<Drawable> walls;
     List<Player> players;
     List<Drawable> spikes;
     List<Drawable> plates;
     List<Drawable> doors;
     List<Drawable> flags;
+    LevelsActivity levels;
 
     public GameActivity_Layout(Context context) {
         super(context);
-        LevelBuilder builder = new LevelBuilder();
+        game = (GameActivity) context;
+        walls = new ArrayList<>();
+        players = new ArrayList<>();
+        spikes = new ArrayList<>();
+        plates = new ArrayList<>();
+        doors = new ArrayList<>();
+        flags = new ArrayList<>();
+
+        getAssets();
+    }
+
+    private void getAssets(){
         LevelsActivity levels = new LevelsActivity();
-        walls = new ArrayList<Drawable>();
-        players = new ArrayList<Player>();
-        spikes = new ArrayList<Drawable>();
-        plates = new ArrayList<Drawable>();
-        doors = new ArrayList<Drawable>();
-        flags = new ArrayList<Drawable>();
-
-
-        if(levels.getLevel() == "Level 1") {
-            walls.addAll(builder.getWalls(1, this));
-            players.addAll(builder.getPlayers(1, this));
-            flags.addAll(builder.getFlags(1,this));
+        if(levels.getLevel() == 1) {
+            walls = LevelBuilder.getWalls(1, this);
+            players = LevelBuilder.getPlayers(1, this);
+            flags = LevelBuilder.getFlags(1,this);
         }
-        else if(levels.getLevel() == "Level 2") {
-            walls.addAll(builder.getWalls(2, this));
-            players.addAll(builder.getPlayers(2, this));
-            spikes.addAll(builder.getSpikes(2, this));
-            flags.addAll(builder.getFlags(2,this));
-            doors.addAll(builder.getDoors(2,this));
-            plates.addAll(builder.getPlates(2, this, new Door(500, 1000, this)));
+        else if(levels.getLevel() == 2) {
+            walls = LevelBuilder.getWalls(2, this);
+            players = LevelBuilder.getPlayers(2, this);
+            spikes = LevelBuilder.getSpikes(2, this);
+            flags = LevelBuilder.getFlags(2,this);
+            doors = LevelBuilder.getDoors(2,this);
+            plates = LevelBuilder.getPlates(2, this, doors);
         }
-        else if(levels.getLevel() == "Level 3") {
-            walls.addAll(builder.getWalls(3, this));
-            players.addAll(builder.getPlayers(3, this));
+        else if(levels.getLevel() == 3) {
+            walls = LevelBuilder.getWalls(3, this);
+            players = LevelBuilder.getPlayers(3, this);
         }
     }
 
     @Override
     void update(double delta_t) {
-        List<Player> playersToBeDeleted = new ArrayList<Player>();
+        List<Player> playersToBeDeleted = new ArrayList<>();
         for(Player player : players){
             boolean spikeCollision = false;
-            List<Sides> collisions = new ArrayList<Sides>();
+            List<Sides> collisions = new ArrayList<>();
 
             // get player direction
             int moveX = 0, moveY = 1;
@@ -75,8 +77,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
             // move that direction
             player.move(moveX, moveY);
 
-            boolean collidedWithDoor = false;
-            boolean collidedWithPlate = false;
             for(Drawable spike : spikes){
                 if(player.collidedWith(spike)){
                     spikeCollision = true;
@@ -89,15 +89,11 @@ public class GameActivity_Layout extends GameLoop_Layout {
             }
             for(Drawable wall : walls){
                 if(player.collidedWith(wall)){
-                    for(Sides side : player.AdvancedCollision(wall)){
-                        collisions.add(side);
-                    }
+                    collisions.addAll(player.AdvancedCollision(wall));
                 }
             }
             for(Drawable plate : plates){
-                for(Sides side : player.AdvancedCollision(plate)){
-                    collisions.add(side);
-                }
+                collisions.addAll(player.AdvancedCollision(plate));
                 if(player.collidedWith(plate)) {
                     if(!((Plate)plate).getDoor().getIsOpen())
                         ((Plate)plate).getDoor().open();
@@ -108,17 +104,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     System.out.println("******* Door Is Open ********");
                 if (!((Door) door).getIsOpen()) {
                     if(player.collidedWith(door)){
-                        for(Sides side : player.AdvancedCollision(door)){
-                            collisions.add(side);
-                        }
+                        collisions.addAll(player.AdvancedCollision(door));
                     }
                 }
             }
             for(Drawable flag : flags){
                 if(player.collidedWith(flag)){
-                    for(Sides side : player.AdvancedCollision(flag)){
-                        collisions.add(side);
-                    }
                     player.atFlag();
                 }
             }
@@ -145,16 +136,24 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
 
         // Win condition stuff -------------------------------
-        boolean beatLevel = true;
-        for(Player p : players){
-            if(p.isAtFlag()){
-                continue;
+        beatLevel = true;
+        if(players.size() > 0) {
+            for (Player p : players) {
+                if (p.isAtFlag()) {
+                    continue;
+                }
+                beatLevel = false;
             }
-            beatLevel = false;
-        }
 
-        if(beatLevel){
-            Log.i("Win","YOU BEAT THE LEVEL");
+            if (beatLevel) {
+                game.levelComplete();
+                Log.i("Win", "YOU BEAT THE LEVEL");
+                levels.beatCurrentLevel();
+            }
+        }
+        else{
+            game.gameOver();
+            Log.i("Lose", "YOU LOST THE LEVEL");
         }
         // ----------------------------------------------------
     }
@@ -194,9 +193,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 draggingPoint = new DraggingPoint(event, this);
@@ -207,5 +203,4 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         return false;
     }
-
 }
