@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class GameActivity extends AppCompatActivity {
 
-    GameActivity_Layout gameActivity_layout;
+    private GameActivity_Layout gameActivity_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

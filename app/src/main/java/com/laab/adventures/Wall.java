@@ -8,8 +8,8 @@ import android.util.Log;
 
 public class Wall extends Drawable {
 
-    Rect rectangle;
-    Paint display;
+    private Rect rectangle;
+    private Paint display;
 
     public Wall(int x1, int y1, int x2, int y2, GameActivity_Layout layout){
         super(layout);
@@ -27,8 +27,8 @@ public class Wall extends Drawable {
 
 
     @Override
-    void draw(Canvas canvas) {
-        canvas.drawRect(layout.toPxs(x1), layout.toPxs(y1), layout.toPxs(x2), layout.toPxs(y2), display);
+    public void draw(Canvas canvas) {
+        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
     }
 
     @Override

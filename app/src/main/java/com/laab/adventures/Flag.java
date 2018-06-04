@@ -1,5 +1,8 @@
 package com.laab.adventures;
 
+import com.laab.adventures.Drawable;
+import com.laab.adventures.GameActivity_Layout;
+import com.laab.adventures.R;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,41 +11,30 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-public class Plate extends Drawable {
+public class Flag extends Drawable {
 
     private Rect rectangle;
     private Paint display;
-    private Bitmap img;
-    private Door door;
+    private Bitmap image;
 
-
-    public Plate (int x1, int y1, GameActivity_Layout layout, Door door){
+    public Flag(int x1, int y1, GameActivity_Layout layout) {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 + 32;
-        this.y2 = y1 + 32;
+        x2 = x1 + 16;
+        y2 = y1 + 16;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
-
-        img = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate);
-
+        image = BitmapFactory.decodeResource(layout.getResources(), R.drawable.flag);
 
         display = new Paint();
         display.setColor(Color.RED);
         display.setStyle(Paint.Style.FILL);
-
-        this.door = door;
-    }
-    @Override
-    public void draw(Canvas canvas) {
-        canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 
-    public Door getDoor(){
-        return door;
+    public void draw(Canvas canvas){
+        canvas.drawBitmap(image, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 }
-

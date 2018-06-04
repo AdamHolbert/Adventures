@@ -15,6 +15,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> spikes;
     List<Drawable> plates;
     List<Drawable> doors;
+    List<Drawable> flags;
 
     public GameActivity_Layout(Context context) {
         super(context);
@@ -25,15 +26,23 @@ public class GameActivity_Layout extends GameLoop_Layout {
         spikes = new ArrayList<Drawable>();
         plates = new ArrayList<Drawable>();
         doors = new ArrayList<Drawable>();
-        if(levels.level == "Level 1") {
+        flags = new ArrayList<Drawable>();
+
+
+        if(levels.getLevel() == "Level 1") {
             walls.addAll(builder.getWalls(1, this));
             players.addAll(builder.getPlayers(1, this));
+            flags.addAll(builder.getFlags(1,this));
         }
-        else if(levels.level == "Level 2") {
+        else if(levels.getLevel() == "Level 2") {
             walls.addAll(builder.getWalls(2, this));
             players.addAll(builder.getPlayers(2, this));
+            spikes.addAll(builder.getSpikes(2, this));
+            flags.addAll(builder.getFlags(2,this));
+            doors.addAll(builder.getDoors(2,this));
+//            plates.addAll(builder.getPlates(2, this, ))
         }
-        else if(levels.level == "Level 2") {
+        else if(levels.getLevel() == "Level 3") {
             walls.addAll(builder.getWalls(3, this));
             players.addAll(builder.getPlayers(3, this));
         }
@@ -72,16 +81,17 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 }
             }
             for(Drawable door : doors){
-
                 if(((Door) door).getIsOpen())
                     System.out.println("******* Door Is Open ********");
-
                 if (!((Door) door).getIsOpen()) {
                     collision = player.AdvancedCollision(door);
                     if(collision != Sides.None) {
                         break;
                     }
                 }
+            }
+            for(Drawable flag : flags){
+
             }
             if(draggingPoint != null &&  draggingPoint.hasEvent()){
                 if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
@@ -115,7 +125,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
     @Override
     void draw() {
         canvas = surfaceHolder.lockCanvas();
-        canvas.drawCircle(cwidth, cheight, toPxs(10), red_paintbrush_fill);
         canvas.drawRect(0,0,cwidth,cheight, gray_panitbrush_fill);
         //cannon ball
         for(Drawable wall : walls){
@@ -133,9 +142,13 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Drawable door : doors){
             door.draw(canvas);
         }
+        for(Drawable flag : flags){
+            flag.draw(canvas);
+        }
         if(draggingPoint != null && draggingPoint.hasEvent()){
             draggingPoint.draw(canvas);
         }
+
         surfaceHolder.unlockCanvasAndPost(canvas);
     }
 

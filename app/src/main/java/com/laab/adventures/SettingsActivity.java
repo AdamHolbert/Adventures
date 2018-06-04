@@ -8,9 +8,9 @@ import android.widget.Button;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button credits;
-    Button back;
-    Button mute;
+    private Button credits;
+    private Button back;
+    private Button mute;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

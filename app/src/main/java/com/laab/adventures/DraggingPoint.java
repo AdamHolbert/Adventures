@@ -6,27 +6,31 @@ import android.graphics.Paint;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import java.lang.Object;
-
 public class DraggingPoint extends Drawable {
 
     private MotionEvent event;
-    private Paint paint;
+    private Paint green;
+    private Paint red;
     private Player capturedPlayer;
 
     DraggingPoint(MotionEvent event, GameActivity_Layout layout){
         super(layout);
         this.event = event;
-        paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.FILL);
+        green = new Paint();
+        green.setColor(Color.GREEN);
+        green.setStyle(Paint.Style.FILL);
+        red = new Paint();
+        red.setColor(Color.RED);
+        red.setStyle(Paint.Style.FILL);
     }
 
 
     int getX(){
-        return (int) (event.getX()/layout.toPxs(1));
+
+        Log.w("dragging point", Float.toString(event.getX()/layout.toPxsWidth(1)));
+        return (int) (event.getX()/layout.toPxsWidth(1));
     }
-    int getY(){return (int) (event.getY()/layout.toPxs(1));}
+    int getY(){return (int) (event.getY()/layout.toPxsHeight(1));}
 
     @Override
     int GetXMin(){return getX() - 10;}
@@ -38,12 +42,13 @@ public class DraggingPoint extends Drawable {
     int GetYMax(){return getY() + 10;}
 
     @Override
-    void draw(Canvas canvas) {
-//        canvas.drawRect(layout.toPxs(getX()), layout.toPxs(getY()),
-//                layout.toPxs(getX() + 10), layout.toPxs(getY()+10), paint);
+    public void draw(Canvas canvas) {
+        Log.w("dragging point", Integer.toString(GetXMin()));
+        canvas.drawRect(event.getX(), event.getY(),
+                event.getX() + 50, event.getY()+50, red);
 
-//        canvas.drawRect(layout.toPxs(GetXMin()), layout.toPxs(GetYMin()),
-//                layout.toPxs(GetXMax()), layout.toPxs(GetYMax()), paint);
+        canvas.drawRect(layout.toPxsWidth(GetXMin()), layout.toPxsHeight(GetYMin()),
+                layout.toPxsWidth(GetXMax()), layout.toPxsHeight(GetYMax()), green);
     }
 
     public void setEvent(MotionEvent event) {

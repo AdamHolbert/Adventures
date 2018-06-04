@@ -12,15 +12,15 @@ public class Door extends Drawable {
     private boolean isOpen;
     private Rect rectangle;
     private Paint display;
-    Bitmap closed;
-    Bitmap open;
+    private Bitmap closed;
+    private Bitmap open;
 
     public Door(int x1, int y1, GameActivity_Layout layout) {
         super(layout);
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x1 + 16;
-        this.y2 = y1 + 16;
+        x1 = x1;
+        y1 = y1;
+        x2 = x1 + 16;
+        y2 = y1 + 16;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
@@ -34,11 +34,11 @@ public class Door extends Drawable {
     }
 
     @Override
-    void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
         if(isOpen){
-            canvas.drawBitmap(open, layout.toPxs(x1), layout.toPxs(y1), display);
+            canvas.drawBitmap(open, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
         } else {
-            canvas.drawBitmap(closed, layout.toPxs(x1), layout.toPxs(y1), display);
+            canvas.drawBitmap(closed, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
         }
     }
 
