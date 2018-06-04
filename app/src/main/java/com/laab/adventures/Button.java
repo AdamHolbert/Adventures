@@ -33,7 +33,7 @@ public class Button extends Drawable {
 
     @Override
     protected void draw(Canvas canvas) {
-        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsWidth(y1), layout.toPxsWidth(x2), layout.toPxsWidth(y2), display);
+//        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsWidth(y1), layout.toPxsWidth(x2), layout.toPxsWidth(y2), display);
         canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 }

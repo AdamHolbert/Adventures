@@ -8,9 +8,9 @@ import android.widget.Button;
 
 
 public class LevelsActivity extends AppCompatActivity {
-    Button back, file, level1, level2, level3;
+    Button back, level1, level2, level3;
     private static int level = 0;
-    private static boolean level2Locked = true, level3Locked = false;
+    private static boolean level2Locked = true, level3Locked = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +18,6 @@ public class LevelsActivity extends AppCompatActivity {
 
 
         back = (Button) findViewById(R.id.backbutton);
-        file = (Button) findViewById(R.id.filebutton);
         level1 = (Button) findViewById(R.id.level1);
         level2 = (Button) findViewById(R.id.level2);
         level3 = (Button) findViewById(R.id.level3);
@@ -30,12 +29,6 @@ public class LevelsActivity extends AppCompatActivity {
             }
         });
 
-        file.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goFile();
-            }
-        });
 
         level1.setOnClickListener(new View.OnClickListener() {
             @Override

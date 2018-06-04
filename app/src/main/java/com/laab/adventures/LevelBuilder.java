@@ -11,7 +11,7 @@ public class LevelBuilder {
         ArrayList<Drawable> walls = new ArrayList<Drawable>();
 
         if(level == 1) {
-            walls.add(new Wall(0, 0, 900, 100,game));
+            walls.add(new Wall(0, 0, 900, 150,game));
             walls.add(new Wall(0, 0, 10, 2000, game));
             walls.add(new Wall(0, 300, 800, 500, game));
             walls.add(new Wall(890, 0, 900, 2000, game));
