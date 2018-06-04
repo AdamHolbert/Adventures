@@ -53,7 +53,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         List<Player> playersToBeDeleted = new ArrayList<Player>();
         for(Player player : players){
             boolean spikeCollision = false;
-            Sides collision = Sides.None;
+            List<Sides> collisions = new ArrayList<Sides>();
             int moveX = 0, moveY = 1;
             boolean collidedWithDoor = false;
             boolean collidedWithPlate = false;
@@ -68,13 +68,10 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 continue;
             }
             for(Drawable wall : walls){
-                collision = player.AdvancedCollision(wall);
-                if(collision != Sides.None){
-                    break;
-                }
+                collisions.add(player.AdvancedCollision(wall));
             }
             for(Drawable plate : plates){
-                collision = player.AdvancedCollision(plate);
+                collisions.add(player.AdvancedCollision(plate));
                 if(player.collidedWith(plate)) {
                     if(!((Plate)plate).getDoor().getIsOpen())
                         ((Plate)plate).getDoor().open();
@@ -84,14 +81,14 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 if(((Door) door).getIsOpen())
                     System.out.println("******* Door Is Open ********");
                 if (!((Door) door).getIsOpen()) {
-                    collision = player.AdvancedCollision(door);
-                    if(collision != Sides.None) {
-                        break;
-                    }
+                    collisions.add(player.AdvancedCollision(door));
                 }
             }
             for(Drawable flag : flags){
-
+                collisions.add(player.AdvancedCollision(flag));
+                if(player.collidedWith(flag)){
+                    player.atFlag();
+                }
             }
             if(draggingPoint != null &&  draggingPoint.hasEvent()){
                 if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
@@ -107,19 +104,49 @@ public class GameActivity_Layout extends GameLoop_Layout {
                     moveY = yMove;
                 }
             }
-            if((collision == Sides.Top && moveY > 0) || (collision ==  Sides.Bottom && moveY < 0)){
-                moveY = 0;
-                Log.i("Y Movement", "Switched");
-            }
-            else if((collision == Sides.Left && moveX < 0) || (collision ==  Sides.Right && moveX > 0)){
-                moveX = 0;
-                Log.i("X Movement", "Switched");
+            for(Sides collision : collisions) {
+                if(collision != Sides.None){
+                    if ((collision == Sides.Top && moveY > 0) || (collision == Sides.Bottom && moveY < 0)) {
+                        moveY = 0;
+                        Log.i("Y Movement", "Switched");
+                    } else if ((collision == Sides.Left && moveX < 0) || (collision == Sides.Right && moveX > 0)) {
+                        moveX = 0;
+                        Log.i("X Movement", "Switched");
+                    } else if (collision == Sides.TopLeft && (moveX < 0 || moveY < 0)) {
+                        moveX = 0;
+                        moveY = 0;
+                    } else if (collision == Sides.TopRight && (moveX > 0 || moveY < 0)) {
+                        moveX = 0;
+                        moveY = 0;
+                    } else if (collision == Sides.BottomLeft && (moveX < 0 || moveY > 0)) {
+                        moveX = 0;
+                        moveY = 0;
+                    } else if (collision == Sides.BottomRight && (moveX > 0 || moveY > 0)) {
+                        moveX = 0;
+                        moveY = 0;
+                    }
+                }
             }
             player.move(moveX, moveY);
         }
+
         for(Player p : playersToBeDeleted){
             players.remove(p);
         }
+
+        // Win condition stuff -------------------------------
+        boolean beatLevel = true;
+        for(Player p : players){
+            if(p.isAtFlag()){
+                continue;
+            }
+            beatLevel = false;
+        }
+
+        if(beatLevel){
+            Log.i("Win","YOU BEAT THE LEVEL");
+        }
+        // ----------------------------------------------------
     }
 
     @Override
