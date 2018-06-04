@@ -94,19 +94,15 @@ public abstract class Drawable {
 
         if(topLeft && topRight){
             sides.add(Sides.Top);
-            Log.i("Collision", "Top");
         }
         if(topLeft && bottomLeft){
             sides.add(Sides.Left);
-            Log.i("Collision", "Left");
         }
         if(topRight && bottomRight){
             sides.add(Sides.Right);
-            Log.i("Collision", "Right");
         }
         if(bottomLeft && bottomRight){
             sides.add(Sides.Bottom);
-            Log.i("Collision", "Bottom");
         }
 
         if (topLeft && !(bottomLeft || topRight)) {
@@ -119,7 +115,6 @@ public abstract class Drawable {
                 sides.add(Sides.Top);
                 sides.add(Sides.Left);
             }
-            Log.i("Collision", "Hit Top Left");
         }
         if (topRight && !(topLeft || bottomRight)) {
             int thing = cornerCheck(thatObj.left, thisObj.top, thisObj.right, thatObj.bottom);
@@ -131,7 +126,6 @@ public abstract class Drawable {
                 sides.add(Sides.Top);
                 sides.add(Sides.Right);
             }
-            Log.i("Collision", "Hit Top Right");
         }
         if (bottomLeft && !(bottomRight || topLeft)) {
             int thing = cornerCheck(thisObj.left, thatObj.top, thatObj.right, thisObj.bottom);
@@ -143,7 +137,6 @@ public abstract class Drawable {
                 sides.add(Sides.Bottom);
                 sides.add(Sides.Left);
             }
-            Log.i("Collision", "Hit Bottom Left (" + Integer.toString(thing) + ")");
         }
         if (bottomRight && !(bottomLeft || topRight)) {
             int thing = cornerCheck(thatObj.left, thatObj.top, thisObj.right, thisObj.bottom);
@@ -155,7 +148,6 @@ public abstract class Drawable {
                 sides.add(Sides.Bottom);
                 sides.add(Sides.Right);
             }
-            Log.i("Collision", "Hit Bottom Right");
         }
         return sides;
     }
