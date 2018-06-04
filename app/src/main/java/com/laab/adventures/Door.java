@@ -19,7 +19,7 @@ public class Door extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        x2 = x1 + 16;
+        x2 = x1 + 40;
         y2 = y1 + 16;
 
         rectangle = new Rect();
@@ -35,6 +35,7 @@ public class Door extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
+        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
         if(isOpen){
             canvas.drawBitmap(open, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
         } else {

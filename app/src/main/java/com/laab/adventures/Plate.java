@@ -20,7 +20,7 @@ public class Plate extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 + 32;
+        this.x2 = x1 + 40;
         this.y2 = y1 + 32;
 
         rectangle = new Rect();
@@ -38,6 +38,7 @@ public class Plate extends Drawable {
     }
     @Override
     public void draw(Canvas canvas) {
+        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
         canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 

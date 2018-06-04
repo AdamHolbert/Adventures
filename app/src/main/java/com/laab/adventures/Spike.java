@@ -18,8 +18,8 @@ public class Spike extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 +32;
-        this.y2 = y1 +32;
+        this.x2 = x1 +64;
+        this.y2 = y1 +64;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
@@ -34,7 +34,7 @@ public class Spike extends Drawable {
     }
     @Override
     public void draw(Canvas canvas) {
-//        canvas.drawRect( layout.toPxs(x1), layout.toPxs(y1), layout.toPxs(x2), layout.toPxs(y2),display);
+        canvas.drawRect( layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2),display);
         canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 }

@@ -40,7 +40,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             spikes.addAll(builder.getSpikes(2, this));
             flags.addAll(builder.getFlags(2,this));
             doors.addAll(builder.getDoors(2,this));
-            plates.addAll(builder.getPlates(2, this, new Door(500, 1000, this)));
+            plates.addAll(builder.getPlates(2, this, doors));
         }
         else if(levels.getLevel() == "Level 3") {
             walls.addAll(builder.getWalls(3, this));
@@ -136,15 +136,20 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
         // Win condition stuff -------------------------------
         boolean beatLevel = true;
-        for(Player p : players){
-            if(p.isAtFlag()){
-                continue;
+        if(players.size() > 0) {
+            for (Player p : players) {
+                if (p.isAtFlag()) {
+                    continue;
+                }
+                beatLevel = false;
             }
-            beatLevel = false;
-        }
 
-        if(beatLevel){
-            Log.i("Win","YOU BEAT THE LEVEL");
+            if (beatLevel) {
+                Log.i("Win", "YOU BEAT THE LEVEL");
+            }
+        }
+        else{
+            Log.i("Lose", "YOU LOST THE LEVEL");
         }
         // ----------------------------------------------------
     }
