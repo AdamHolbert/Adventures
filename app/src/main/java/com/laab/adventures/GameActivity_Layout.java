@@ -20,6 +20,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> plates;
     List<Drawable> doors;
     List<Drawable> flags;
+    LevelsActivity levels;
 
     public GameActivity_Layout(Context context) {
         super(context);
@@ -154,6 +155,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
             if (beatLevel) {
                 game.levelComplete();
+                Log.i("Win", "YOU BEAT THE LEVEL");
+                levels.beatCurrentLevel();
             }
         }
         else{

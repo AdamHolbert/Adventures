@@ -10,14 +10,12 @@ import android.widget.Button;
 public class LevelsActivity extends AppCompatActivity {
     Button back, file, level1, level2, level3;
     private static int level = 0;
-    private static boolean level2Locked, level3Locked;
+    private static boolean level2Locked = true, level3Locked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_levels);
 
-        level2Locked = false;
-        level3Locked = true;
 
         back = (Button) findViewById(R.id.backbutton);
         file = (Button) findViewById(R.id.filebutton);
@@ -61,54 +59,65 @@ public class LevelsActivity extends AppCompatActivity {
             }
         });
 
-        if(level2Locked == true) {
+        if (level2Locked) {
             level2.setEnabled(false);
         }
-
-        if(level3Locked == true) {
-            level3.setEnabled(true);
+        if (level3Locked) {
+            level3.setEnabled(false);
         }
     }
 
-    public void goBack() {
-        Intent intent = new Intent(this, HomeScreen.class);
-        startActivity(intent);
-    }
+        public void goBack() {
+            Intent intent = new Intent(this, HomeScreen.class);
+            startActivity(intent);
+        }
 
-    public void goFile() {
-        Intent intent = new Intent(this, FileActivity.class);
-        startActivity(intent);
-    }
+        public void goFile() {
+            Intent intent = new Intent(this, FileActivity.class);
+            startActivity(intent);
+        }
 
-    public void goLevel1(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
-    }
+        public void goLevel1(View view){
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        }
 
-    public void goLevel2(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
-    }
+        public void goLevel2 (View view){
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        }
 
-    public void goLevel3(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
-    }
+        public void goLevel3 (View view){
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        Music.startMusic();
-    }
+        public void beatCurrentLevel () {
+            switch (level) {
+                case 0:
+                    break;
+                case 1:
+                    level2Locked = false;
+                    break;
+                case 2:
+                    level3Locked = false;
+                    break;
+            }
+        }
 
-    @Override
-    public void onPause(){
-        super.onPause();
-        Music.pauseMusic();
+        @Override
+        public void onResume () {
+            super.onResume();
+            Music.startMusic();
+        }
 
-    }
+        @Override
+        public void onPause () {
+            super.onPause();
+            Music.pauseMusic();
+        }
 
-    public int getLevel(){
-        return level;
+        public int getLevel () {
+            return level;
+        }
     }
-}
