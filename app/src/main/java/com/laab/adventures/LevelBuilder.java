@@ -1,5 +1,7 @@
 package com.laab.adventures;
 
+import android.graphics.BitmapFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,5 +95,12 @@ public class LevelBuilder {
             doors.add(new Door(825, 500, game));
         }
         return doors;
+    }
+
+    public static ArrayList<Drawable> getButtons(GameActivity_Layout game){
+        ArrayList<Drawable> buttons = new ArrayList<Drawable>();
+        buttons.add(new Button(game,10, 10,  BitmapFactory.decodeResource(game.getResources(), R.drawable.flag)));
+        buttons.add(new Button(game, 790, 10,  BitmapFactory.decodeResource(game.getResources(), R.drawable.plate)));
+        return buttons;
     }
 }

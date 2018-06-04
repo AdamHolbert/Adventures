@@ -16,6 +16,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> doors;
     List<Drawable> flags;
     LevelsActivity levels;
+    List<Drawable> buttons;
 
     public GameActivity_Layout(Context context) {
         super(context);
@@ -26,7 +27,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         plates = new ArrayList<>();
         doors = new ArrayList<>();
         flags = new ArrayList<>();
-
+        buttons = new ArrayList<>();
         getAssets();
     }
 
@@ -50,6 +51,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             walls = LevelBuilder.getWalls(3, this);
             players = LevelBuilder.getPlayers(3, this);
         }
+        buttons = LevelBuilder.getButtons(this);
     }
 
     @Override
@@ -181,6 +183,14 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         for(Drawable flag : flags){
             flag.draw(canvas);
+        }
+        for(Drawable button : buttons){
+            if(button != null) {
+                Log.i("Button", "Button is not null");
+                button.draw(canvas);
+            }
+            else
+                Log.i("Button", "Button is null");
         }
         if(draggingPoint != null && draggingPoint.hasEvent()){
             draggingPoint.draw(canvas);
