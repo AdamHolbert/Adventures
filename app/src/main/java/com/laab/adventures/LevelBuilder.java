@@ -140,7 +140,7 @@ public class LevelBuilder {
     public static ArrayList<Drawable>getPlates(int level, GameActivity_Layout game, List<Drawable> doors) {
         ArrayList<Drawable> plates = new ArrayList<Drawable>();
         if(level == 2) {
-            plates.add(new Plate(10, 575, game, (Door)doors.get(0)));
+            plates.add(new Plate(10, 588, game, (Door)doors.get(0)));
         }
         if(level == 3) {
             plates.add(new Plate(335, 1480, game, (Door)doors.get(0)));

@@ -107,8 +107,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 }
             }
             for(Drawable door : doors){
-                if(((Door) door).getIsOpen())
-                    System.out.println("******* Door Is Open ********");
                 if (!((Door) door).getIsOpen()) {
                     if(player.collidedWith(door)){
                         collisions.addAll(player.AdvancedCollision(door));
@@ -154,13 +152,11 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
             if (beatLevel) {
                 game.levelComplete();
-                Log.i("Win", "YOU BEAT THE LEVEL");
                 levels.beatCurrentLevel();
             }
         }
         else{
             game.gameOver();
-            Log.i("Lose", "YOU LOST THE LEVEL");
         }
         // ----------------------------------------------------
     }
