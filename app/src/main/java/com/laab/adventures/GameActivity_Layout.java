@@ -31,7 +31,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
     }
 
     private void getAssets(){
-        LevelBuilder builder = new LevelBuilder();
         levels = new LevelsActivity();
         if(levels.getLevel() == 1) {
             walls = LevelBuilder.getWalls(1, this);
@@ -96,6 +95,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             for(Drawable plate : plates){
                 collisions.addAll(player.AdvancedCollision(plate));
                 if(player.collidedWith(plate)) {
+                    ((Plate)plate).press();
                     if(!((Plate)plate).getDoor().getIsOpen())
                         ((Plate)plate).getDoor().open();
                 }

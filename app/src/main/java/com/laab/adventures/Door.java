@@ -19,14 +19,14 @@ public class Door extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        x2 = x1 + 40;
-        y2 = y1 + 16;
+        x2 = x1 + 70;
+        y2 = y1 + 13;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
         closed = BitmapFactory.decodeResource(layout.getResources(), R.drawable.door);
-        open = BitmapFactory.decodeResource(layout.getResources(), R.drawable.flag);
+        open = BitmapFactory.decodeResource(layout.getResources(), R.drawable.open_door);
 
         display = new Paint();
         display.setColor(Color.RED);
@@ -35,7 +35,7 @@ public class Door extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
+//        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
         if(isOpen){
             canvas.drawBitmap(open, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
         } else {

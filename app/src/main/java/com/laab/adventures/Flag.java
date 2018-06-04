@@ -35,7 +35,7 @@ public class Flag extends Drawable {
     }
 
     public void draw(Canvas canvas){
-        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
+//        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
         canvas.drawBitmap(image, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 }

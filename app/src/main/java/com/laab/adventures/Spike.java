@@ -18,8 +18,8 @@ public class Spike extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 +64;
-        this.y2 = y1 +64;
+        this.x2 = x1 +70;
+        this.y2 = y1 +70;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);

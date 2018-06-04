@@ -71,10 +71,10 @@ public class LevelBuilder {
     public static ArrayList<Drawable>getFlags(int level, GameActivity_Layout game) {
         ArrayList<Drawable> flags = new ArrayList<Drawable>();
         if(level == 1) {
-            flags.add(new Flag(30,220, game));
+            flags.add(new Flag(30,225, game));
         }
         if(level == 2) {
-            flags.add(new Flag(20,220, game));
+            flags.add(new Flag(20,225, game));
         }
         return flags;
     }
@@ -82,7 +82,7 @@ public class LevelBuilder {
     public static ArrayList<Drawable>getPlates(int level, GameActivity_Layout game, List<Drawable> doors) {
         ArrayList<Drawable> plates = new ArrayList<Drawable>();
         if(level == 2) {
-            plates.add(new Plate(10, 570, game, (Door)doors.get(0)));
+            plates.add(new Plate(10, 575, game, (Door)doors.get(0)));
         }
         return plates;
     }
