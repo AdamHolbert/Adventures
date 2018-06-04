@@ -19,8 +19,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
     public GameActivity_Layout(Context context) {
         super(context);
-        LevelBuilder builder = new LevelBuilder();
-        LevelsActivity levels = new LevelsActivity();
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
@@ -28,23 +26,28 @@ public class GameActivity_Layout extends GameLoop_Layout {
         doors = new ArrayList<Drawable>();
         flags = new ArrayList<Drawable>();
 
+        getAssets();
+    }
 
+    private void getAssets(){
+        LevelBuilder builder = new LevelBuilder();
+        LevelsActivity levels = new LevelsActivity();
         if(levels.getLevel() == "Level 1") {
-            walls.addAll(builder.getWalls(1, this));
-            players.addAll(builder.getPlayers(1, this));
-            flags.addAll(builder.getFlags(1,this));
+            walls = builder.getWalls(1, this);
+            players = builder.getPlayers(1, this);
+            flags = builder.getFlags(1,this);
         }
         else if(levels.getLevel() == "Level 2") {
-            walls.addAll(builder.getWalls(2, this));
-            players.addAll(builder.getPlayers(2, this));
-            spikes.addAll(builder.getSpikes(2, this));
-            flags.addAll(builder.getFlags(2,this));
-            doors.addAll(builder.getDoors(2,this));
-            plates.addAll(builder.getPlates(2, this, doors));
+            walls = builder.getWalls(2, this);
+            players = builder.getPlayers(2, this);
+            spikes = builder.getSpikes(2, this);
+            flags = builder.getFlags(2,this);
+            doors = builder.getDoors(2,this);
+            plates = builder.getPlates(2, this, doors);
         }
         else if(levels.getLevel() == "Level 3") {
-            walls.addAll(builder.getWalls(3, this));
-            players.addAll(builder.getPlayers(3, this));
+            walls = builder.getWalls(3, this);
+            players = builder.getPlayers(3, this);
         }
     }
 
