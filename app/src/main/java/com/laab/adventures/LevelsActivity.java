@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class LevelsActivity extends AppCompatActivity {
     Button back, file, level1, level2, level3;
-    private static String level = "";
+    private static int level = 0;
     private static boolean level2Locked, level3Locked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +43,21 @@ public class LevelsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goLevel1(v);
-                level = "Level 1";
+                level = 1;
             }
         });
         level2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goLevel2(v);
-                level = "Level 2";
+                level = 2;
             }
         });
         level3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goLevel3(v);
-                level = "Level 3";
+                level = 3;
             }
         });
 
@@ -66,7 +66,7 @@ public class LevelsActivity extends AppCompatActivity {
         }
 
         if(level3Locked == true) {
-            level3.setEnabled(false);
+            level3.setEnabled(true);
         }
     }
 
@@ -108,7 +108,7 @@ public class LevelsActivity extends AppCompatActivity {
 
     }
 
-    public String getLevel(){
+    public int getLevel(){
         return level;
     }
 }

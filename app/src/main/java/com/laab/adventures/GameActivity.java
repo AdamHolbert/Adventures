@@ -1,7 +1,11 @@
 package com.laab.adventures;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import static com.laab.adventures.GameActivity_Layout.beatLevel;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -28,5 +32,15 @@ public class GameActivity extends AppCompatActivity {
         super.onPause();
         gameActivity_layout.pause();
         Music.pauseMusic();
+    }
+
+    public void levelComplete() {
+        Intent intent = new Intent(this, LevelComplete_Activity.class);
+        startActivity(intent);
+    }
+
+    public void gameOver() {
+        Intent intent = new Intent(this, GameOver_Activity.class);
+        startActivity(intent);
     }
 }

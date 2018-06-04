@@ -36,6 +36,14 @@ public class LevelBuilder {
             //Right Wall
             walls.add(new Wall(890, 0, 900, 2000, game));
         }
+        if(level == 3) {
+            walls.add(new Wall(0, 0, 900, 100,game));
+            walls.add(new Wall(0, 0, 10, 2000, game));
+            walls.add(new Wall(0, 300, 800, 500, game));
+            walls.add(new Wall(890, 0, 900, 2000, game));
+            walls.add(new Wall(100, 700, 900, 1000, game));
+            walls.add(new Wall(0, 1300, 900, 2000, game));
+        }
         return walls;
     }
 

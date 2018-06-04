@@ -2,14 +2,18 @@ package com.laab.adventures;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity_Layout extends GameLoop_Layout {
 
+    public static boolean beatLevel;
+    GameActivity game;
     List<Drawable> walls;
     List<Player> players;
     List<Drawable> spikes;
@@ -19,6 +23,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
     public GameActivity_Layout(Context context) {
         super(context);
+        game = (GameActivity) context;
         walls = new ArrayList<Drawable>();
         players = new ArrayList<Player>();
         spikes = new ArrayList<Drawable>();
@@ -32,12 +37,12 @@ public class GameActivity_Layout extends GameLoop_Layout {
     private void getAssets(){
         LevelBuilder builder = new LevelBuilder();
         LevelsActivity levels = new LevelsActivity();
-        if(levels.getLevel() == "Level 1") {
+        if(levels.getLevel() == 1) {
             walls = builder.getWalls(1, this);
             players = builder.getPlayers(1, this);
             flags = builder.getFlags(1,this);
         }
-        else if(levels.getLevel() == "Level 2") {
+        else if(levels.getLevel() == 2) {
             walls = builder.getWalls(2, this);
             players = builder.getPlayers(2, this);
             spikes = builder.getSpikes(2, this);
@@ -45,7 +50,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             doors = builder.getDoors(2,this);
             plates = builder.getPlates(2, this, doors);
         }
-        else if(levels.getLevel() == "Level 3") {
+        else if(levels.getLevel() == 3) {
             walls = builder.getWalls(3, this);
             players = builder.getPlayers(3, this);
         }
@@ -138,7 +143,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
 
         // Win condition stuff -------------------------------
-        boolean beatLevel = true;
+        beatLevel = true;
         if(players.size() > 0) {
             for (Player p : players) {
                 if (p.isAtFlag()) {
@@ -148,10 +153,11 @@ public class GameActivity_Layout extends GameLoop_Layout {
             }
 
             if (beatLevel) {
-                Log.i("Win", "YOU BEAT THE LEVEL");
+                game.levelComplete();
             }
         }
         else{
+            game.gameOver();
             Log.i("Lose", "YOU LOST THE LEVEL");
         }
         // ----------------------------------------------------
@@ -205,5 +211,4 @@ public class GameActivity_Layout extends GameLoop_Layout {
         }
         return false;
     }
-
 }
