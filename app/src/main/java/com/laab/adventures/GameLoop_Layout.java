@@ -44,7 +44,7 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
 
         // 50 physics updates per second, = 1/50 sec = (1/50)*1,000,000,000 nanosecs
         // 1 physics update every 20,000,000 nanoseconds
-        physics_rate=100;
+        physics_rate=400;
         dt=(1/physics_rate)*1000000000;
         dt_pool=0;
     }

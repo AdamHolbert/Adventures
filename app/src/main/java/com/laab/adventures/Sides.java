@@ -5,5 +5,9 @@ public enum Sides {
     Bottom,
     Left,
     Right,
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight,
     None
 }

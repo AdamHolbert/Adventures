@@ -81,18 +81,77 @@ public abstract class Drawable {
         boolean bottomLeftO = isInside(thatObj, x1, y2);
         boolean bottomRightO = isInside(thatObj, x2, y2);
 
-        if(topLeft || topRight || bottomLeft || bottomRight || topLeftO || topRightO || bottomLeftO || bottomRightO){
-            if((topLeft && topRight) || (bottomLeftO && bottomRightO)){
+        if(topLeftO){
+            bottomRight = true;
+        }
+        if(topRightO){
+            bottomLeft = true;
+        }
+        if(bottomLeftO){
+            topRight = true;
+        }
+        if(bottomRightO){
+            topLeft = true;
+        }
+
+        if(topLeft && topRight){
+            side = Sides.Top;
+        }
+        else if(topLeft && bottomLeft){
+            side = Sides.Left;
+        }
+        else if(topRight && bottomRight){
+            side = Sides.Right;
+        }
+        else if(bottomLeft && bottomRight){
+            side = Sides.Bottom;
+        }
+        else if(topLeft){
+            int thing = cornerCheck(this.GetXMin(),this.GetYMin(),obj.GetXMax(),obj.GetYMax());
+            if(thing > 0) {
                 side = Sides.Top;
             }
-            else if((bottomLeft && bottomRight) || (topLeftO && topRightO)){
+            else if(thing < 0){
+                side = Sides.Left;
+            }
+            else{
+                side = Sides.TopLeft;
+            }
+        }
+        else if(topRight){
+            int thing = cornerCheck(obj.GetXMin(),this.GetYMin(),this.GetXMax(),obj.GetYMax());
+            if(thing > 0) {
+                side = Sides.Top;
+            }
+            else if(thing < 0){
+                side = Sides.Right;
+            }
+            else{
+                side = Sides.TopRight;
+            }
+        }
+        else if(bottomLeft){
+            int thing = cornerCheck(this.GetXMin(),obj.GetYMin(),obj.GetXMax(),this.GetYMax());
+            if(thing > 0) {
                 side = Sides.Bottom;
             }
-            else if((topLeft && bottomLeft) || (topRightO && bottomRightO)){
+            else if(thing < 0){
                 side = Sides.Left;
             }
-            else if((topRight && bottomRight) || (topLeftO && bottomLeftO)){
-                side = Sides.Left;
+            else{
+                side = Sides.BottomLeft;
+            }
+        }
+        else if(bottomRight){
+            int thing = cornerCheck(obj.GetXMin(),obj.GetYMin(),this.GetXMax(),this.GetYMax());
+            if(thing > 0) {
+                side = Sides.Bottom;
+            }
+            else if(thing < 0){
+                side = Sides.Right;
+            }
+            else{
+                side = Sides.BottomRight;
             }
         }
         else{
@@ -109,6 +168,12 @@ public abstract class Drawable {
         else{
             return false;
         }
+    }
+
+    private int cornerCheck(int x1, int y1, int x2, int y2){ //returns 0 is equal, + if wide, - if tall
+        int width = x2-x1;
+        int height = y2-y1;
+        return width-height;
     }
 
 

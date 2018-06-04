@@ -21,8 +21,8 @@ public class Flag extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        x2 = x1 + 16;
-        y2 = y1 + 16;
+        x2 = x1 + 50;
+        y2 = y1 + 80;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
@@ -35,6 +35,7 @@ public class Flag extends Drawable {
     }
 
     public void draw(Canvas canvas){
+        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
         canvas.drawBitmap(image, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 }
