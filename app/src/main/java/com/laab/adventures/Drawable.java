@@ -53,13 +53,7 @@ public abstract class Drawable {
         boolean bottomLeftO = coordInsideRect(thisObj.bottom, thisObj.left, thatObj);
         boolean bottomRightO = coordInsideRect(thisObj.bottom, thisObj.right, thatObj);
 
-        if(topLeft || topRight || bottomLeft || bottomRight || topLeftO || topRightO || bottomLeftO || bottomRightO){
-            collision = true;
-        }
-        else{
-            collision = false;
-        }
-        return collision;
+        return topLeft || topRight || bottomLeft || bottomRight || topLeftO || topRightO || bottomLeftO || bottomRightO;
     }
 
     ArrayList<Sides> AdvancedCollision(Drawable obj){

@@ -17,8 +17,8 @@ public class Button extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1+10;
-        this.y2 = y1+10;
+        this.x2 = x1+100;
+        this.y2 = y1+100;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
@@ -33,6 +33,7 @@ public class Button extends Drawable {
 
     @Override
     protected void draw(Canvas canvas) {
+        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsWidth(y1), layout.toPxsWidth(x2), layout.toPxsWidth(y2), display);
         canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
     }
 }

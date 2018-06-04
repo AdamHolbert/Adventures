@@ -43,4 +43,14 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameOver_Activity.class);
         startActivity(intent);
     }
+
+    public void levelSelect() {
+        Intent intent = new Intent(this, LevelsActivity.class);
+        startActivity(intent);
+    }
+
+    public void restart() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
 }

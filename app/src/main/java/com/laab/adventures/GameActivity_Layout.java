@@ -1,5 +1,6 @@
 package com.laab.adventures;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.MotionEvent;
 import java.util.ArrayList;
@@ -16,22 +17,22 @@ public class GameActivity_Layout extends GameLoop_Layout {
     List<Drawable> doors;
     List<Drawable> flags;
     LevelsActivity levels;
-    List<Drawable> buttons;
+    Drawable mainMenuButton;
+    Drawable restartButton;
 
     public GameActivity_Layout(Context context) {
         super(context);
         game = (GameActivity) context;
+        getAssets();
+    }
+
+    private void getAssets(){
         walls = new ArrayList<>();
         players = new ArrayList<>();
         spikes = new ArrayList<>();
         plates = new ArrayList<>();
         doors = new ArrayList<>();
         flags = new ArrayList<>();
-        buttons = new ArrayList<>();
-        getAssets();
-    }
-
-    private void getAssets(){
         levels = new LevelsActivity();
         if(levels.getLevel() == 1) {
             walls = LevelBuilder.getWalls(1, this);
@@ -50,12 +51,27 @@ public class GameActivity_Layout extends GameLoop_Layout {
             walls = LevelBuilder.getWalls(3, this);
             players = LevelBuilder.getPlayers(3, this);
         }
-        buttons = LevelBuilder.getButtons(this);
+        restartButton = new Button(this,10, 10,
+                BitmapFactory.decodeResource(game.getResources(), R.drawable.flag));
+        mainMenuButton = new Button(this, 790, 10,
+                BitmapFactory.decodeResource(game.getResources(), R.drawable.plate));
+
     }
 
     @Override
     void update(double delta_t) {
         List<Player> playersToBeDeleted = new ArrayList<>();
+
+        if(draggingPoint != null && draggingPoint.hasEvent() && !draggingPoint.hasPlayer()){
+            if(restartButton.collidedWith(draggingPoint)) {
+                game.restart();
+                return;
+            }
+            if(mainMenuButton.collidedWith(draggingPoint)){
+                game.levelSelect();
+                return;
+            }
+        }
         for(Player player : players){
             boolean spikeCollision = false;
             List<Sides> collisions = new ArrayList<>();
@@ -103,8 +119,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 }
             }
             for(Drawable door : doors){
-                if(((Door) door).getIsOpen())
-                    System.out.println("******* Door Is Open ********");
                 if (!((Door) door).getIsOpen()) {
                     if(player.collidedWith(door)){
                         collisions.addAll(player.AdvancedCollision(door));
@@ -132,6 +146,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
             if(revertY){
                 player.move(0, moveY*-1);
             }
+
+
         }
 
         for(Player p : playersToBeDeleted){
@@ -150,13 +166,11 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
             if (beatLevel) {
                 game.levelComplete();
-                Log.i("Win", "YOU BEAT THE LEVEL");
                 levels.beatCurrentLevel();
             }
         }
         else{
             game.gameOver();
-            Log.i("Lose", "YOU LOST THE LEVEL");
         }
         // ----------------------------------------------------
     }
@@ -184,14 +198,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Drawable flag : flags){
             flag.draw(canvas);
         }
-        for(Drawable button : buttons){
-            if(button != null) {
-                Log.i("Button", "Button is not null");
-                button.draw(canvas);
-            }
-            else
-                Log.i("Button", "Button is null");
-        }
+        mainMenuButton.draw(canvas);
+        restartButton.draw(canvas);
         if(draggingPoint != null && draggingPoint.hasEvent()){
             draggingPoint.draw(canvas);
         }

@@ -25,11 +25,7 @@ public class DraggingPoint extends Drawable {
     }
 
 
-    int getX(){
-
-        Log.w("dragging point", Float.toString(event.getX()/layout.toPxsWidth(1)));
-        return (int) (event.getX()/layout.toPxsWidth(1));
-    }
+    int getX(){return (int) (event.getX()/layout.toPxsWidth(1));}
     int getY(){return (int) (event.getY()/layout.toPxsHeight(1)) - 15;}
 
     @Override
@@ -47,8 +43,8 @@ public class DraggingPoint extends Drawable {
 //        canvas.drawRect(event.getX(), event.getY(),
 //                event.getX() + 50, event.getY()+50, red);
 //
-        canvas.drawRect(layout.toPxsWidth(GetXMin()), layout.toPxsHeight(GetYMin()),
-                layout.toPxsWidth(GetXMax()), layout.toPxsHeight(GetYMax()), green);
+//        canvas.drawRect(layout.toPxsWidth(GetXMin()), layout.toPxsHeight(GetYMin()),
+//                layout.toPxsWidth(GetXMax()), layout.toPxsHeight(GetYMax()), green);
     }
 
     public void setEvent(MotionEvent event) {
