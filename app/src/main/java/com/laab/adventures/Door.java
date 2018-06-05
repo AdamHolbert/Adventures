@@ -17,7 +17,7 @@ public class Door extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        x2 = x1 + 70;
+        x2 = x1 + 80;
         y2 = y1 + 13;
 
         closed = Bitmap.createScaledBitmap(
