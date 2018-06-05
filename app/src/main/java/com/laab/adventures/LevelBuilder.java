@@ -41,9 +41,9 @@ public class LevelBuilder {
         if(level == 3) {
 //            Outer walls
             walls.add(new Wall(0, 0, 900, 100,game));
-            walls.add(new Wall(0, 0, 50, 2000, game));
-            walls.add(new Wall(850, 0, 900, 2000, game));
-            walls.add(new Wall(0, 1500, 900, 2000, game));
+            walls.add(new Wall(0, 0, 50, 1600, game));
+            walls.add(new Wall(850, 0, 900, 1600, game));
+            walls.add(new Wall(0, 1500, 900, 1600, game));
 
             walls.add(new Wall(200, 300, 900, 400, game));
             walls.add(new Wall(120, 350, 200, 400, game));
@@ -54,7 +54,7 @@ public class LevelBuilder {
             walls.add(new Wall(230, 1000, 900, 1100, game));
             walls.add(new Wall(120, 1050, 230, 1100, game));
 //            Bottom
-            walls.add(new Wall(600, 1300, 900, 2000, game));
+            walls.add(new Wall(600, 1300, 900, 1600, game));
 
 
         }
@@ -74,6 +74,7 @@ public class LevelBuilder {
             players.add(new Player(750, 1100, game));
             players.add(new Player(700, 1100, game));
             players.add(new Player(650, 1100, game));
+            players.add(new Player(800, 1100, game));
         }
         return players;
     }
