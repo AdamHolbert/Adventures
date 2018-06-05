@@ -54,11 +54,7 @@ public class FileActivity extends AppCompatActivity {
     public void buttonSave(View view) {
         File file = new File(path + "/savedFile.txt");
         String [] saveText = editText.getText().toString().split(System.getProperty("line.separator"));
-        Log.i("Save", String.valueOf(editText.getText()));
-        editText.setText("");
-
         Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
-
         Save(file, saveText);
     }
 

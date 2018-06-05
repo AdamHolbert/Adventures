@@ -76,6 +76,9 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 return;
             }
         }
+        for(Drawable door : doors) {
+            ((Door) door).close();
+        }
         for(Player player : players){
             boolean spikeCollision = false;
             List<Sides> collisions = new ArrayList<>();
@@ -170,7 +173,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
             if (beatLevel) {
                 game.levelComplete();
-                levels.beatCurrentLevel();
+                LevelsActivity.beatLevel();
             }
         }
         else{
@@ -182,7 +185,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
     @Override
     void draw() {
         canvas = surfaceHolder.lockCanvas();
-        canvas.drawRect(0,0,cwidth,cheight, gray_panitbrush_fill);
+        canvas.drawRect(0,0,cwidth,cheight, backgroundPaint);
         //cannon ball
         for(Drawable wall : walls){
             wall.draw(canvas);

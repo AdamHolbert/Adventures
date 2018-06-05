@@ -10,7 +10,7 @@ import android.widget.Button;
 public class LevelsActivity extends AppCompatActivity {
     Button back, level1, level2, level3;
     private static int level = 0;
-    private static boolean level2Locked = true, level3Locked = true;
+    private static int highestBeatLevel = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,26 +33,26 @@ public class LevelsActivity extends AppCompatActivity {
         level1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goLevel1(v);
                 level = 1;
+                openLevel();
             }
         });
         level2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goLevel2(v);
                 level = 2;
+                openLevel();
             }
         });
         level3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goLevel3(v);
                 level = 3;
+                openLevel();
             }
         });
 
-        if (level2Locked) {
+        if (highestBeatLevel < 1) {
             level2.setEnabled(false);
             level2.setText("Locked");
         }
@@ -60,7 +60,7 @@ public class LevelsActivity extends AppCompatActivity {
             level2.setText("Level 2");
         }
 
-        if (level3Locked) {
+        if (highestBeatLevel < 2) {
             level3.setEnabled(false);
             level3.setText("Locked");
         }
@@ -69,57 +69,44 @@ public class LevelsActivity extends AppCompatActivity {
         }
     }
 
-        public void goBack() {
-            Intent intent = new Intent(this, HomeScreen.class);
-            startActivity(intent);
-        }
+    private void openLevel() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+    }
 
-        public void goFile() {
-            Intent intent = new Intent(this, FileActivity.class);
-            startActivity(intent);
-        }
+    public void goBack() {
+        Intent intent = new Intent(this, HomeScreen.class);
+        startActivity(intent);
+    }
 
-        public void goLevel1(View view){
-            Intent intent = new Intent(this, GameActivity.class);
-            startActivity(intent);
-        }
+    public static void beatLevel() {
+        beatLevel(level);
+    }
 
-        public void goLevel2 (View view){
-            Intent intent = new Intent(this, GameActivity.class);
-            startActivity(intent);
-        }
-
-        public void goLevel3 (View view){
-            Intent intent = new Intent(this, GameActivity.class);
-            startActivity(intent);
-        }
-
-        public void beatCurrentLevel () {
-            switch (level) {
-                case 0:
-                    break;
-                case 1:
-                    level2Locked = false;
-                    break;
-                case 2:
-                    level3Locked = false;
-                    break;
-            }
-        }
-
-        @Override
-        public void onResume () {
-            super.onResume();
-            Music.startMusic();
-        }
-
-        @Override
-        public void onPause () {
-            super.onPause();
-            Music.pauseMusic();
-        }
-
-        public int getLevel () {
-            return level;
+    public static void beatLevel(int level) {
+        if(highestBeatLevel < level){
+            highestBeatLevel = level;
+            HomeScreen.saveConfig();
         }
     }
+
+    @Override
+    public void onResume () {
+        super.onResume();
+        Music.startMusic();
+    }
+
+    @Override
+    public void onPause () {
+        super.onPause();
+        Music.pauseMusic();
+    }
+
+    public int getLevel () {
+        return level;
+    }
+
+    public static int getHighestLevel(){
+        return highestBeatLevel;
+    }
+}

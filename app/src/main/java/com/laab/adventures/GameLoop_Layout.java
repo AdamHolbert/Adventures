@@ -10,13 +10,15 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.ByteArrayOutputStream;
+
 public abstract class GameLoop_Layout extends SurfaceView implements Runnable, SurfaceHolder.Callback {
 
     private Thread thread = null;
     private double frames_per_second, frame_time_seconds, frame_time_ms, frame_time_ns;
     private double tLF, tEOR, delta_t,physics_rate,dt,dt_pool;
 
-    Paint red_paintbrush_fill, blue_paintbrush_fill, green_paintbrush_fill, gray_panitbrush_fill;
+    Paint red_paintbrush_fill, blue_paintbrush_fill, green_paintbrush_fill, gray_paintbrush_fill, backgroundPaint;
     Paint red_paintbrush_stroke,blue_paintbrush_stroke,green_paintbrush_stroke;
 
     Boolean CanDraw;
@@ -169,9 +171,13 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
         green_paintbrush_stroke.setStyle(Paint.Style.STROKE);
         green_paintbrush_stroke.setStrokeWidth(10);
 
-        gray_panitbrush_fill = new Paint();
-        gray_panitbrush_fill.setColor(Color.DKGRAY);
-        gray_panitbrush_fill.setStyle(Paint.Style.FILL);
+        gray_paintbrush_fill = new Paint();
+        gray_paintbrush_fill.setColor(Color.DKGRAY);
+        gray_paintbrush_fill.setStyle(Paint.Style.FILL);
+
+        backgroundPaint = new Paint();
+        backgroundPaint.setColor(Color.argb(255,55,142,158));
+        backgroundPaint.setStyle(Paint.Style.FILL);
     }
 
     protected float toPxsWidth(float gameUnits){
@@ -182,21 +188,9 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
         return ((gameUnits/1600) * getResources().getDisplayMetrics().heightPixels);
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // CREATE A MATRIX FOR THE MANIPULATION
-        Matrix matrix = new Matrix();
-        // RESIZE THE BIT MAP
-        matrix.postScale(scaleWidth, scaleHeight);
+    public Bitmap getResizedBitmap(Bitmap b, int newWidth, int newHeight) {
+        return Bitmap.createScaledBitmap(b, newWidth, newHeight, false);
 
-        // "RECREATE" THE NEW BITMAP
-        Bitmap resizedBitmap = Bitmap.createBitmap(
-                bm, 0, 0, width, height, matrix, false);
-        bm.recycle();
-        return resizedBitmap;
     }
 
     public void pause(){

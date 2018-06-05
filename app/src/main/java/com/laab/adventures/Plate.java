@@ -22,16 +22,22 @@ public class Plate extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 + 70;
-        this.y2 = y1 + 10;
+        this.x2 = x1 + 64;
+        this.y2 = y1 + 20;
 
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
 
-        plateUp = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate);
-        plateDown = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_downxx);
+        plateUp = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate),
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
+
+        plateDown = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_downxx),
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
+
 
 
         display = new Paint();
@@ -61,6 +67,10 @@ public class Plate extends Drawable {
 
     public Door getDoor(){
         return door;
+    }
+
+    public void unpress() {
+        pressed = false;
     }
 }
 

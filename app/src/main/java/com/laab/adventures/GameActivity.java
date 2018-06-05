@@ -45,12 +45,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void levelSelect() {
+
         Intent intent = new Intent(this, LevelsActivity.class);
         startActivity(intent);
     }
 
     public void restart() {
         Intent intent = new Intent(this, GameActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }
