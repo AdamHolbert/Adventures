@@ -42,8 +42,12 @@
         <activity
             android:name=".FileActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".GameOver_Activity" />
-        <activity android:name=".LevelComplete_Activity"></activity>
+        <activity
+            android:name=".GameOver_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LevelComplete_Activity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

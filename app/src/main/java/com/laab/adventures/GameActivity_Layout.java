@@ -76,9 +76,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 return;
             }
         }
-        for(Drawable door : doors) {
-            ((Door) door).close();
-        }
         for(Player player : players){
             boolean spikeCollision = false;
             List<Sides> collisions = new ArrayList<>();
