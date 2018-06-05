@@ -56,9 +56,9 @@ public class GameActivity_Layout extends GameLoop_Layout {
             players = LevelBuilder.getPlayers(3, this);
         }
         restartButton = new Button(this,10, 10,
-                BitmapFactory.decodeResource(game.getResources(), R.drawable.flag));
+                BitmapFactory.decodeResource(game.getResources(), R.drawable.restart));
         mainMenuButton = new Button(this, 790, 10,
-                BitmapFactory.decodeResource(game.getResources(), R.drawable.spikes));
+                BitmapFactory.decodeResource(game.getResources(), R.drawable.back));
 
     }
 
