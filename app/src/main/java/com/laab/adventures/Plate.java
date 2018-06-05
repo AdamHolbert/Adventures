@@ -68,5 +68,9 @@ public class Plate extends Drawable {
     public Door getDoor(){
         return door;
     }
+
+    public void unpress() {
+        pressed = false;
+    }
 }
 

@@ -13,6 +13,10 @@ public class Music {
     private static boolean muted = false;
     private static Context lastContext = null;
 
+    static boolean isMuted(){
+        return muted;
+    }
+
     static void startMusic(){
         if(!muted){
             if(!music.isPlaying()) {
@@ -35,6 +39,7 @@ public class Music {
         else{
             changeMusic(lastContext, currentMusic);
         }
+        HomeScreen.saveConfig();
     }
 
     static void levelMusic(Context context) {
@@ -60,4 +65,9 @@ public class Music {
         startMusic();
     }
 
+    public static void setMute(boolean mute) {
+        if(mute != muted){
+            toggleMute();
+        }
+    }
 }
