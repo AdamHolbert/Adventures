@@ -22,8 +22,8 @@ public class Plate extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 + 70;
-        this.y2 = y1 + 10;
+        this.x2 = x1 + 64;
+        this.y2 = y1 + 20;
 
 
         rectangle = new Rect();

@@ -15,9 +15,9 @@ class Player extends Drawable {
     public Player(int x1, int y1, GameActivity_Layout layout) {
         super(layout);
         this.x1 = x1;
-        this.x2 = x1 + 20;
+        this.x2 = x1 + 32;
         this.y1 = y1;
-        this.y2 = y1 + 20;
+        this.y2 = y1 + 32;
         atFlag = false;
 
         img = Bitmap.createScaledBitmap(

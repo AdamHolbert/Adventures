@@ -21,8 +21,8 @@ public class Flag extends Drawable {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        x2 = x1 + 50;
-        y2 = y1 + 80;
+        x2 = x1 + 60;
+        y2 = y1 + 75;
 
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
