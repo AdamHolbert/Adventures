@@ -10,8 +10,6 @@ import android.view.Display;
 
 public class Door extends Drawable {
     private boolean isOpen;
-    private Rect rectangle;
-    private Paint display;
     private Bitmap closed;
     private Bitmap open;
 
@@ -22,24 +20,22 @@ public class Door extends Drawable {
         x2 = x1 + 70;
         y2 = y1 + 13;
 
-        rectangle = new Rect();
-        rectangle.set(x1, y1, x2, y2);
+        closed = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.door),
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
 
-        closed = BitmapFactory.decodeResource(layout.getResources(), R.drawable.door);
-        open = BitmapFactory.decodeResource(layout.getResources(), R.drawable.open_door);
-
-        display = new Paint();
-        display.setColor(Color.RED);
-        display.setStyle(Paint.Style.FILL);
+        open = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.open_door),
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
     }
 
     @Override
     public void draw(Canvas canvas) {
 //        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
         if(isOpen){
-            canvas.drawBitmap(open, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
+            canvas.drawBitmap(open, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
         } else {
-            canvas.drawBitmap(closed, layout.toPxsWidth(x1), layout.toPxsHeight(y1), display);
+            canvas.drawBitmap(closed, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
         }
     }
 

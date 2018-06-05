@@ -8,7 +8,6 @@ import android.util.Log;
 
 public class Wall extends Drawable {
 
-    private Rect rectangle;
     private Paint display;
 
     public Wall(int x1, int y1, int x2, int y2, GameActivity_Layout layout){
@@ -17,8 +16,6 @@ public class Wall extends Drawable {
         this.x2 = x2;
         this.y1 = y1;
         this.y2 = y2;
-        rectangle = new Rect();
-        rectangle.set(x1, y1, x2, y2);
 
         display = new Paint();
         display.setColor(Color.LTGRAY);

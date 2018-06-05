@@ -30,8 +30,14 @@ public class Plate extends Drawable {
         rectangle.set(x1, y1, x2, y2);
 
 
-        plateUp = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate);
-        plateDown = BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_downxx);
+        plateUp = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate),
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
+
+        plateDown = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_downxx),
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
+
 
 
         display = new Paint();

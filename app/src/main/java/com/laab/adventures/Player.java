@@ -9,28 +9,20 @@ import android.graphics.Rect;
 import android.util.Log;
 
 class Player extends Drawable {
-    private Rect rectangle;
     private Bitmap img;
-    private Paint display;
     private boolean atFlag;
 
     public Player(int x1, int y1, GameActivity_Layout layout) {
         super(layout);
         this.x1 = x1;
-        this.x2 = x1 +35;
+        this.x2 = x1 + 20;
         this.y1 = y1;
-        this.y2 = y1 +35;
-        rectangle = new Rect();
-        rectangle.set(x1, y1, x2, y2);
+        this.y2 = y1 + 20;
         atFlag = false;
 
-        img = BitmapFactory.decodeResource(layout.getResources(), R.drawable.objectboi);
-
-
-        display = new Paint();
-        display.setColor(Color.BLACK);
-        display.setStyle(Paint.Style.FILL);
-
+        img = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.objectboi)
+                , (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
     }
 
     public void atFlag(){
@@ -43,10 +35,7 @@ class Player extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
-        if(img != null) {
-            canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
-        }
+        canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
     }
 
 }

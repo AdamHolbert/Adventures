@@ -58,7 +58,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         restartButton = new Button(this,10, 10,
                 BitmapFactory.decodeResource(game.getResources(), R.drawable.flag));
         mainMenuButton = new Button(this, 790, 10,
-                BitmapFactory.decodeResource(game.getResources(), R.drawable.plate));
+                BitmapFactory.decodeResource(game.getResources(), R.drawable.spikes));
 
     }
 

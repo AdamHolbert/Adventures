@@ -27,7 +27,9 @@ public class Flag extends Drawable {
         rectangle = new Rect();
         rectangle.set(x1, y1, x2, y2);
 
-        image = BitmapFactory.decodeResource(layout.getResources(), R.drawable.flag);
+        image = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.flag),
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
 
         display = new Paint();
         display.setColor(Color.RED);

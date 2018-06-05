@@ -22,7 +22,8 @@ public class LevelBuilder {
             //Top Wall
             walls.add(new Wall(0, 0, 900, 100,game));
             //Bottom Wall
-            walls.add(new Wall(0, 1500, 900, 2000,game));
+//            walls.add(new Wall(450, 1500, 900, 1600,game));
+//            walls.add(new Wall(0, 1500, 450, 1550,game));
             //Huge bottom structure
             walls.add(new Wall(200, 1300, 900, 2000,game));
             //Above huge bottom structure
@@ -34,9 +35,10 @@ public class LevelBuilder {
             //Right of previous wall
             walls.add(new Wall(500, 300, 830, 700,game));
             //Left Wall
-            walls.add(new Wall(0, 0, 10, 2000, game));
+            walls.add(new Wall(0, 0, 25, 1400, game));
+            walls.add(new Wall(25, 0, 50, 1500, game));
             //Right Wall
-            walls.add(new Wall(890, 0, 900, 2000, game));
+            walls.add(new Wall(850, 0, 900, 1500, game));
         }
         if(level == 3) {
 //            Outer walls

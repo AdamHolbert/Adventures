@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.ByteArrayOutputStream;
+
 public abstract class GameLoop_Layout extends SurfaceView implements Runnable, SurfaceHolder.Callback {
 
     private Thread thread = null;
@@ -182,21 +184,9 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
         return ((gameUnits/1600) * getResources().getDisplayMetrics().heightPixels);
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // CREATE A MATRIX FOR THE MANIPULATION
-        Matrix matrix = new Matrix();
-        // RESIZE THE BIT MAP
-        matrix.postScale(scaleWidth, scaleHeight);
+    public Bitmap getResizedBitmap(Bitmap b, int newWidth, int newHeight) {
+        return Bitmap.createScaledBitmap(b, newWidth, newHeight, false);
 
-        // "RECREATE" THE NEW BITMAP
-        Bitmap resizedBitmap = Bitmap.createBitmap(
-                bm, 0, 0, width, height, matrix, false);
-        bm.recycle();
-        return resizedBitmap;
     }
 
     public void pause(){
