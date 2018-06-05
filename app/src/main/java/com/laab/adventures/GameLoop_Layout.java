@@ -18,7 +18,7 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
     private double frames_per_second, frame_time_seconds, frame_time_ms, frame_time_ns;
     private double tLF, tEOR, delta_t,physics_rate,dt,dt_pool;
 
-    Paint red_paintbrush_fill, blue_paintbrush_fill, green_paintbrush_fill, gray_panitbrush_fill;
+    Paint red_paintbrush_fill, blue_paintbrush_fill, green_paintbrush_fill, gray_paintbrush_fill, backgroundPaint;
     Paint red_paintbrush_stroke,blue_paintbrush_stroke,green_paintbrush_stroke;
 
     Boolean CanDraw;
@@ -171,9 +171,13 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
         green_paintbrush_stroke.setStyle(Paint.Style.STROKE);
         green_paintbrush_stroke.setStrokeWidth(10);
 
-        gray_panitbrush_fill = new Paint();
-        gray_panitbrush_fill.setColor(Color.DKGRAY);
-        gray_panitbrush_fill.setStyle(Paint.Style.FILL);
+        gray_paintbrush_fill = new Paint();
+        gray_paintbrush_fill.setColor(Color.DKGRAY);
+        gray_paintbrush_fill.setStyle(Paint.Style.FILL);
+
+        backgroundPaint = new Paint();
+        backgroundPaint.setColor(Color.argb(255,55,142,158));
+        backgroundPaint.setStyle(Paint.Style.FILL);
     }
 
     protected float toPxsWidth(float gameUnits){
