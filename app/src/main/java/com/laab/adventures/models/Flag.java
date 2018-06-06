@@ -1,6 +1,5 @@
-package com.laab.adventures;
+package com.laab.adventures.models;
 
-import com.laab.adventures.Drawable;
 import com.laab.adventures.GameActivity_Layout;
 import com.laab.adventures.R;
 
@@ -9,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 
 public class Flag extends Drawable {
 

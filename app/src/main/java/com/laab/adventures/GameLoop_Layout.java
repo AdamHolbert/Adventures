@@ -180,11 +180,11 @@ public abstract class GameLoop_Layout extends SurfaceView implements Runnable, S
         backgroundPaint.setStyle(Paint.Style.FILL);
     }
 
-    protected float toPxsWidth(float gameUnits){
+    public float toPxsWidth(float gameUnits){
         return ((gameUnits/900) * getResources().getDisplayMetrics().widthPixels);
     }
 
-    protected float toPxsHeight(float gameUnits){
+    public float toPxsHeight(float gameUnits){
         return ((gameUnits/1600) * getResources().getDisplayMetrics().heightPixels);
     }
 

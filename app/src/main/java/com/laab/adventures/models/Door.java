@@ -1,12 +1,11 @@
-package com.laab.adventures;
+package com.laab.adventures.models;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.view.Display;
+
+import com.laab.adventures.GameActivity_Layout;
+import com.laab.adventures.R;
 
 public class Door extends Drawable {
     private boolean isOpen;

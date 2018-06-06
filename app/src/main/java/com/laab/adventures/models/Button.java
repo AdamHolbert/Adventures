@@ -1,11 +1,9 @@
-package com.laab.adventures;
+package com.laab.adventures.models;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
+
+import com.laab.adventures.GameActivity_Layout;
 
 public class Button extends Drawable {
 
@@ -25,7 +23,7 @@ public class Button extends Drawable {
     }
 
     @Override
-    protected void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
         canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
     }
 }

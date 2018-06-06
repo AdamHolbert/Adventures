@@ -1,12 +1,12 @@
-package com.laab.adventures;
+package com.laab.adventures.models;
 
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
+
+import com.laab.adventures.GameActivity_Layout;
+import com.laab.adventures.R;
 
 public class Plate extends Drawable {
 
@@ -51,7 +51,7 @@ public class Plate extends Drawable {
     }
 
     @Override
-    int GetYMin() {
+    public int GetYMin() {
         int y1 = super.GetYMin() + (pressed ? (y2-this.y1)/2 : 0);
         return yBump ? y1 - 1 : y1;
     }

@@ -1,8 +1,9 @@
-package com.laab.adventures;
+package com.laab.adventures.models;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
+
+import com.laab.adventures.GameActivity_Layout;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public abstract class Drawable {
         this.layout = layout;
     }
 
-    boolean collidedWith(Drawable obj){
+    public boolean collidedWith(Drawable obj){
         boolean collision = false;
 //        if(this.GetXMax() >= obj.GetXMin()){ //right
 //            if(this.GetYMax() >= obj.GetYMin()){ //bottom
@@ -56,7 +57,7 @@ public abstract class Drawable {
         return topLeft || topRight || bottomLeft || bottomRight || topLeftO || topRightO || bottomLeftO || bottomRightO;
     }
 
-    ArrayList<Sides> AdvancedCollision(Drawable obj){
+    public ArrayList<Sides> AdvancedCollision(Drawable obj){
         ArrayList<Sides> sides = new ArrayList<Sides>();
 
         Rect thisObj = new Rect();
@@ -164,12 +165,12 @@ public abstract class Drawable {
     }
 
 
-    int GetXMin(){return x1;}
-    int GetYMin(){return y1;}
-    int GetXMax(){return x2;}
-    int GetYMax(){return y2;}
+    public int GetXMin(){return x1;}
+    public int GetYMin(){return y1;}
+    public int GetXMax(){return x2;}
+    public int GetYMax(){return y2;}
 
-    protected abstract void draw(Canvas canvas);
+    public abstract void draw(Canvas canvas);
 
     public void move(int x, int y){
         x = x > 0 ? 1 : x < 0 ? -1 : 0;

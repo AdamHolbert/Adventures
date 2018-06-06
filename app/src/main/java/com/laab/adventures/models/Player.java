@@ -1,14 +1,13 @@
-package com.laab.adventures;
+package com.laab.adventures.models;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.util.Log;
 
-class Player extends Drawable {
+import com.laab.adventures.GameActivity_Layout;
+import com.laab.adventures.R;
+
+public class Player extends Drawable {
     private Bitmap img;
     private boolean atFlag;
     private boolean isGoon;
@@ -69,5 +68,13 @@ class Player extends Drawable {
 
     public void dragging() {
         this.everDragged = true;
+    }
+
+    public float xCenter(){
+        return ((GetXMax()-GetXMin())/2 + GetXMin());
+    }
+
+    public float yCenter(){
+        return ((GetYMax()-GetYMin())/2 + GetYMin());
     }
 }

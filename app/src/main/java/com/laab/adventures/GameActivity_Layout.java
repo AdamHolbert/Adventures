@@ -3,9 +3,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.MotionEvent;
+
+import com.laab.adventures.models.Button;
+import com.laab.adventures.models.Door;
+import com.laab.adventures.models.DraggingPoint;
+import com.laab.adventures.models.Drawable;
+import com.laab.adventures.models.Plate;
+import com.laab.adventures.models.Player;
+import com.laab.adventures.models.Sides;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,13 +141,10 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
                     draggingPoint.setCapturedPlayer(player);
                     player.dragging();
-                    int xMove = draggingPoint.getX() - ((player.x2-player.x1)/2 + player.x1);
-                    int yMove = draggingPoint.getY() - ((player.y2-player.y1)/2 + player.y1);
-                    moveX = xMove;
-                    moveY = yMove;
-                } else if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
-                    int xMove = draggingPoint.getX() - ((player.x2-player.x1)/2 + player.x1);
-                    int yMove = draggingPoint.getY() - ((player.y2-player.y1)/2 + player.y1);
+                }
+                if(draggingPoint.hasPlayer() && player == draggingPoint.getCapturedPlayer()){
+                    int xMove = draggingPoint.getX() - (int) player.xCenter();
+                    int yMove = draggingPoint.getY() - (int) player.yCenter();
                     moveX = xMove;
                     moveY = yMove;
                 }
@@ -245,9 +249,6 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Drawable spike : spikes){
             spike.draw(canvas);
         }
-        for(Drawable player : players){
-            player.draw(canvas);
-        }
         for (Drawable plate : plates){
             plate.draw(canvas);
         }
@@ -257,13 +258,16 @@ public class GameActivity_Layout extends GameLoop_Layout {
         for(Drawable flag : flags){
             flag.draw(canvas);
         }
-        mainMenuButton.draw(canvas);
-        restartButton.draw(canvas);
         if(draggingPoint != null && draggingPoint.hasEvent()){
             draggingPoint.draw(canvas);
         }
+        for(Drawable player : players){
+            player.draw(canvas);
+        }
+        mainMenuButton.draw(canvas);
+        restartButton.draw(canvas);
 
-//        canvas.drawBitmap(grid, 0, 0, transparent);
+        canvas.drawBitmap(grid, 0, 0, transparent);
         surfaceHolder.unlockCanvasAndPost(canvas);
     }
 

@@ -1,6 +1,12 @@
 package com.laab.adventures;
 
-import android.graphics.BitmapFactory;
+import com.laab.adventures.models.Door;
+import com.laab.adventures.models.Drawable;
+import com.laab.adventures.models.Flag;
+import com.laab.adventures.models.Plate;
+import com.laab.adventures.models.Player;
+import com.laab.adventures.models.Spike;
+import com.laab.adventures.models.Wall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,14 +51,14 @@ public class LevelBuilder {
             walls.add(new Wall(850, 0, 900, 1600, game));
             walls.add(new Wall(0, 1500, 900, 1600, game));
 
-            walls.add(new Wall(200, 300, 900, 400, game));
-            walls.add(new Wall(120, 350, 200, 400, game));
+            walls.add(new Wall(200, 300, 850, 350, game));
+            walls.add(new Wall(120, 350, 850, 400, game));
 //            Above lower wall
-            walls.add(new Wall(0, 650, 665, 750, game));
-            walls.add(new Wall(665, 700, 780, 750, game));
+            walls.add(new Wall(50, 650, 665, 700, game));
+            walls.add(new Wall(50, 700, 780, 750, game));
 //            Above bottom
-            walls.add(new Wall(230, 1000, 900, 1100, game));
-            walls.add(new Wall(120, 1050, 230, 1100, game));
+            walls.add(new Wall(230, 1000, 850, 1050, game));
+            walls.add(new Wall(120, 1050, 850, 1100, game));
 //            Bottom
             walls.add(new Wall(600, 1300, 900, 1600, game));
 

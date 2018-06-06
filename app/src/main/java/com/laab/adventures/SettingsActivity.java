@@ -1,6 +1,7 @@
 package com.laab.adventures;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,17 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
         Music.menuMusic(this);
+        updateMuteButton();
+    }
+
+    private void updateMuteButton() {
+        if(Music.isMuted()){
+            mute.setBackgroundColor(Color.DKGRAY);
+            mute.setText("SOUND - OFF");
+        } else {
+            mute.setBackgroundColor(Color.BLACK);
+            mute.setText("SOUND - ON ");
+        }
     }
 
     public void openCredits() {
@@ -47,6 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void toggleMute(){
         Music.toggleMute();
+        updateMuteButton();
     }
 
     public void goBack() {

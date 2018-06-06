@@ -1,10 +1,10 @@
-package com.laab.adventures;
+package com.laab.adventures.models;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.util.Log;
+
+import com.laab.adventures.GameActivity_Layout;
 
 public class Wall extends Drawable {
 

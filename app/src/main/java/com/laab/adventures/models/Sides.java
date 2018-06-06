@@ -1,4 +1,4 @@
-package com.laab.adventures;
+package com.laab.adventures.models;
 
 public enum Sides {
     Top,
