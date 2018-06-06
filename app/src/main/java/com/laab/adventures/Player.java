@@ -14,16 +14,13 @@ class Player extends Drawable {
     private boolean isGoon;
     private boolean dragTag;
     private Bitmap dragImg;
+    private boolean everDragged;
 
     public Player(int x1, int y1, GameActivity_Layout layout, boolean isGoon) {
-        this(x1, y1, x1+32, y1+32, layout, isGoon, false);
+        this(x1, y1, x1+32, y1+32, layout, isGoon);
     }
 
-    public Player(int x1, int y1, GameActivity_Layout layout, boolean isGoon, boolean dragTag) {
-        this(x1, y1, x1+32, y1+32, layout, isGoon, dragTag);
-    }
-
-    public Player(int x1, int y1, int x2, int y2, GameActivity_Layout layout, boolean isGoon, boolean dragTag) {
+    public Player(int x1, int y1, int x2, int y2, GameActivity_Layout layout, boolean isGoon) {
         super(layout);
         this.x1 = x1;
         this.x2 = x2;
@@ -31,7 +28,8 @@ class Player extends Drawable {
         this.y2 = y2;
         this.isGoon = isGoon;
         atFlag = false;
-        this.dragTag = dragTag;
+        this.dragTag = false;
+        this.everDragged = false;
 
         img = Bitmap.createScaledBitmap(
                 BitmapFactory.decodeResource(layout.getResources(), isGoon ? R.drawable.goonboi : R.drawable.objectboi)
@@ -63,5 +61,13 @@ class Player extends Drawable {
 
     public boolean isGoon() {
         return isGoon;
+    }
+
+    public boolean hasEverDragged() {
+        return everDragged;
+    }
+
+    public void dragging() {
+        this.everDragged = true;
     }
 }

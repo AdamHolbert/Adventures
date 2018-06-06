@@ -64,7 +64,7 @@ public class LevelBuilder {
     public static ArrayList<Player> getPlayers(int level, GameActivity_Layout game) {
         ArrayList<Player> players = new ArrayList<Player>();
         if(level == 1) {
-            players.add(new Player(750, 1100, game, false, true));
+            players.add(new Player(750, 1100, game, false));
         }
         if(level == 2) {
             players.add(new Player(700, 1100, game, false));
