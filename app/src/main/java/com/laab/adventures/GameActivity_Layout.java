@@ -115,6 +115,19 @@ public class GameActivity_Layout extends GameLoop_Layout {
 
             // get player direction
             int moveX = 0, moveY = 1;
+
+
+
+            // if is object boi, and dragging isn't happening
+            if((
+                    draggingPoint == null ||
+                    draggingPoint != null && !draggingPoint.hasEvent() ||
+                    draggingPoint != null && draggingPoint.hasEvent() && !draggingPoint.hasPlayer())){
+                player.setDragTag(true);
+            } else {
+                player.setDragTag(false);
+            }
+
             if(draggingPoint != null &&  draggingPoint.hasEvent()){
                 if(!draggingPoint.hasPlayer() && player.collidedWith(draggingPoint)){
                     draggingPoint.setCapturedPlayer(player);
