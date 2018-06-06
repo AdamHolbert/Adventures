@@ -13,6 +13,7 @@ public class Player extends Drawable {
     private boolean isGoon;
     private boolean dragTag;
     private Bitmap dragImg;
+    private boolean isAlive;
     private boolean everDragged;
 
     public Player(int x1, int y1, GameActivity_Layout layout, boolean isGoon) {
@@ -29,6 +30,7 @@ public class Player extends Drawable {
         atFlag = false;
         this.dragTag = false;
         this.everDragged = false;
+        this.isAlive = true;
 
         img = Bitmap.createScaledBitmap(
                 BitmapFactory.decodeResource(layout.getResources(), isGoon ? R.drawable.goonboi : R.drawable.objectboi)
@@ -52,9 +54,11 @@ public class Player extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
-        if(dragTag){
-            canvas.drawBitmap(dragImg, layout.toPxsWidth(GetXMin()+((GetXMax()-GetXMin())/2)-(100/2)), layout.toPxsHeight(GetYMin() - 45), null);
+        if(isAlive){
+            canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
+            if(dragTag){
+                canvas.drawBitmap(dragImg, layout.toPxsWidth(GetXMin()+((GetXMax()-GetXMin())/2)-(100/2)), layout.toPxsHeight(GetYMin() - 45), null);
+            }
         }
     }
 
@@ -76,5 +80,13 @@ public class Player extends Drawable {
 
     public float yCenter(){
         return ((GetYMax()-GetYMin())/2 + GetYMin());
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 }

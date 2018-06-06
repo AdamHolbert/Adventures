@@ -69,7 +69,7 @@ public class DraggingPoint extends Drawable {
     }
 
     public boolean hasPlayer(){
-        return capturedPlayer != null;
+        return capturedPlayer != null && capturedPlayer.isAlive();
     }
 
     public Player getCapturedPlayer(){

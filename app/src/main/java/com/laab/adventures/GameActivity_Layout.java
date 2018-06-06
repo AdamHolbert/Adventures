@@ -219,6 +219,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         // Win condition checks -------------------------------
 
         for(Player p : playersToBeDeleted){
+            p.setAlive(false);
             if(!p.isGoon()){
                 game.gameOver();
                 return;
