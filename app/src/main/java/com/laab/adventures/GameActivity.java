@@ -36,18 +36,18 @@ public class GameActivity extends AppCompatActivity {
 
     public void levelComplete() {
         Intent intent = new Intent(this, LevelComplete_Activity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
         startActivity(intent);
     }
 
     public void gameOver() {
+        finish();
         Intent intent = new Intent(this, GameOver_Activity.class);
         startActivity(intent);
     }
 
     public void levelSelect() {
-
-        Intent intent = new Intent(this, LevelsActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public void restart() {

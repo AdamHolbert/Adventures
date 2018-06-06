@@ -29,13 +29,13 @@ public class DraggingPoint extends Drawable {
     int getY(){return (int) (event.getY()/layout.toPxsHeight(1)) - 15;}
 
     @Override
-    int GetXMin(){return getX() - 15;}
+    int GetXMin(){return getX() - 25;}
     @Override
-    int GetYMin(){return getY() - 15;}
+    int GetYMin(){return getY() - 25;}
     @Override
-    int GetXMax(){return getX() + 15;}
+    int GetXMax(){return getX() + 25;}
     @Override
-    int GetYMax(){return getY() + 15;}
+    int GetYMax(){return getY() + 25;}
 
     @Override
     public void draw(Canvas canvas) {
@@ -43,8 +43,8 @@ public class DraggingPoint extends Drawable {
 //        canvas.drawRect(event.getX(), event.getY(),
 //                event.getX() + 50, event.getY()+50, red);
 //
-//        canvas.drawRect(layout.toPxsWidth(GetXMin()), layout.toPxsHeight(GetYMin()),
-//                layout.toPxsWidth(GetXMax()), layout.toPxsHeight(GetYMax()), green);
+        canvas.drawRect(layout.toPxsWidth(GetXMin()), layout.toPxsHeight(GetYMin()),
+                layout.toPxsWidth(GetXMax()), layout.toPxsHeight(GetYMax()), green);
     }
 
     public void setEvent(MotionEvent event) {

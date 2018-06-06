@@ -10,13 +10,12 @@ public class LevelComplete_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_level_complete_);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LevelComplete_Activity.this, LevelsActivity.class);
-                startActivity(intent);
                 finish();
             }
         }, SPLASH_SCREEN_TIMEOUT);

@@ -11,17 +11,19 @@ import android.util.Log;
 class Player extends Drawable {
     private Bitmap img;
     private boolean atFlag;
+    private boolean isGoon;
 
-    public Player(int x1, int y1, GameActivity_Layout layout) {
+    public Player(int x1, int y1, GameActivity_Layout layout, boolean isGoon) {
         super(layout);
         this.x1 = x1;
         this.x2 = x1 + 32;
         this.y1 = y1;
         this.y2 = y1 + 32;
+        this.isGoon = isGoon;
         atFlag = false;
 
         img = Bitmap.createScaledBitmap(
-                BitmapFactory.decodeResource(layout.getResources(), R.drawable.objectboi)
+                BitmapFactory.decodeResource(layout.getResources(), isGoon ? R.drawable.goonboi : R.drawable.objectboi)
                 , (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
     }
 
@@ -38,4 +40,7 @@ class Player extends Drawable {
         canvas.drawBitmap(img, layout.toPxsWidth(x1), layout.toPxsHeight(y1), null);
     }
 
+    public boolean isGoon() {
+        return isGoon;
+    }
 }

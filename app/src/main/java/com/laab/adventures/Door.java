@@ -14,11 +14,14 @@ public class Door extends Drawable {
     private Bitmap open;
 
     public Door(int x1, int y1, GameActivity_Layout layout) {
+        this(x1, y1, x1 + 80, y1+13, layout);
+    }
+    public Door(int x1, int y1, int x2, int y2, GameActivity_Layout layout) {
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        x2 = x1 + 80;
-        y2 = y1 + 13;
+        this.x2 = x2;
+        this.y2 = y2;
 
         closed = Bitmap.createScaledBitmap(
                 BitmapFactory.decodeResource(layout.getResources(), R.drawable.door),

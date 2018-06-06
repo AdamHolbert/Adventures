@@ -1,6 +1,9 @@
 package com.laab.adventures;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.MotionEvent;
 import java.util.ArrayList;
@@ -19,10 +22,18 @@ public class GameActivity_Layout extends GameLoop_Layout {
     LevelsActivity levels;
     Drawable mainMenuButton;
     Drawable restartButton;
+    Bitmap grid;
+    Paint transparent;
 
     public GameActivity_Layout(Context context) {
         super(context);
         game = (GameActivity) context;
+        grid = Bitmap.createScaledBitmap(
+                BitmapFactory.decodeResource(getResources(), R.drawable.grid),
+                (int)toPxsWidth(900), (int)toPxsHeight(1600), false);
+        transparent = new Paint();
+        transparent.setAlpha(80);
+
         getAssets();
     }
 
@@ -76,8 +87,30 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 return;
             }
         }
+
+        // Reset doors and plates
+        for(Drawable door : doors){
+            ((Door) door).close();
+        }
+        for(Drawable plate : plates){
+            ((Plate) plate).unpress();
+        }
+
+        // Activate all doors and plates based off simple collision
+        for(Drawable dPlate : plates){
+            Plate plate = ((Plate)dPlate);
+            plate.turnOnYBump();
+            for(Player player : players){
+                if(player.collidedWith(plate)){
+                    plate.press();
+                    plate.getDoor().open();
+                }
+            }
+            plate.turnOffYBump();
+        }
+
+
         for(Player player : players){
-            boolean spikeCollision = false;
             List<Sides> collisions = new ArrayList<>();
 
             // get player direction
@@ -99,6 +132,8 @@ public class GameActivity_Layout extends GameLoop_Layout {
             // move that direction
             player.move(moveX, moveY);
 
+            // Check spike collision
+            boolean spikeCollision = false;
             for(Drawable spike : spikes){
                 if(player.collidedWith(spike)){
                     spikeCollision = true;
@@ -109,20 +144,24 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 playersToBeDeleted.add(player);
                 continue;
             }
+
+            // Check Wall collision
             for(Drawable wall : walls){
                 if(player.collidedWith(wall)){
                     collisions.addAll(player.AdvancedCollision(wall));
                 }
             }
+
+            // Check Plate collision
             for(Drawable plate : plates){
-                collisions.addAll(player.AdvancedCollision(plate));
-                if(player.collidedWith(plate)) {
-                    ((Plate)plate).press();
-                    if(!((Plate)plate).getDoor().getIsOpen())
-                        ((Plate)plate).getDoor().open();
+                if(player.collidedWith(plate)){
+                    collisions.addAll(player.AdvancedCollision(plate));
                 }
             }
+
+            // Check door collision
             for(Drawable door : doors){
+                // If door is closed, add the collisions
                 if (!((Door) door).getIsOpen()) {
                     if(player.collidedWith(door)){
                         collisions.addAll(player.AdvancedCollision(door));
@@ -135,6 +174,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
                 }
             }
 
+            // Undo moves based off of the collisions
             boolean revertY = false;
             boolean revertX = false;
             for(Sides collision : collisions) {
@@ -152,29 +192,28 @@ public class GameActivity_Layout extends GameLoop_Layout {
             }
 
 
-        }
+        } // End of all player collision checks
+
+
+
+        // Win condition checks -------------------------------
 
         for(Player p : playersToBeDeleted){
+            if(!p.isGoon()){
+                game.gameOver();
+                return;
+            }
             players.remove(p);
         }
 
-        // Win condition stuff -------------------------------
-        beatLevel = true;
         if(players.size() > 0) {
             for (Player p : players) {
-                if (p.isAtFlag()) {
-                    continue;
+                if (p.isAtFlag() && !p.isGoon()) {
+                    game.levelComplete();
+                    LevelsActivity.beatLevel();
+                    return;
                 }
-                beatLevel = false;
             }
-
-            if (beatLevel) {
-                game.levelComplete();
-                LevelsActivity.beatLevel();
-            }
-        }
-        else{
-            game.gameOver();
         }
         // ----------------------------------------------------
     }
@@ -208,6 +247,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
             draggingPoint.draw(canvas);
         }
 
+        canvas.drawBitmap(grid, 0, 0, transparent);
         surfaceHolder.unlockCanvasAndPost(canvas);
     }
 

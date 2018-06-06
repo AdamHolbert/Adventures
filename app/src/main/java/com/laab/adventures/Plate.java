@@ -11,11 +11,10 @@ import android.graphics.Rect;
 public class Plate extends Drawable {
 
     private boolean pressed;
-    private Rect rectangle;
-    private Paint display;
     private Bitmap plateUp;
     private Bitmap plateDown;
     private Door door;
+    private boolean yBump;
 
 
     public Plate (int x1, int y1, GameActivity_Layout layout, Door door){
@@ -24,25 +23,15 @@ public class Plate extends Drawable {
         this.y1 = y1;
         this.x2 = x1 + 64;
         this.y2 = y1 + 20;
-
-
-        rectangle = new Rect();
-        rectangle.set(x1, y1, x2, y2);
-
+        yBump = false;
 
         plateUp = Bitmap.createScaledBitmap(
                 BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate),
                 (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
 
         plateDown = Bitmap.createScaledBitmap(
-                BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_downxx),
-                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
-
-
-
-        display = new Paint();
-        display.setColor(Color.RED);
-        display.setStyle(Paint.Style.FILL);
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_down),
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1-10), false);
 
         this.door = door;
     }
@@ -51,11 +40,25 @@ public class Plate extends Drawable {
 //        canvas.drawRect(layout.toPxsWidth(x1), layout.toPxsHeight(y1), layout.toPxsWidth(x2), layout.toPxsHeight(y2), display);
 
         if(!pressed){
-            canvas.drawBitmap(plateUp, layout.toPxsWidth(x1), layout.toPxsHeight(y1 -10), display);
+            canvas.drawBitmap(plateUp, layout.toPxsWidth(GetXMin()), layout.toPxsHeight(GetYMin()), null);
         }
         else {
-            canvas.drawBitmap(plateDown, layout.toPxsWidth(x1), layout.toPxsHeight(y1 -10), display);
+            canvas.drawBitmap(plateDown, layout.toPxsWidth(GetXMin()), layout.toPxsHeight(GetYMin()), null);
         }
+    }
+
+    @Override
+    int GetYMin() {
+        int y1 = super.GetYMin() + (pressed ? 10 : 0);
+        return yBump ? y1 - 1 : y1;
+    }
+
+    public void turnOnYBump(){
+        yBump = true;
+    }
+
+    public void turnOffYBump(){
+        yBump = false;
     }
 
     public void press(){
