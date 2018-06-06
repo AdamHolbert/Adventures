@@ -59,9 +59,11 @@ public class Music {
         if(music.isPlaying()) {
             pauseMusic();
         }
-        currentMusic = newMusic;
-        music = MediaPlayer.create(context, currentMusic);
-        music.setLooping(true);
+        if(newMusic != currentMusic){
+            currentMusic = newMusic;
+            music = MediaPlayer.create(context, currentMusic);
+            music.setLooping(true);
+        }
         startMusic();
     }
 
