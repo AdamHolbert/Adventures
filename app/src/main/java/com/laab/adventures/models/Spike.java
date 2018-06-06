@@ -31,7 +31,7 @@ public class Spike extends Drawable {
         rectangle.set(x1, y1, x2, y2);
 
         img = Bitmap.createScaledBitmap(
-                BitmapFactory.decodeResource(layout.getResources(), R.drawable.spikes),
+                BitmapFactory.decodeResource(layout.getResources(), R.drawable.spikesxx),
                 (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1), false);
 
         display = new Paint();
