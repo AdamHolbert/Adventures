@@ -82,29 +82,29 @@ public class LevelBuilder {
     public static ArrayList<Drawable> getSpikes(int level, GameActivity_Layout game) {
         ArrayList<Drawable> spikes = new ArrayList<Drawable>();
         if(level == 2) {
-            spikes.add(new Spike(50, 1400, 200, 1500, game));
-//            spikes.add(new Spike(125, 1430, game));
+            spikes.add(new Spike(50, 1430, game));
+            spikes.add(new Spike(125, 1430, game));
         }
         if(level == 3) {
 //            Bottom
-            spikes.add(new Spike(50, 1400, 100, 1500, game));
-            spikes.add(new Spike(100, 1400, 150, 1500, game));
-            spikes.add(new Spike(150, 1400, 200, 1500, game));
-            spikes.add(new Spike(200, 1400, 250, 1500, game));
-            spikes.add(new Spike(250, 1400, 300, 1500, game));
-            spikes.add(new Spike(300, 1400, 350, 1500, game));
-            spikes.add(new Spike(350, 1400, 400, 1500, game));
-            spikes.add(new Spike(450, 1400, 500, 1500, game));
-            spikes.add(new Spike(500, 1400, 550, 1500, game));
-            spikes.add(new Spike(550, 1400, 600, 1500, game));
+            spikes.add(new Spike(50, 1410, 100, 1500, game));
+            spikes.add(new Spike(100, 1410, 150, 1500, game));
+            spikes.add(new Spike(150, 1410, 200, 1500, game));
+            spikes.add(new Spike(200, 1410, 250, 1500, game));
+            spikes.add(new Spike(250, 1410, 300, 1500, game));
+            spikes.add(new Spike(300, 1410, 350, 1500, game));
+            spikes.add(new Spike(350, 1410, 400, 1500, game));
+            spikes.add(new Spike(450, 1410, 500, 1500, game));
+            spikes.add(new Spike(500, 1410, 550, 1500, game));
+            spikes.add(new Spike(550, 1410, 600, 1500, game));
 //            Above Bottom
             for(int i = 250; i < 850; i += 50){
-                spikes.add(new Spike(i, 950, i + 50, 1000, game));
+                spikes.add(new Spike(i, 930, i + 50, 1000, game));
             }
 
 //            Above lower spikes
             for(int i = 50; i < 650; i += 50){
-                spikes.add(new Spike(i, 575, i + 50, 650, game));
+                spikes.add(new Spike(i, 585, i + 50, 650, game));
             }
 
 
