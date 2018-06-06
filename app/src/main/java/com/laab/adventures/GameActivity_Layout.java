@@ -267,7 +267,7 @@ public class GameActivity_Layout extends GameLoop_Layout {
         mainMenuButton.draw(canvas);
         restartButton.draw(canvas);
 
-        canvas.drawBitmap(grid, 0, 0, transparent);
+//        canvas.drawBitmap(grid, 0, 0, transparent);
         surfaceHolder.unlockCanvasAndPost(canvas);
     }
 
