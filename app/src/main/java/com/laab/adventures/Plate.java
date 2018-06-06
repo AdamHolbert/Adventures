@@ -18,11 +18,14 @@ public class Plate extends Drawable {
 
 
     public Plate (int x1, int y1, GameActivity_Layout layout, Door door){
+        this(x1, y1, x1+64, y1 + 20, layout, door);
+    }
+    public Plate (int x1, int y1, int x2, int y2, GameActivity_Layout layout, Door door){
         super(layout);
         this.x1 = x1;
         this.y1 = y1;
-        this.x2 = x1 + 64;
-        this.y2 = y1 + 20;
+        this.x2 = x2;
+        this.y2 = y2;
         yBump = false;
 
         plateUp = Bitmap.createScaledBitmap(
@@ -31,7 +34,7 @@ public class Plate extends Drawable {
 
         plateDown = Bitmap.createScaledBitmap(
                 BitmapFactory.decodeResource(layout.getResources(), R.drawable.plate_down),
-                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight(y2-y1-10), false);
+                (int)layout.toPxsWidth(x2-x1), (int)layout.toPxsHeight((y2-y1)/2), false);
 
         this.door = door;
     }
@@ -49,7 +52,7 @@ public class Plate extends Drawable {
 
     @Override
     int GetYMin() {
-        int y1 = super.GetYMin() + (pressed ? 10 : 0);
+        int y1 = super.GetYMin() + (pressed ? (y2-this.y1)/2 : 0);
         return yBump ? y1 - 1 : y1;
     }
 

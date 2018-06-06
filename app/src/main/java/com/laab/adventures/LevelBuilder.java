@@ -67,14 +67,14 @@ public class LevelBuilder {
             players.add(new Player(750, 1100, game, false));
         }
         if(level == 2) {
-            players.add(new Player(700, 1100, game, false));
-            players.add(new Player(750, 1100, game, true));
+            players.add(new Player(700, 1100, game, true));
+            players.add(new Player(750, 1100, game, false));
         }
         if(level == 3) {
-            players.add(new Player(650, 1100, game, false));
+            players.add(new Player(650, 1100, game, true));
             players.add(new Player(700, 1100, game, true));
             players.add(new Player(750, 1100, game, true));
-            players.add(new Player(800, 1100, game, true));
+            players.add(new Player(800, 1100, game, false));
         }
         return players;
     }
@@ -87,39 +87,31 @@ public class LevelBuilder {
         }
         if(level == 3) {
 //            Bottom
-            spikes.add(new Spike(55, 1430, game));
-            spikes.add(new Spike(130, 1430, game));
-            spikes.add(new Spike(205, 1430, game));
-            spikes.add(new Spike(280, 1430, game));
-            spikes.add(new Spike(450, 1430, game));
-            spikes.add(new Spike(525, 1430, game));
+            spikes.add(new Spike(50, 1400, 100, 1500, game));
+            spikes.add(new Spike(100, 1400, 150, 1500, game));
+            spikes.add(new Spike(150, 1400, 200, 1500, game));
+            spikes.add(new Spike(200, 1400, 250, 1500, game));
+            spikes.add(new Spike(250, 1400, 300, 1500, game));
+            spikes.add(new Spike(300, 1400, 350, 1500, game));
+            spikes.add(new Spike(350, 1400, 400, 1500, game));
+            spikes.add(new Spike(450, 1400, 500, 1500, game));
+            spikes.add(new Spike(500, 1400, 550, 1500, game));
+            spikes.add(new Spike(550, 1400, 600, 1500, game));
 //            Above Bottom
-            spikes.add(new Spike(250, 930, game));
-            spikes.add(new Spike(325, 930, game));
-            spikes.add(new Spike(400, 930, game));
-            spikes.add(new Spike(475, 930, game));
-            spikes.add(new Spike(550, 930, game));
-            spikes.add(new Spike(625, 930, game));
-            spikes.add(new Spike(700, 930, game));
-            spikes.add(new Spike(775, 930, game));
+            for(int i = 250; i < 850; i += 50){
+                spikes.add(new Spike(i, 950, i + 50, 1000, game));
+            }
 
 //            Above lower spikes
-            spikes.add(new Spike(55, 580, game));
-            spikes.add(new Spike(130, 580, game));
-            spikes.add(new Spike(205, 580, game));
-            spikes.add(new Spike(280, 580, game));
-            spikes.add(new Spike(355, 580, game));
-            spikes.add(new Spike(430, 580, game));
-            spikes.add(new Spike(505, 580, game));
-            spikes.add(new Spike(580, 580, game));
+            for(int i = 50; i < 650; i += 50){
+                spikes.add(new Spike(i, 575, i + 50, 650, game));
+            }
 
-            spikes.add(new Spike(210, 230, game));
-            spikes.add(new Spike(285, 230, game));
-            spikes.add(new Spike(360, 230, game));
-            spikes.add(new Spike(435, 230, game));
-            spikes.add(new Spike(510, 230, game));
-            spikes.add(new Spike(585, 230, game));
-            spikes.add(new Spike(660, 230, game));
+
+//          Top spikes
+            for(int i = 200; i < 750; i += 50){
+                spikes.add(new Spike(i, 250, i + 50, 300, game));
+            }
         }
         return spikes;
     }
@@ -133,7 +125,7 @@ public class LevelBuilder {
             flags.add(new Flag(70,225, game));
         }
         if(level == 3) {
-            flags.add(new Flag(800,220, game));
+            flags.add(new Flag(775,200, 850, 300, game));
         }
         return flags;
     }
@@ -144,9 +136,9 @@ public class LevelBuilder {
             plates.add(new Plate(50, 580, game, (Door)doors.get(0)));
         }
         if(level == 3) {
-            plates.add(new Plate(370, 1490, game, (Door)doors.get(0)));
-            plates.add(new Plate(150, 1040, game, (Door)doors.get(1)));
-            plates.add(new Plate(685, 690, game, (Door)doors.get(2)));
+            plates.add(new Plate(400, 1480, 450, 1500, game, (Door)doors.get(0)));
+            plates.add(new Plate(130, 1030, 200, 1050, game, (Door)doors.get(1)));
+            plates.add(new Plate(690, 680, 760, 700, game, (Door)doors.get(2)));
         }
         return plates;
     }
@@ -157,9 +149,9 @@ public class LevelBuilder {
             doors.add(new Door(750, 500, 850, 520, game));
         }
         if(level == 3) {
-            doors.add(new Door(45, 1088, game));
-            doors.add(new Door(775, 738, game));
-            doors.add(new Door(45, 388, game));
+            doors.add(new Door(50, 1080, 120, 1100, game));
+            doors.add(new Door(780, 730, 850, 750, game));
+            doors.add(new Door(50, 380, 120, 400, game));
         }
         return doors;
     }
