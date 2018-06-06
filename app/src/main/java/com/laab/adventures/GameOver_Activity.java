@@ -16,9 +16,15 @@ public class GameOver_Activity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(GameOver_Activity.this, LevelsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
         }, SPLASH_SCREEN_TIMEOUT);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
